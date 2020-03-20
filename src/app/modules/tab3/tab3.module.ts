@@ -7,13 +7,13 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }])
-  ],
-  declarations: [Tab3Page]
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        ExploreContainerComponentModule,
+        RouterModule.forChild([{ path: '', component: Tab3Page }])
+    ],
+    declarations: [Tab3Page]
 })
 export class Tab3PageModule {}

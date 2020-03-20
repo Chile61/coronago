@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-   providedIn: 'root'
+    providedIn: 'root'
 })
 export class BootService {
-   constructor() {}
+    constructor() {}
 
-   /**
-    * App services entry point
-    */
-   public initApp(): void {
-      return;
-   }
+    /**
+     * App services entry point
+     */
+    public initApp(): void {
+        return;
+    }
 }

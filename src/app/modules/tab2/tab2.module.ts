@@ -7,13 +7,13 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }])
-  ],
-  declarations: [Tab2Page]
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        ExploreContainerComponentModule,
+        RouterModule.forChild([{ path: '', component: Tab2Page }])
+    ],
+    declarations: [Tab2Page]
 })
 export class Tab2PageModule {}
