@@ -1,0 +1,7 @@
+{
+  "name": "corona-go",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
