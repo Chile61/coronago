@@ -8,42 +8,60 @@ const routes: Routes = [
         component: TabsPage,
         children: [
             {
-                path: 'tab1',
+                path: 'score',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+                        loadChildren: () => import('../score/score.module').then(m => m.ScoreModule)
                     }
                 ]
             },
             {
-                path: 'tab2',
+                path: 'score-log',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+                        loadChildren: () => import('../score-log/score-log.module').then(m => m.ScoreLogModule)
                     }
                 ]
             },
             {
-                path: 'tab3',
+                path: 'ticker',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+                        loadChildren: () => import('../ticker/ticker.module').then(m => m.TickerModule)
+                    }
+                ]
+            },
+            {
+                path: 'message-box',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('../message-box/message-box.module').then(m => m.MessageBoxModule)
+                    }
+                ]
+            },
+            {
+                path: 'info',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('../info/info.module').then(m => m.InfoModule)
                     }
                 ]
             },
             {
                 path: '',
-                redirectTo: '/tabs/tab1',
+                redirectTo: '/tabs/score',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/score',
         pathMatch: 'full'
     }
 ];
