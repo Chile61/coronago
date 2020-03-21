@@ -1,3 +1,14 @@
-<p>
-  score-log works!
-</p>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Ihre Kontakthistorie</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+
+    <ng-container *ngFor="let log of logs">
+        <ui-score-log-entry [log]="log"></ui-score-log-entry>
+    </ng-container>
+
+</ion-content>
