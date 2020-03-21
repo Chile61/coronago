@@ -1,4 +1,13 @@
-import { faEnvelope, faHistory, faInfo, faInfoCircle, faLongArrowAltRight, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEnvelope,
+    faHistory,
+    faInfo,
+    faInfoCircle,
+    faLongArrowAltRight,
+    faNewspaper,
+    faUser,
+    faUsers
+} from '@fortawesome/free-solid-svg-icons';
 
 export const APP_ICONS = {
     info: faInfo,
@@ -7,5 +16,6 @@ export const APP_ICONS = {
     history: faHistory,
     news: faNewspaper,
     messages: faEnvelope,
-    user: faUser
+    user: faUser,
+    users: faUsers
 };

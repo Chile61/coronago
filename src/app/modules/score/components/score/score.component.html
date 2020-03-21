@@ -1,23 +1,25 @@
 <ion-header>
-
+    <ion-toolbar color="primary">
+        <ion-title>Corona GO</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
     <div class="score-hint full-center">
-        <h1>
-            <span i18n class="score-hint-text">Dein aktueller Infektionsfaktor</span>
+        <h1 class="score-title">
+            <span i18n class="score-hint-text">Deine <br> Personen-Kontakte</span>
 <!--            <span class="score-hint-info-icon">-->
 <!--                <fa-icon [icon]="icons.info"></fa-icon>-->
-<!--            </span>-->
+<!--            </span>-->adv
         </h1>
 
     </div>
 
     <ui-score-counter score="7392"></ui-score-counter>
 
-    <div style="text-align: center; padding: 50px 20px;"> 
-        <fa-icon [icon]="icons.infoCircle"></fa-icon> Was bedeutet das?
-    </div>
+<!--    <div style="text-align: center; padding: 50px 20px;">-->
+<!--        <fa-icon [icon]="icons.infoCircle"></fa-icon> Was bedeutet das?-->
+<!--    </div>-->
 
 </ion-content>

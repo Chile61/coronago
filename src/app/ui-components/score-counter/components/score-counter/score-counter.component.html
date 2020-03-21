@@ -1,5 +1,8 @@
-<div class="score-container">
-    <div class="score">
-        {{ score }}
+<div class="score-container" #container>
+    <div class="score" #scoreText>
+        {{ score }}<br>
+    </div>
+    <div class="group-icon">
+        <fa-icon [icon]="icons.users"></fa-icon>
     </div>
 </div>

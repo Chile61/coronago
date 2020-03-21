@@ -1,5 +1,13 @@
 .score-hint {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    padding-top: 10px;
+
+    .score-title {
+        font-size: 2em;
+        white-space: normal;
+        word-break: break-word;
+        font-weight: bold;
+    }
 
     .score-hint-text {
         color: var(--score-hint-text)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogEntry } from '../../../../ui-components/score-log-entry/components/score-log-entry/log-entry';
 import { HelperService } from '../../../../services/helper.service';
-import moment from 'moment-mini-ts';
+import * as moment from 'moment-mini-ts';
 
 @Component({
     selector: 'app-score-log',
