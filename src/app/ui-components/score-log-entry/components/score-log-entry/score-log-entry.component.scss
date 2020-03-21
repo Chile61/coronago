@@ -1,0 +1,29 @@
+.log-entry {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .contact-score {
+        color: var(--log-entry-contact-score);
+        padding: 0 10px 0 0;
+        font-weight: bold;
+        font-size: 26px;
+    }
+    .total-score {
+        flex-grow: 1;
+        justify-content: center;
+        color: var(--log-entry-total-score);
+        padding: 0 10px;
+        font-weight: bold;
+
+        .arrow-icon {
+            margin-right: 4px;
+        }
+    }
+    .timestamp {
+        flex-shrink: 1;
+        word-break: break-word;
+        color: var(--log-entry-timestamp);
+        padding: 0 0 0 10px;
+    }
+}

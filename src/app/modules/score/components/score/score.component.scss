@@ -1,0 +1,17 @@
+.score-hint {
+    margin-bottom: 20px;
+
+    .score-hint-text {
+        color: var(--score-hint-text)
+    }
+
+    .score-hint-info-icon {
+        color: var(--score-info-icon);
+        font-size: .5em;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .info-icon {
+    }
+}

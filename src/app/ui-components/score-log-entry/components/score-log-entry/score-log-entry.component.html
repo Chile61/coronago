@@ -1,0 +1,20 @@
+<ion-list>
+    <ion-item>
+        <ion-label>
+            <div class="log-entry">
+                <div class="contact-score">
+                    + {{ log.contactScore }}
+                </div>
+                <div class="total-score flex-inline">
+                    <div class="arrow-icon">
+                        <fa-icon [icon]="icons.arrowRight"></fa-icon>
+                    </div>
+                    <div>{{ log.scoreAccumulated }}</div>
+                </div>
+                <div class="timestamp">
+                    {{ log.contactTimeReadable }}
+                </div>
+            </div>
+        </ion-label>
+    </ion-item>
+</ion-list>
