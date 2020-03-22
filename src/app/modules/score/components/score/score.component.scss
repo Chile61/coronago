@@ -5,6 +5,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    margin-top: 0vh;
 }
 
 .score-area {
@@ -73,5 +74,36 @@
         fa-icon, .keyword {
             color: var(--score-distance-danger);
         }
+    }
+}
+
+
+.virus-background {
+    position: fixed;
+    top: 20%;
+    opacity: .07;
+}
+
+ion-header:after {
+    background-image: none;
+}
+
+.header {
+    padding: 2vh 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image-container {
+        img {
+            max-height: 12vh;
+        }
+        margin-right: 10px;
+    }
+
+    .title-container {
+        color: var(--app-primary);
+        font-weight: bold;
+        font-size: 12vw;
     }
 }

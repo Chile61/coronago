@@ -1,10 +1,23 @@
 <ion-header>
-    <ion-toolbar color="primary">
-        <ion-title class="ion-padding-start">Corona GO</ion-title>
-    </ion-toolbar>
+    <!--    <ion-toolbar color="primary">-->
+    <!--        <ion-title class="ion-padding-start">Corona GO</ion-title>-->
+    <!--    </ion-toolbar>-->
+    <div class="header">
+        <div class="image-container">
+            <img src="assets/icon/icon.png" alt="">
+        </div>
+        <div class="title-container">
+            Corona Go
+        </div>
+    </div>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
+
+    <div class="virus-background">
+        <img src="assets/icon/virus.svg">
+    </div>
 
     <div class="flex-center-container">
         <div class="score-area">
@@ -26,18 +39,18 @@
         <!--    </div>-->
 
         <div class="danger-level-hint">
-            <div class="level-0" *ngIf="dangerLevel === 0">
+            <div class="level-0" *ngIf="dangerLevel === 0" i18n>
                 <fa-icon [icon]="icons.ok"></fa-icon>
-                Keine Personen-Kontakte in deiner Umgebung
+                Keine Personen-Kontakte in deiner Umgebung<br><br>
             </div>
-            <div class="level-1" *ngIf="dangerLevel === 1">
+            <div class="level-1" *ngIf="dangerLevel === 1" i18n>
                 <fa-icon [icon]="icons.warn"></fa-icon>
-                <b class="keyword">Vorsicht!</b> Dein Personen-Kontakte-Netzwerk könnte sich vergrößern.
+                <b class="keyword">Vorsicht!</b> Personen in der Umgebung. Deine Personen-Kontakte könnten sich
+                vergrößern.
             </div>
-            <div class="level-2" *ngIf="dangerLevel === 2">
+            <div class="level-2" *ngIf="dangerLevel === 2" i18n>
                 <fa-icon [icon]="icons.danger"></fa-icon>
-                <b class="keyword">Gefahr!</b> Dein Personen-Kontakte Netzwerk wird sich vergrößern! Versuche diese
-                Situation zu umgehen!
+                <b class="keyword">Gefahr!</b> Mindestens eine Person zu nahe! Versuche die Situation zu umgehen!
             </div>
         </div>
     </div>
