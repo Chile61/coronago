@@ -1,31 +1,12 @@
-.score-hint {
-    margin-bottom: 40px;
-    padding-top: 10px;
-
-    .score-title {
-        font-size: 2em;
-        white-space: normal;
-        word-break: break-word;
-        font-weight: bold;
-    }
-
-    .score-hint-text {
-        color: var(--score-hint-text)
-    }
-
-    .score-hint-info-icon {
-        color: var(--score-info-icon);
-        font-size: .5em;
-        font-weight: bold;
-        margin-left: 10px;
-    }
-
-    .info-icon {
-    }
+.flex-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 .score-area {
     position: relative;
     padding: 20px 0;
-    transform: translateY(30px);
 }

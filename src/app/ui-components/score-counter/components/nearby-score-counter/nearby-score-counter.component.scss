@@ -6,9 +6,9 @@
 
         .score-container {
             background-color: white;
-            width: 20vw;
-            height: 20vw;
-            border: 6px solid var(--score-distance-ok);
+            width: 18vw;
+            height: 18vw;
+            border: 4px solid var(--score-distance-ok);
             //border-radius: 100%;
             //margin: 0 auto;
             padding-top: 0;
@@ -30,6 +30,27 @@
                 font-size: 22px !important;
                 //color: var(--score-number-icon);
             }
+        }
+
+        &.inner-slot {
+            .score-container {
+                width: 14vw;
+                height: 14vw;
+                border-color: red;
+            }
+
+            .score {
+            }
+
+            .group-icon {
+                color: var(--ion-color-danger) !important;
+                font-size: 12px !important;
+                display: none;
+            }
+        }
+
+        &.outer-slot {
+
         }
     }
 }

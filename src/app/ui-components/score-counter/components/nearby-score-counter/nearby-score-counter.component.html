@@ -1,0 +1,6 @@
+<div class="nearby-score ">
+    <ui-score-counter [contactScore]="nearbyContactScore" [icon]="icons.user"
+                      [class.inner-slot]="nearbyContactScore.slotType === 'inner'"
+                      [class.outer-slot]="nearbyContactScore.slotType === 'outer'"
+                      [textBorderOffsetPx]="nearbyContactScore.slotType === 'inner' ? 12 : 30" iconPosition="above"></ui-score-counter>
+</div>

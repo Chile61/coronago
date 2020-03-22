@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { APP_ICONS } from '../../../icons/icons';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import { ContactScore } from '../../../../core/entities/ContactScore';
 
 @Component({
     selector: 'ui-score-counter',
@@ -8,8 +9,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types';
     styleUrls: ['./score-counter.component.scss']
 })
 export class ScoreCounterComponent implements OnInit {
-    @Input() score: number;
-    @Input() rssi: number;
+    @Input() contactScore: ContactScore;
     @Input() textBorderOffsetPx: number;
     @Input() icon: IconDefinition;
     @Input() showHintText = false;
@@ -50,18 +50,6 @@ export class ScoreCounterComponent implements OnInit {
             this.adjustCounterSize();
         } else {
             console.warn('Element resized', scoreTextWidth, 'in', scoreTextWidth);
-        }
-    }
-
-
-
-    public getColor(rssi: number): string {
-        if (rssi > -55) {
-            return '#64dd17';
-        } else if (rssi > -74) {
-            return '#ffd600';
-        } else {
-            return '#d50000';
         }
     }
 }
