@@ -9,23 +9,39 @@
 
 .score-area {
     position: relative;
+
+    ::ng-deep ui-score-counter .score {
+        font-size: 5em;
+    }
 }
 
 .danger-level-ok {
     ::ng-deep .score-container {
         border-color: var(--score-distance-ok);
+
+        fa-icon {
+            color: var(--score-distance-ok);
+        }
     }
 }
 
 .danger-level-warn {
     ::ng-deep .score-container {
         border-color: var(--score-distance-warn);
+
+        fa-icon {
+            color: var(--score-distance-warn);
+        }
     }
 }
 
 .danger-level-danger {
     ::ng-deep .score-container {
         border-color: var(--score-distance-danger);
+
+        fa-icon {
+            color: var(--score-distance-danger);
+        }
     }
 }
 
@@ -39,6 +55,8 @@
 
     fa-icon {
         margin-right: 8px;
+        font-size: larger;
+        vertical-align: -2px;
     }
 
     .level-0 {

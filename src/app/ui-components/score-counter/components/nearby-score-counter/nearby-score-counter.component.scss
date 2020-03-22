@@ -19,11 +19,11 @@
             //box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
             .score {
-                //font-size: 4em;
                 //font-weight: bold;
                 //color: var(--score-number);
                 text-shadow: none !important;
                 //text-align: center;
+                font-size: 1em;
             }
 
             .group-icon {
@@ -53,12 +53,12 @@
 
         &.outer-slot {
             .score-container {
-                border-color: var(--score-distance-ok);
+                border-color: var(--score-distance-warn);
             }
 
             &.tiny-slot {
                 .score-container {
-                    background-color: var(--score-distance-ok);
+                    background-color: var(--score-distance-warn);
                 }
             }
 
@@ -66,7 +66,7 @@
             }
 
             .group-icon {
-                color: var(--score-distance-ok) !important;
+                color: var(--score-distance-warn) !important;
             }
 
         }
