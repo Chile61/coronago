@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { APP_ICONS } from '../../../../ui-components/icons/icons';
-import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots } from './circle-score-slots';
+import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots, hiddenSlot } from './circle-score-slots';
 import { HelperService } from '../../../../services/helper.service';
 import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
+import _sortBy from 'lodash.sortby';
+import _orderBy from 'lodash.orderby';
 
 @Component({
     selector: 'app-score',
@@ -24,16 +26,20 @@ export class ScoreComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 4; i++) {
             let contactScore = new ContactScore();
-            contactScore.score = HelperService.randomIntFromInterval(40055, 2465216);
-            contactScore.rssi = HelperService.randomIntFromInterval(-30, -90);
-            contactScore = this.addAvailableSlot(contactScore);
+            contactScore.score = HelperService.randomIntFromInterval(4, 200);
+            contactScore.rssi = HelperService.randomIntFromInterval(-20, -90);
             this.nearbyScores.push(contactScore);
         }
 
+        this.nearbyScores = _orderBy(this.nearbyScores, ['rssi', 'score'], ['desc', 'desc']); // sort by signal, score
+        this.nearbyScores = this.nearbyScores.map(contactScore => {
+            return this.addAvailableSlot(contactScore);
+        });
+
         this.contactScore = new ContactScore();
-        this.contactScore.score = 1928384;
+        this.contactScore.score = 40;
 
         this.updateDangerLevel();
     }
@@ -56,12 +62,15 @@ export class ScoreComponent implements OnInit {
             }
         } else {
             // Assign random tiny-slot
-            const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
-            const randomSlot = new CircleScoreSlotPosition();
-            randomSlot.setRandomPosition(direction);
-            contactScore.slot = randomSlot;
-            contactScore.slotType = direction;
-            contactScore.isTinySlot = true;
+            // const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
+            // const randomSlot = new CircleScoreSlotPosition();
+            // randomSlot.setRandomPosition(direction);
+            // contactScore.slot = randomSlot;
+            // contactScore.slotType = direction;
+            // contactScore.isTinySlot = true;
+
+            // Hidden slot
+            contactScore.slot = hiddenSlot;
         }
 
         return contactScore;
