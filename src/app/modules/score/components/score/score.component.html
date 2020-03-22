@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>Corona GO</ion-title>
+        <ion-title class="ion-padding-start">Corona GO</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,9 @@
 
     <div class="score-area">
         <ng-container *ngFor="let score of nearbyScores">
-            <ui-nearby-score [nearbyScore]="score" [ngStyle]="score.slot"></ui-nearby-score>
+            <ui-nearby-score
+                class="animated infinite pulse slower"
+                [nearbyScore]="score" [ngStyle]="score.slot"></ui-nearby-score>
         </ng-container>
         <ui-score-counter score="7392" showHintText="true"></ui-score-counter>
     </div>
