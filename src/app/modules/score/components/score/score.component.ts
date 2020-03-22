@@ -24,7 +24,7 @@ export class ScoreComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             let contactScore = new ContactScore();
             contactScore.score = HelperService.randomIntFromInterval(40055, 2465216);
             contactScore.rssi = HelperService.randomIntFromInterval(-30, -90);

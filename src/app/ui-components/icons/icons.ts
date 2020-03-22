@@ -1,5 +1,6 @@
 import {
-    faEnvelope,
+    faCheckCircle,
+    faEnvelope, faExclamationTriangle, faHandPaper,
     faHistory,
     faInfo,
     faInfoCircle,
@@ -17,5 +18,8 @@ export const APP_ICONS = {
     news: faNewspaper,
     messages: faEnvelope,
     user: faUser,
-    users: faUsers
+    users: faUsers,
+    ok: faCheckCircle,
+    warn: faExclamationTriangle,
+    danger: faHandPaper
 };

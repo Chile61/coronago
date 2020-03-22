@@ -1,5 +1,6 @@
 .flex-center-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -25,5 +26,34 @@
 .danger-level-danger {
     ::ng-deep .score-container {
         border-color: var(--score-distance-danger);
+    }
+}
+
+.danger-level-hint {
+    padding: 8px;
+    margin: 30px 10px -24px;
+    font-size: large;
+    border-radius: 8px;
+    color: var(--score-hint-text);
+    text-align: center;
+
+    fa-icon {
+        margin-right: 8px;
+    }
+
+    .level-0 {
+        fa-icon, .keyword {
+            color: var(--score-distance-ok);
+        }
+    }
+    .level-1 {
+        fa-icon, .keyword {
+            color: var(--score-distance-warn);
+        }
+    }
+    .level-2 {
+        fa-icon, .keyword {
+            color: var(--score-distance-danger);
+        }
     }
 }
