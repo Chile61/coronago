@@ -8,7 +8,7 @@
 
     <div class="flex-center-container">
         <div class="score-area">
-            <ng-container *ngFor="let score of nearbyScores">
+            <ng-container *ngFor="let score of nearbyScores; let i=index">
                 <ui-nearby-score-counter
                     class="animated infinite pulse slower"
                     [nearbyContactScore]="score" [ngStyle]="score.slot"></ui-nearby-score-counter>

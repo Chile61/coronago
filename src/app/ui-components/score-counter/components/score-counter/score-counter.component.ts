@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { APP_ICONS } from '../../../icons/icons';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { ContactScore } from '../../../../core/entities/ContactScore';
+import { LogManager } from '../../../../services/log.service';
 
 @Component({
     selector: 'ui-score-counter',
@@ -9,6 +10,7 @@ import { ContactScore } from '../../../../core/entities/ContactScore';
     styleUrls: ['./score-counter.component.scss']
 })
 export class ScoreCounterComponent implements OnInit {
+    private log = new LogManager('ScoreCounterComponent');
     @Input() contactScore: ContactScore;
     @Input() textBorderOffsetPx: number;
     @Input() icon: IconDefinition;
@@ -49,7 +51,7 @@ export class ScoreCounterComponent implements OnInit {
             this.scoreTextElement.nativeElement.style.fontSize = fontSize - 2 + 'px';
             this.adjustCounterSize();
         } else {
-            console.warn('Element resized', scoreTextWidth, 'in', scoreTextWidth);
+            // this.log.warn('adjustCounterSize', 'Element resized', scoreTextWidth, 'in', scoreTextWidth);
         }
     }
 }

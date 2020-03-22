@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APP_ICONS } from '../../../../ui-components/icons/icons';
-import { hiddenSlot, innerCircleScoreSlots, outerCircleScoreSlots } from './circle-score-slots';
+import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots } from './circle-score-slots';
 import { HelperService } from '../../../../services/helper.service';
 import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
@@ -15,14 +15,13 @@ export class ScoreComponent implements OnInit {
 
     public icons = APP_ICONS;
     public nearbyScores: ContactScore[] = [];
-    public availableOuterSlots = [].concat(outerCircleScoreSlots);
-    public availableInnerSlots = [].concat(innerCircleScoreSlots);
+    public availableSlots: CircleScoreSlot[] = [].concat(circleScoreSlots);
     public contactScore: ContactScore;
 
     constructor() {}
 
     ngOnInit() {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 20; i++) {
             let contactScore = new ContactScore();
             contactScore.score = HelperService.randomIntFromInterval(40055, 2465216);
             contactScore.rssi = HelperService.randomIntFromInterval(-30, -90);
@@ -38,28 +37,26 @@ export class ScoreComponent implements OnInit {
      * Get available circle slot
      */
     public addAvailableSlot(contactScore: ContactScore): ContactScore {
-        if (contactScore.rssi <= -50) {
-            if (this.availableInnerSlots.length) {
-                const slot = Object.assign({}, this.availableInnerSlots[0]);
-                this.availableInnerSlots = this.availableInnerSlots.slice(1);
-                contactScore.slot = slot;
-                contactScore.slotType = 'inner';
-            } else {
-                this.log.warn(this.addAvailableSlot.name, 'Skipping contactScore because out of slots');
-                contactScore.slot = hiddenSlot;
-                contactScore.slotType = 'hidden';
-            }
-        } else {
-            if (this.availableOuterSlots.length) {
-                const slot = Object.assign({}, this.availableOuterSlots[0]);
-                this.availableOuterSlots = this.availableOuterSlots.slice(1);
-                contactScore.slot = slot;
+        if (this.availableSlots.length) {
+            // Assign next slot
+            const slot = Object.assign({}, this.availableSlots[0]);
+            this.availableSlots = this.availableSlots.slice(1);
+
+            if (contactScore.rssi <= -50) {
+                contactScore.slot = slot.outer;
                 contactScore.slotType = 'outer';
             } else {
-                this.log.warn(this.addAvailableSlot.name, 'Skipping contactScore because out of slots');
-                contactScore.slot = hiddenSlot;
-                contactScore.slotType = 'hidden';
+                contactScore.slot = slot.inner;
+                contactScore.slotType = 'inner';
             }
+        } else {
+            // Assign random tiny-slot
+            const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
+            const randomSlot = new CircleScoreSlotPosition();
+            randomSlot.setRandomPosition(direction);
+            contactScore.slot = randomSlot;
+            contactScore.slotType = direction;
+            contactScore.isTinySlot = true;
         }
 
         return contactScore;
