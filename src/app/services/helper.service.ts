@@ -31,4 +31,11 @@ export class HelperService {
         }
         return parseInt(result, 10);
     }
+
+    /**
+     * Random number from interval
+     */
+    public static randomIntFromInterval(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 }

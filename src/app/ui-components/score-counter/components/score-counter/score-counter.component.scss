@@ -17,7 +17,6 @@
 
     .score {
         font-size: 5em;
-        //font-size: 600%;
         font-weight: bold;
         color: var(--score-number);
         text-shadow: 2px 2px 3px #888888e6;
@@ -27,5 +26,11 @@
     .group-icon {
         font-size: 60px;
         color: var(--score-number-icon);
+    }
+
+    .person-contacts-hint {
+        font-size: 22px;
+        margin-top: -12px;
+        font-weight: 500;
     }
 }

@@ -8,18 +8,23 @@
 
     <div class="score-hint full-center">
         <h1 class="score-title">
-            <span i18n class="score-hint-text">Deine <br> Personen-Kontakte</span>
-<!--            <span class="score-hint-info-icon">-->
-<!--                <fa-icon [icon]="icons.info"></fa-icon>-->
-<!--            </span>-->
+<!--            <span i18n class="score-hint-text">Personen-Kontakte</span>-->
+            <!--            <span class="score-hint-info-icon">-->
+            <!--                <fa-icon [icon]="icons.info"></fa-icon>-->
+            <!--            </span>-->
         </h1>
 
     </div>
 
-    <ui-score-counter score="7392"></ui-score-counter>
+    <div class="score-area">
+        <ng-container *ngFor="let score of nearbyScores">
+            <ui-nearby-score [nearbyScore]="score" [ngStyle]="score.slot"></ui-nearby-score>
+        </ng-container>
+        <ui-score-counter score="7392" showHintText="true"></ui-score-counter>
+    </div>
 
-<!--    <div style="text-align: center; padding: 50px 20px;">-->
-<!--        <fa-icon [icon]="icons.infoCircle"></fa-icon> Was bedeutet das?-->
-<!--    </div>-->
+    <!--    <div style="text-align: center; padding: 50px 20px;">-->
+    <!--        <fa-icon [icon]="icons.infoCircle"></fa-icon> Was bedeutet das?-->
+    <!--    </div>-->
 
 </ion-content>

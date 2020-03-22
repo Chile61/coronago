@@ -11,7 +11,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "format-prettier": "prettier --write \"./src/**/*.{ts,scss,json}\""
+        "format-prettier": "prettier --write \"./src/**/*.{ts,scss,json}\"",
+        "creare-release": "node ./src/environments/before-build.js"
     },
     "private": true,
     "dependencies": {
@@ -36,6 +37,7 @@
         "cordova-plugin-bluetoothle": "^4.5.9",
         "core-js": "^2.5.4",
         "moment-mini-ts": "^2.20.1",
+        "proper-url-join": "^2.1.1",
         "rxjs": "~6.5.1",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"

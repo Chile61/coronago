@@ -1,8 +1,17 @@
-<div class="score-container" #container>
+<div class="score-container" #container [ngStyle]="{ borderColor: rssi ? getColor(rssi) : '' }">
+    <div class="group-icon" *ngIf="iconPosition === 'above'">
+        <fa-icon [icon]="icon ? icon : icons.user"></fa-icon>
+    </div>
+
     <div class="score" #scoreText>
         {{ score }}<br>
     </div>
-    <div class="group-icon">
-        <fa-icon [icon]="icons.users"></fa-icon>
+
+    <div i18n *ngIf="showHintText" class="person-contacts-hint">
+        Personen-Kontakte
+    </div>
+
+    <div class="group-icon" *ngIf="iconPosition === 'below'">
+        <fa-icon [icon]="icon ? icon : icons.user"></fa-icon>
     </div>
 </div>
