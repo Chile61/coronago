@@ -4,7 +4,7 @@
     </div>
 
     <div class="score" #scoreText>
-        {{ contactScore.score }}<br>
+        {{ contactScore.score | number: '' : 'de-DE' }}<br>
     </div>
 
     <div i18n *ngIf="showHintText" class="person-contacts-hint">

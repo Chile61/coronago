@@ -8,7 +8,7 @@
     border: 40px groove var(--score-circle);
     border-radius: 100%;
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 8vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,8 +19,9 @@
         font-size: 5em;
         font-weight: bold;
         color: var(--score-number);
-        text-shadow: 2px 2px 3px #888888e6;
+        text-shadow: 1px 1px 1px #888888e6;
         text-align: center;
+        margin-bottom: 4px;
     }
 
     .group-icon {
@@ -29,8 +30,9 @@
     }
 
     .person-contacts-hint {
-        font-size: 22px;
+        font-size: 20px;
         margin-top: -12px;
-        font-weight: 500;
+        font-weight: bold;
+        color: var(--score-hint-text);
     }
 }

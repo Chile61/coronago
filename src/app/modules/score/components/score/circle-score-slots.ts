@@ -9,56 +9,52 @@ export interface CircleScoreSlot {
 export const outerCircleScoreSlots: CircleScoreSlot[] = [
     // bottom left
     {
-        bottom: '0px',
-        left: '0px'
+        bottom: '0vw',
+        left: '0vw'
     },
 
     // bottom right
     {
-        bottom: '0px',
-        right: '0px'
+        bottom: '0vw',
+        right: '0vw'
     },
 
     // top left
     {
-        top: '0px',
-        left: '0px'
+        top: '0vw',
+        left: '0vw'
     },
 
     // top right
     {
-        top: '0px',
-        right: '0px'
+        top: '0vw',
+        right: '0vw'
     }
 ];
 
 export const innerCircleScoreSlots: CircleScoreSlot[] = [
-    // top middle
+    // top left
     {
-        top: '14vw',
-        left: '0px',
-        right: '0px'
+        top: '18vw',
+        left: '18vw',
     },
 
-    // bottom middle
+    // bottom left
     {
-        bottom: '14vw',
-        left: '0px',
-        right: '0px'
+        bottom: '18vw',
+        left: '18vw',
     },
 
-    // left middle
+    // top right
     {
-        top: '40%',
-        bottom: '0px',
-        left: '8vw'
+        top: '18vw',
+        right: '18vw',
     },
 
-    // right middle
+    // bottom right
     {
-        top: '40%',
-        bottom: '0px',
-        right: '8vw'
+        bottom: '18vw',
+        right: '18vw',
     }
 ];
 
