@@ -9,3 +9,21 @@
 .score-area {
     position: relative;
 }
+
+.danger-level-ok {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-ok);
+    }
+}
+
+.danger-level-warn {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-warn);
+    }
+}
+
+.danger-level-danger {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-danger);
+    }
+}

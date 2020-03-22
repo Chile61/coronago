@@ -14,14 +14,17 @@ export class ScoreComponent implements OnInit {
     private log = new LogManager('ScoreComponent');
 
     public icons = APP_ICONS;
-    public nearbyScores: ContactScore[] = [];
+
     public availableSlots: CircleScoreSlot[] = [].concat(circleScoreSlots);
+
+    public nearbyScores: ContactScore[] = [];
     public contactScore: ContactScore;
+    public dangerLevel: 0 | 1 | 2 = 0;
 
     constructor() {}
 
     ngOnInit() {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 10; i++) {
             let contactScore = new ContactScore();
             contactScore.score = HelperService.randomIntFromInterval(40055, 2465216);
             contactScore.rssi = HelperService.randomIntFromInterval(-30, -90);
@@ -31,6 +34,8 @@ export class ScoreComponent implements OnInit {
 
         this.contactScore = new ContactScore();
         this.contactScore.score = 1928384;
+
+        this.updateDangerLevel();
     }
 
     /**
@@ -60,5 +65,30 @@ export class ScoreComponent implements OnInit {
         }
 
         return contactScore;
+    }
+
+    /**
+     * Update danger level
+     */
+    private updateDangerLevel(): void {
+        let isWarning = false;
+        let isDanger = false;
+
+        for (const score of this.nearbyScores) {
+            if (score.slotType === 'outer') {
+                isWarning = true;
+            } else if (score.slotType === 'inner') {
+                isDanger = true;
+                break;
+            }
+        }
+
+        if (isDanger) {
+            this.dangerLevel = 2;
+        } else if (isWarning) {
+            this.dangerLevel = 1;
+        } else {
+            this.dangerLevel = 0;
+        }
     }
 }
