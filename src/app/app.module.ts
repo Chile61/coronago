@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserModule,
         HttpClientModule,
         IonicModule.forRoot({
-            mode: 'md'
+            // mode: 'md'
         }),
         IonicStorageModule.forRoot(),
         AppRoutingModule
