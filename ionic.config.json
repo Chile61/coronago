@@ -1,7 +1,10 @@
 {
-  "name": "corona-go",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+    "name": "corona-go",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
+
+
+
 }
