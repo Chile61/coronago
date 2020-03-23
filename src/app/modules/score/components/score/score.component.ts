@@ -6,6 +6,7 @@ import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
 import _sortBy from 'lodash.sortby';
 import _orderBy from 'lodash.orderby';
+import { UserService } from '../../../../services/api-services/user.service';
 
 @Component({
     selector: 'app-score',
@@ -23,9 +24,10 @@ export class ScoreComponent implements OnInit {
     public contactScore: ContactScore;
     public dangerLevel: 0 | 1 | 2 = 0;
 
-    constructor() {}
+    constructor(private userService: UserService) {}
 
     ngOnInit() {
+        // Simulate neighbours
         for (let i = 0; i < 10; i++) {
             let contactScore = new ContactScore();
             contactScore.score = HelperService.randomIntFromInterval(4, 2000);
@@ -38,10 +40,22 @@ export class ScoreComponent implements OnInit {
             return this.addAvailableSlot(contactScore);
         });
 
-        this.contactScore = new ContactScore();
-        this.contactScore.score = 40;
-
+        this.loadLocalUserScore();
         this.updateDangerLevel();
+    }
+
+    /**
+     * Get local user score from server
+     */
+    private loadLocalUserScore() {
+        this.contactScore = new ContactScore();
+        this.contactScore.score = 0;
+
+        this.userService.getUserScore(this.userService.localUserId).subscribe(score => {
+            if (score) {
+                this.contactScore.score = score.networkSize;
+            }
+        });
     }
 
     /**

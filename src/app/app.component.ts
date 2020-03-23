@@ -17,8 +17,8 @@ export class AppComponent {
         private statusBar: StatusBar,
         private bootService: BootService
     ) {
-        this.initializeApp();
         this.bootService.initApp();
+        this.initializeApp();
     }
 
     initializeApp() {

@@ -4,7 +4,7 @@
 import { environmentBase } from './environment-base';
 
 const environmentDev = {
-    apiBaseUrl: 'http://' + window.location.hostname + ':8765'
+    apiBaseUrl: 'https://api.corona-go.de/'
 };
 
 export const environment = Object.assign({}, environmentBase, environmentDev);

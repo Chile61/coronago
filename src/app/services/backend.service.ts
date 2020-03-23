@@ -17,60 +17,32 @@ export class BackendService {
     /**
      * Catch some http error
      */
-    // @ts-ignore
-    private catchSomeError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
-        of(error);
-    }
 
     /**
      * Http request GET
      */
     public GET(route: string): Observable<any> {
-        return this.http
-            .get(urlJoin(this.baseRoute, route), {
-                headers: {
-                    Authorization: null
-                }
-            })
-            .pipe(catchError(error => this.catchSomeError(error)));
+        return this.http.get(urlJoin(this.baseRoute, route));
     }
 
     /**
      * Http request GET
      */
     public POST(route: string, data: any): Observable<any> {
-        return this.http
-            .post(urlJoin(this.baseRoute, route), data, {
-                headers: {
-                    Authorization: null
-                }
-            })
-            .pipe(catchError(error => this.catchSomeError(error)));
+        return this.http.post(urlJoin(this.baseRoute, route), data);
     }
 
     /**
      * Http request GET
      */
     public PUT(route: string, data: any): Observable<any> {
-        return this.http
-            .put(urlJoin(this.baseRoute, route), data, {
-                headers: {
-                    Authorization: null
-                }
-            })
-            .pipe(catchError(error => this.catchSomeError(error)));
+        return this.http.put(urlJoin(this.baseRoute, route), data);
     }
 
     /**
      * Http request GET
      */
     public DELETE(route: string): Observable<any> {
-        return this.http
-            .delete(urlJoin(this.baseRoute, route), {
-                headers: {
-                    Authorization: null
-                }
-            })
-            .pipe(catchError(error => this.catchSomeError(error)));
+        return this.http.delete(urlJoin(this.baseRoute, route));
     }
 }
