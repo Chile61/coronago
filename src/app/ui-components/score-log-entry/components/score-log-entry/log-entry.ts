@@ -9,4 +9,9 @@ export class LogEntry {
 export class ContactLocation {
     public lng?: string;
     public lat?: string;
+
+    constructor(lng, lat) {
+        this.lng = lng;
+        this.lat = lat;
+    }
 }
