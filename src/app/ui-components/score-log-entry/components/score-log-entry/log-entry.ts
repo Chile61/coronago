@@ -7,6 +7,6 @@ export class LogEntry {
 }
 
 export class ContactLocation {
-    public lon?: string;
+    public lng?: string;
     public lat?: string;
 }

@@ -17,14 +17,17 @@ export class ReportingService {
     /**
      * Report user clash
      */
-    public reportClash(localUserId: number, detectedUserId: number, rssi: number, location: ContactLocation): Observable<ReportResponse> {
-        const body = {
-            localUserId,
-            detectedUserId,
-            rssi,
-            location: location
-        };
+    public reportMeeting(localUserId: number, detectedUserId: number, rssi: number, location: ContactLocation): Observable<ReportResponse> {
+        const queryParams = [
+            'source=' + localUserId,
+            'target=' + detectedUserId,
+            'timestamp=' + Date.now(),
+            'rssi=' + rssi,
+            'lng=' + location.lng,
+            'lat=' + location.lat
+        ];
+        const query = '?' + queryParams.join('&');
 
-        return this.backendService.POST(environment.apiEndpoints.reportClash, body);
+        return this.backendService.GET(environment.apiEndpoints.reportMeeting + query);
     }
 }

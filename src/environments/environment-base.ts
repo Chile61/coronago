@@ -8,8 +8,9 @@ export const environmentBase = {
    VERSION: require('../../package.json').version,
    build: require('../../package.json').build,
    apiEndpoints: {
-       reportClash: '/api/report-clash',
-       userScore: '/api/user-score',
+       reportMeeting: '/meet',
+       createUser: '/createUser',
+       userScore: '/getNetworkSize',
        ping: '/api/ping'
    }
 };
