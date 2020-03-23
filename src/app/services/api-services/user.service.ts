@@ -9,6 +9,10 @@ interface GetUserScoreResponse {
     timestamp: Date;
 }
 
+interface CreateUserResponse {
+    userId: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -18,9 +22,16 @@ export class UserService {
     /**
      * Get user score
      */
-    public getUserScore(localUserId: number): Observable<GetUserScoreResponse> {
-        const route = environment.apiEndpoints.userScore + '?userId=' + localUserId;
+    public createUser(): Observable<CreateUserResponse> {
+        const route = environment.apiEndpoints.createUser;
+        return this.backendService.GET(route);
+    }
 
+    /**
+     * Get user score
+     */
+    public getUserScore(userId: number): Observable<GetUserScoreResponse> {
+        const route = environment.apiEndpoints.userScore + '?userId=' + userId;
         return this.backendService.GET(route);
     }
 }
