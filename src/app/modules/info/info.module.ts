@@ -5,6 +5,7 @@ import { InfoRoutingModule } from './info-routing.module';
 import { InfoComponent } from './components/info/info.component';
 import { DisclaimerModule } from '../../ui-components/disclaimer/disclaimer.module';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { IonicModule } from '@ionic/angular';
         CommonModule,
         InfoRoutingModule,
         DisclaimerModule,
-        IonicModule
+        IonicModule,
+        FormsModule
     ]
 })
 export class InfoModule { }

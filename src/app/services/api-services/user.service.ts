@@ -25,6 +25,10 @@ export class UserService {
 
     constructor(private backendService: BackendService, private storage: Storage) {}
 
+    public init(): void {
+        this.createUserIfNotExist();
+    }
+
     /**
      * Get user score
      */

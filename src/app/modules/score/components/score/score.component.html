@@ -1,23 +1,23 @@
 <ion-header>
-        <ion-toolbar color="primary">
-            <ion-title class="ion-padding-start">Corona GO</ion-title>
-        </ion-toolbar>
-<!--    <div class="header">-->
-<!--        <div class="image-container">-->
-<!--            <img src="assets/icon/icon.png" alt="">-->
-<!--        </div>-->
-<!--        <div class="title-container">-->
-<!--            Corona Go-->
-<!--        </div>-->
-<!--    </div>-->
+    <ion-toolbar color="primary">
+        <ion-title class="ion-padding-start">Corona GO</ion-title>
+    </ion-toolbar>
+    <!--    <div class="header">-->
+    <!--        <div class="image-container">-->
+    <!--            <img src="assets/icon/icon.png" alt="">-->
+    <!--        </div>-->
+    <!--        <div class="title-container">-->
+    <!--            Corona Go-->
+    <!--        </div>-->
+    <!--    </div>-->
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
 
-<!--    <div class="virus-background">-->
-<!--        <img src="assets/icon/virus.svg">-->
-<!--    </div>-->
+    <!--    <div class="virus-background">-->
+    <!--        <img src="assets/icon/virus.svg">-->
+    <!--    </div>-->
 
     <div class="flex-center-container">
         <div class="score-area">
@@ -30,6 +30,7 @@
                               [class.danger-level-ok]="dangerLevel === 0"
                               [class.danger-level-warn]="dangerLevel === 1"
                               [class.danger-level-danger]="dangerLevel === 2"
+                              (click)="onConfigUpdated()"
                               showHintText="true"
                               textBorderOffsetPx="200"></ui-score-counter>
         </div>
@@ -45,12 +46,16 @@
             </div>
             <div class="level-1" *ngIf="dangerLevel === 1" i18n>
                 <fa-icon [icon]="icons.warn"></fa-icon>
-                <b class="keyword">Vorsicht!</b> Personen in der Umgebung. Deine Personen-Kontakte könnten sich
+                <b class="keyword">Vorsicht! </b><b>{{ countOfWarningContacts }} {{ countOfWarningContacts >= 2 ? 'Personen' : 'Person' }}
+                in der Umgebung.</b> Deine Personen-Kontakte könnten sich
                 vergrößern.
             </div>
             <div class="level-2" *ngIf="dangerLevel === 2" i18n>
                 <fa-icon [icon]="icons.danger"></fa-icon>
-                <b class="keyword">Gefahr!</b> Mindestens eine Person zu nahe! Versuche die Situation zu umgehen!
+                <b class="keyword">Gefahr! </b><b>{{ countOfDangerContacts }} {{ countOfDangerContacts >= 2 ? 'Personen' : 'Person' }}
+                zu nahe!</b> Versuche die Situation zu umgehen!
+                <br>
+                <br>
             </div>
         </div>
     </div>

@@ -4,11 +4,11 @@ import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots, hiddenSlot 
 import { HelperService } from '../../../../services/helper.service';
 import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
-import _sortBy from 'lodash.sortby';
 import _orderBy from 'lodash.orderby';
 import { UserService } from '../../../../services/api-services/user.service';
 import { Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
+import { FlagService } from '../../../../services/flag.service';
 
 @Component({
     selector: 'app-score',
@@ -23,32 +23,51 @@ export class ScoreComponent implements OnInit, OnDestroy {
 
     public availableSlots: CircleScoreSlot[] = [].concat(circleScoreSlots);
 
-    public nearbyScores: ContactScore[] = [];
-    public contactScore: ContactScore;
-    public dangerLevel: 0 | 1 | 2 = 0;
+    private simulateContactsFlag: boolean;
+    private maxRenderDevicesFlag: number;
+    private showAllAreaDevicesFlag: boolean;
 
-    constructor(private userService: UserService) {}
+    public nearbyScores: ContactScore[] = [];
+    public contactScore: ContactScore = new ContactScore();
+    public dangerLevel: 0 | 1 | 2 = 0;
+    public countOfDangerContacts = 0;
+    public countOfWarningContacts = 0;
+
+    constructor(private userService: UserService, private flagService: FlagService) {}
 
     ngOnInit(): void {
-        // Simulate neighbours
-        for (let i = 0; i < 10; i++) {
-            let contactScore = new ContactScore();
-            contactScore.score = HelperService.randomIntFromInterval(4, 2000);
-            contactScore.rssi = HelperService.randomIntFromInterval(-20, -90);
-            this.nearbyScores.push(contactScore);
-        }
-
-        this.nearbyScores = _orderBy(this.nearbyScores, ['rssi', 'score'], ['desc', 'desc']); // sort by signal, score
-        this.nearbyScores = this.nearbyScores.map(contactScore => {
-            return this.addAvailableSlot(contactScore);
-        });
-
-        this.subscriptions.push(this.userService.localUserIdLoaded.subscribe(() => this.loadLocalUserScore()));
-        this.updateDangerLevel();
+        this.subscriptions.push(
+            this.flagService.simulateContacts$.subscribe(value => {
+                this.simulateContactsFlag = value;
+                this.onConfigUpdated();
+            }),
+            this.flagService.maxRenderDevices$.subscribe(value => {
+                this.maxRenderDevicesFlag = value;
+                this.onConfigUpdated();
+            }),
+            this.flagService.showAllAreaDevices$.subscribe(value => {
+                this.showAllAreaDevicesFlag = value;
+                this.onConfigUpdated();
+            }),
+            this.userService.localUserIdLoaded.subscribe(() => {
+                this.loadLocalUserScore();
+            })
+        );
     }
 
     ngOnDestroy(): void {
         ObservableService.unsubscribeFromAll(this.subscriptions);
+    }
+
+    /**
+     * On config updated
+     */
+    private onConfigUpdated(): void {
+        if (this.simulateContactsFlag === true) {
+            this.simulateContacts();
+        } else {
+            this.detectNearbyContacts();
+        }
     }
 
     /**
@@ -82,19 +101,28 @@ export class ScoreComponent implements OnInit, OnDestroy {
                 contactScore.slotType = 'inner';
             }
         } else {
-            // Assign random tiny-slot
-            // const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
-            // const randomSlot = new CircleScoreSlotPosition();
-            // randomSlot.setRandomPosition(direction);
-            // contactScore.slot = randomSlot;
-            // contactScore.slotType = direction;
-            // contactScore.isTinySlot = true;
-
-            // Hidden slot
-            contactScore.slot = hiddenSlot;
+            if (this.showAllAreaDevicesFlag) {
+                // Assign random tiny-slot
+                const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
+                const randomSlot = new CircleScoreSlotPosition();
+                randomSlot.setRandomPosition(direction);
+                contactScore.slot = randomSlot;
+                contactScore.slotType = direction;
+                contactScore.isTinySlot = true;
+            } else {
+                // Hidden slot
+                contactScore.slot = hiddenSlot;
+            }
         }
 
         return contactScore;
+    }
+
+    /**
+     * Reset available slots
+     */
+    private resetAvailableSlots(): void {
+        this.availableSlots = [].concat(circleScoreSlots);
     }
 
     /**
@@ -120,5 +148,40 @@ export class ScoreComponent implements OnInit, OnDestroy {
         } else {
             this.dangerLevel = 0;
         }
+
+        this.countOfDangerContacts = this.nearbyScores.filter(score => score.slotType === 'inner').length;
+        this.countOfWarningContacts = this.nearbyScores.filter(score => score.slotType === 'outer').length;
+    }
+
+    /**
+     * Simulate contacts/devices around
+     */
+    private simulateContacts() {
+        let nearbyScores = [];
+        this.resetAvailableSlots();
+
+        // Simulate contacts
+        for (let i = 0; i < this.maxRenderDevicesFlag; i++) {
+            let contactScore = new ContactScore();
+            contactScore.score = HelperService.randomIntFromInterval(4, 2000);
+            contactScore.rssi = HelperService.randomIntFromInterval(-20, -90);
+            nearbyScores.push(contactScore);
+        }
+
+        nearbyScores = _orderBy(nearbyScores, ['rssi', 'score'], ['desc', 'desc']); // sort by signal, score
+        nearbyScores = nearbyScores.map(contactScore => {
+            return this.addAvailableSlot(contactScore);
+        });
+
+        this.nearbyScores = nearbyScores;
+        this.updateDangerLevel();
+    }
+
+    /**
+     * Detect nearby via bluetooth
+     */
+    private detectNearbyContacts(): void {
+        this.resetAvailableSlots();
+        this.nearbyScores = [];
     }
 }
