@@ -17,7 +17,7 @@ export class ReportingService {
     /**
      * Report user clash
      */
-    public reportMeeting(localUserId: number, detectedUserId: number, rssi: number, location: ContactLocation): Observable<ReportResponse> {
+    public reportMeeting(localUserId: string, detectedUserId: string, rssi: number, location: ContactLocation): Observable<ReportResponse> {
         const queryParams = [
             'source=' + localUserId,
             'target=' + detectedUserId,
