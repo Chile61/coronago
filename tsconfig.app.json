@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
+    "src/app/types/types.d.ts",
     "src/**/*.ts"
   ],
   "exclude": [
