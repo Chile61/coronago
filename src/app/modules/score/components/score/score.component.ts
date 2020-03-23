@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { APP_ICONS } from '../../../../ui-components/icons/icons';
 import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots, hiddenSlot } from './circle-score-slots';
 import { HelperService } from '../../../../services/helper.service';
@@ -7,14 +7,17 @@ import { LogManager } from '../../../../services/log.service';
 import _sortBy from 'lodash.sortby';
 import _orderBy from 'lodash.orderby';
 import { UserService } from '../../../../services/api-services/user.service';
+import { Subscription } from 'rxjs';
+import { ObservableService } from '../../../../services/observable.service';
 
 @Component({
     selector: 'app-score',
     templateUrl: './score.component.html',
     styleUrls: ['./score.component.scss']
 })
-export class ScoreComponent implements OnInit {
+export class ScoreComponent implements OnInit, OnDestroy {
     private log = new LogManager('ScoreComponent');
+    private subscriptions: Subscription[] = [];
 
     public icons = APP_ICONS;
 
@@ -26,7 +29,7 @@ export class ScoreComponent implements OnInit {
 
     constructor(private userService: UserService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         // Simulate neighbours
         for (let i = 0; i < 10; i++) {
             let contactScore = new ContactScore();
@@ -40,8 +43,12 @@ export class ScoreComponent implements OnInit {
             return this.addAvailableSlot(contactScore);
         });
 
-        this.loadLocalUserScore();
+        this.subscriptions.push(this.userService.localUserIdLoaded.subscribe(() => this.loadLocalUserScore()));
         this.updateDangerLevel();
+    }
+
+    ngOnDestroy(): void {
+        ObservableService.unsubscribeFromAll(this.subscriptions);
     }
 
     /**
