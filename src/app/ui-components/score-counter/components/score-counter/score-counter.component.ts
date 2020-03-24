@@ -23,8 +23,8 @@ export class ScoreCounterComponent implements OnInit, OnDestroy {
     @Input() showHintText = false;
     @Input() iconPosition: 'above' | 'below' = 'below';
 
-    @ViewChild('container', { static: true }) scoreContainerElement: ElementRef;
-    @ViewChild('scoreText', { static: true }) scoreTextElement: ElementRef;
+    @ViewChild('container', { static: false }) scoreContainerElement: ElementRef;
+    @ViewChild('scoreText', { static: false }) scoreTextElement: ElementRef;
 
     public showNodeDebugInfo: boolean;
 

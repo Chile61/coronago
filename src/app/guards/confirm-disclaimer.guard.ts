@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlagService } from '../services/flag.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class ConfirmDisclaimerGuard implements CanActivate {
+export class ConfirmDisclaimerGuard implements CanActivate, CanActivateChild {
     constructor(private flagService: FlagService, private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
