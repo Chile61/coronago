@@ -49,7 +49,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
                 this.showAllAreaDevicesFlag = value;
                 this.onConfigUpdated();
             }),
-            this.userService.localUserIdLoaded.subscribe(() => {
+            this.userService.localUserIdLoaded$.subscribe(() => {
                 this.loadLocalUserScore();
             })
         );
