@@ -1,8 +1,21 @@
 
+
+
+// CGAdvertisement.Platform
+
+
 export class CGAdvertisement {
 
-    // constructor(private cgUserId: CGUserId, private rssi) {
-    constructor(private advertisementBase64Str: string, private posRssi: number) {
+    constructor(
+        public uuid: any,
+        public rssi: number,
+        public rawAdvResp: any
+    ) {
     }
+    // // constructor(
+    // //     private rawAdvResp: any,
+    // //     private platform: any,
+    // //     private posRssi: number) {
+    // }
 
 }

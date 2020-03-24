@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs';
-import {CdvBluetoothLeService} from "./cdv-bluetooth-le.service";
-import {CdvBluetoothLeHelperService} from "./cdv-bluetooth-le-helper.service";
+import {CdvBluetoothLeService} from './cdv-bluetooth-le.service';
+import {CdvBluetoothLeHelperService} from './cdv-bluetooth-le-helper.service';
+import {CGAdvertisement} from './cg-advertisement.class';
+import {CgServiceMatcherService} from './cg-service-matcher.service';
 
 
 const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,44 +45,51 @@ export class CgAdvertisementScannerService {
 
 
         CdvBluetoothLeService.advReceived$
-            .subscribe( cgAdv => {
+            .subscribe( ({ rssi, advertisement: rawAdvResp }) => {
 
                 try{
 
-                    if (isIos) {
+                    // console.error('raw-adv', rawAdvResp);
 
-                    } else {
+                    const serviceUuidByteArray = CdvBluetoothLeHelperService.extractServiceUuidByteArrayFromAdvResp(rawAdvResp);
+
+                    if (serviceUuidByteArray) {
+
+                        // console.error('raw-adv-service-id-extracted', serviceUuidByteArray);
+
+                        const uuidByteArray = CgServiceMatcherService.matchServiceUuidReturnUser(serviceUuidByteArray);
+
+                        const cgAdv = new CGAdvertisement(uuidByteArray, rssi, rawAdvResp);
+
+                        this.cgAdvertisementReceivedSubject$.next(cgAdv);
 
                     }
 
-                    // const advBase64 = obj.advertisement;
-                    // const advHexStr = CdvBluetoothLeHelperService.base64ToHex(advBase64);
-                    // const advIntArray = window.bluetoothle.encodedStringToBytes(advBase64);
-
-                    // console.error( cgAdv);
-                    // console.error(advIntArray);
-
-                    this.cgAdvertisementReceivedSubject$.next(cgAdv);
 
                 } catch (e) {
 
+                    console.error('error', e);
                 }
+
+
 
             });
 
 
         let msg: any;
+        const scanTimeMs = 3000;
+        const pauseTimeMs = 10000;
         while (true) {
 
             msg = await CdvBluetoothLeService.startScan();
             console.error('startScan msg', msg);
 
-            await this.delayAsync(3000);
+            await this.delayAsync(scanTimeMs);
 
             msg = await CdvBluetoothLeService.stopScan();
             console.error('stopScan msg', msg);
 
-            await this.delayAsync(10000);
+            await this.delayAsync(pauseTimeMs);
 
         }
 

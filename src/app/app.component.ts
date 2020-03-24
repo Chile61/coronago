@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { BootService } from './services/boot.service';
 import {CgAdvertisementScannerService} from './services/ble/cg-advertisement-scanner.service';
 import {CgAdvertisementFactoryService} from "./services/ble/cg-advertisement-factory.service";
+import {CGAdvertisement} from "./services/ble/cg-advertisement.class";
 
 @Component({
     selector: 'app-root',
@@ -25,10 +26,8 @@ export class AppComponent {
 
 
         cGAdvertisementScannerService.cgAdvertisementReceived$
-            .subscribe( cgAdv => {
-
-                console.error('KLABBET', cgAdv);
-
+            .subscribe( ( cgAdv: CGAdvertisement ) => {
+                console.error('KLABBET', cgAdv.uuid, cgAdv.rawAdvResp);
             });
 
         setTimeout(async () => {

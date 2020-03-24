@@ -1,8 +1,8 @@
 import {Subject} from 'rxjs';
-import {CGAdvertisement} from './cg-advertisement.class';
 import {Injectable} from '@angular/core';
 import {CDV_BLE_RESTORE_KEY} from './cdv-bluetooth-le-config';
 import {take} from 'rxjs/operators';
+import _ from 'lodash';
 
 
 
@@ -10,9 +10,11 @@ import {take} from 'rxjs/operators';
  *
  */
 
-const SERVICE_TEST_UUID = '01000001-0101-0101-FFFF-000000000001';
-
 const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+// const SERVICE_TEST_UUID = '01000001-0101-0101-FFFF-000000000001';
+   const SERVICE_TEST_UUID = '11A33463-26ff-0101-FFFF-000000000' + _.random(10, 99) + (isIos ? '1' : '0');
+
 
 /**
  * Wrapper for
@@ -106,6 +108,12 @@ export class CdvBluetoothLeService {
 
     }
 
+    static async removeAllService(): Promise<any> {
+        return new Promise( (resolve, reject) => {
+            window.bluetoothle.removeAllServices(resolve, reject);
+        });
+    }
+
     static async addService(): Promise<any> {
 
         const serviceParams = {
@@ -115,16 +123,16 @@ export class CdvBluetoothLeService {
                     uuid: 'ABCD',
                     permissions: {
                         read: true,
-                        write: true,
+                        // write: true,
                         // readEncryptionRequired: true,
                         // writeEncryptionRequired: true,
                     },
                     properties : {
                         read: true,
-                        writeWithoutResponse: true,
-                        write: true,
-                        notify: true,
-                        indicate: true,
+                        // writeWithoutResponse: true,
+                        // write: true,
+                        // notify: true,
+                        // indicate: true,
                         // authenticatedSignedWrites: true,
                         // notifyEncryptionRequired: true,
                         // indicateEncryptionRequired: true,
@@ -142,15 +150,25 @@ export class CdvBluetoothLeService {
     static async stopAdvertising(): Promise<any> {
         return new Promise( (resolve, reject) => {
             window.bluetoothle.stopAdvertising(
-                resolve, reject);
+                resolve, resolve);
         });
     }
 
     static async startAdvertising(): Promise<any> {
 
         if (isIos) {
+
+            const msgGe = await CdvBluetoothLeService.removeAllService();
+            console.error('remove service', msgGe);
+
             const msg = await CdvBluetoothLeService.addService();
             console.error('add service', msg);
+        }
+
+        const hasLocation = await CdvBluetoothLeService.hasLocationPermission();
+        if (!hasLocation){
+            const locPerm = await CdvBluetoothLeService.requestLocationPermission();
+            console.error('requestLocation', locPerm);
         }
 
         console.error('Start Advertising...');
@@ -168,7 +186,7 @@ export class CdvBluetoothLeService {
             mode: 'lowLatency',
             powerLevel: 'high',
             connectable: true,
-            timeout: 500,
+            timeout: 0, // disable timeout
             includeDeviceName: false,
             includeTxPowerLevel: false
 
@@ -195,7 +213,17 @@ export class CdvBluetoothLeService {
 
     }
 
-    static async requestLocation(): Promise <any> {
+    static async hasLocationPermission(): Promise <any> {
+
+        return new Promise((resolve, reject) => {
+
+            window.bluetoothle.isLocationEnabled(resolve, reject);
+
+        });
+
+    }
+
+    static async requestLocationPermission(): Promise <any> {
 
         return new Promise((resolve, reject) => {
 
@@ -229,20 +257,16 @@ export class CdvBluetoothLeService {
 
         await CdvBluetoothLeService.assertPreConditions();
 
-
-
-
         const scanParams = {
             allowDuplicates: true // iOS
         };
-
 
         return new Promise((resolve, reject) => {
 
             window.bluetoothle.startScan(
                 (obj) => {
 
-                    // console.error('startScan', obj);
+                    // console.error('raw-scan-obj', obj)
 
                     if (obj.status === 'scanStarted') {
                         console.error(obj);
@@ -250,8 +274,7 @@ export class CdvBluetoothLeService {
                     }
 
                     if (obj.status === 'scanResult') {
-                        const adv = new CGAdvertisement(obj.advertisement, obj.rssi);
-                        CdvBluetoothLeService.advReceivedSubject$.next(adv);
+                        CdvBluetoothLeService.advReceivedSubject$.next(obj);
                     }
 
                 },

@@ -13,11 +13,12 @@ export class CgAdvertisementFactoryService {
 
     public async startAdvertising(): Promise<any> {
 
+        console.error('factory', 'starting advertisement');
+
         const msg$ = await CdvBluetoothLeService.initializePeripheral();
         msg$.subscribe( periEvent => {
             console.error('start advertising', periEvent);
         });
-
 
 
         const dd = await CdvBluetoothLeService.stopAdvertising();
