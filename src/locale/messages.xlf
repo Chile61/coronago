@@ -2,6 +2,94 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="6eb8129333b2afd82d4a8e19e34094038d8be627" datatype="html">
+        <source>
+        Personen-Kontakte
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/ui-components/score-counter/components/score-counter/score-counter.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9dadda41d2e5eb394cbdba630487cb9ec269d47d" datatype="html">
+        <source>
+                <x id="START_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;fa-icon&gt;"/><x id="CLOSE_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;/fa-icon&gt;"/>
+                Keine Personen-Kontakte in deiner Umgebung<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/score/components/score/score.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b3bbd07df40b7e71e9d1bdfd425036af5f56b8d5" datatype="html">
+        <source>
+                <x id="START_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;fa-icon&gt;"/><x id="CLOSE_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;/fa-icon&gt;"/>
+                <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Vorsicht! <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/><x id="START_BOLD_TEXT_1" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION" equiv-text="{{ countOfWarningContacts }}"/> <x id="INTERPOLATION_1" equiv-text="{{ countOfWarningContacts &gt;= 2 ? &apos;Personen&apos; : &apos;Person&apos; }}"/>
+                in der Umgebung.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Deine Personen-Kontakte könnten sich
+                vergrößern.
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/score/components/score/score.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85656867e9c602eeebfc4fb4597eef34cb8956b7" datatype="html">
+        <source>
+                <x id="START_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;fa-icon&gt;"/><x id="CLOSE_TAG_FA-ICON" ctype="x-fa-icon" equiv-text="&lt;/fa-icon&gt;"/>
+                <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Vorsicht! <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/><x id="START_BOLD_TEXT_1" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION" equiv-text="{{ countOfDangerContacts }}"/> <x id="INTERPOLATION_1" equiv-text="{{ countOfDangerContacts &gt;= 2 ? &apos;Personen&apos; : &apos;Person&apos; }}"/>
+                im unmittelbaren Umfeld. <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Situation genau einschätzen und ggf. meiden.
+                <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+                <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/score/components/score/score.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="380e8b02368ff11bb583599456f10fee49900860" datatype="html">
+        <source>Verlauf deiner Personen-Kontakte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/score-log/components/score-log/score-log.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1fde7ef69ba76dfb83b11163079c0873340b5712" datatype="html">
+        <source>
+        Hier kannst du in Kürze den Verlauf deiner Personen-Kontakte einsehen.
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/score-log/components/score-log/score-log.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="634ad9d7b66735dce881cffce67d2b5d29f88af0" datatype="html">
+        <source>Disclaimer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/info/components/info/info.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cdd84c720af90358838549f9985d315d1cc2659e" datatype="html">
+        <source>Haftungsausschluss</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/confirm-disclaimer/components/confirm-disclaimer/confirm-disclaimer.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f27a3094823b4638b91931d7ab00087499a1d382" datatype="html">
+        <source>Ablehnen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/confirm-disclaimer/components/confirm-disclaimer/confirm-disclaimer.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="387cdba6dde6b3e0924f8c0d71afeaece0f7abf2" datatype="html">
+        <source>Akzeptieren</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/confirm-disclaimer/components/confirm-disclaimer/confirm-disclaimer.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

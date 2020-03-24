@@ -12,7 +12,8 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "format-prettier": "prettier --write \"./src/**/*.{ts,scss,json}\"",
-        "creare-release": "node ./src/environments/before-build.js"
+        "creare-release": "node ./src/environments/before-build.js",
+        "xi18n": "ng xi18n --output-path src/locale"
     },
     "private": true,
     "dependencies": {
