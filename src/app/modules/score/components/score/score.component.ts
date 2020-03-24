@@ -62,7 +62,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     /**
      * On config updated
      */
-    private onConfigUpdated(): void {
+    public onConfigUpdated(): void {
         if (this.simulateContactsFlag === true) {
             this.simulateContacts();
         } else {
