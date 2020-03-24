@@ -33,6 +33,9 @@ export class InfoComponent implements OnInit, OnDestroy {
             }),
             this.flagService.hasConfirmedDisclaimer$.subscribe(value => {
                 this.hasConfirmedDisclaimer = value;
+            }),
+            this.flagService.showNodeDebugInfo$.subscribe(value => {
+                this.showNodeDebugInfo = value;
             })
         );
     }
