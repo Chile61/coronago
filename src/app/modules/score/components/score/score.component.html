@@ -23,7 +23,7 @@
         <div class="score-area">
             <ng-container *ngFor="let score of nearbyScores; let i=index">
                 <ui-nearby-score-counter
-                    class="animated infinite pulse slower"
+                    class="animated infinite pulse slow"
                     [nearbyContactScore]="score" [ngStyle]="score.slot"></ui-nearby-score-counter>
             </ng-container>
             <ui-score-counter [contactScore]="contactScore"
@@ -52,8 +52,8 @@
             </div>
             <div class="level-2" *ngIf="dangerLevel === 2" i18n>
                 <fa-icon [icon]="icons.danger"></fa-icon>
-                <b class="keyword">Gefahr! </b><b>{{ countOfDangerContacts }} {{ countOfDangerContacts >= 2 ? 'Personen' : 'Person' }}
-                zu nahe!</b> Versuche die Situation zu umgehen!
+                <b class="keyword">Vorsicht! </b><b>{{ countOfDangerContacts }} {{ countOfDangerContacts >= 2 ? 'Personen' : 'Person' }}
+                im unmittelbaren Umfeld. </b> Situation genau einschätzen und ggf. meiden.
                 <br>
                 <br>
             </div>

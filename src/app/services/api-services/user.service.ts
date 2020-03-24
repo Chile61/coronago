@@ -21,7 +21,7 @@ interface CreateUserResponse {
 export class UserService {
     private log = new LogManager('UserService');
     public localUserId: string;
-    public localUserIdLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public localUserIdLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private backendService: BackendService, private storage: Storage) {}
 
@@ -54,7 +54,7 @@ export class UserService {
             this.storage.get('localUserId').then(userId => {
                 if (userId) {
                     this.localUserId = userId;
-                    this.localUserIdLoaded.next(true);
+                    this.localUserIdLoaded$.next(true);
                     resolve();
                 } else {
                     console.warn('Create userId');
@@ -62,12 +62,12 @@ export class UserService {
                         resp => {
                             this.localUserId = resp.userId;
                             this.storage.set('localUserId', resp.userId);
-                            this.localUserIdLoaded.next(true);
+                            this.localUserIdLoaded$.next(true);
                             resolve();
                         },
                         error => {
                             this.log.error(this.createUserIfNotExist.name, 'Creating user failed!', error);
-                            this.localUserIdLoaded.next(false);
+                            this.localUserIdLoaded$.next(false);
                             reject();
                         }
                     );

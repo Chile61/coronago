@@ -7,13 +7,19 @@ import { Storage } from '@ionic/storage';
 })
 export class FlagService {
     public showAllAreaDevicesKey = 'showAllAreaDevices';
-    public showAllAreaDevices$ = new BehaviorSubject<boolean>(null);
+    public showAllAreaDevices$ = new BehaviorSubject<boolean>(false);
 
     public maxRenderDevicesKey = 'maxRenderDevices';
     public maxRenderDevices$ = new BehaviorSubject<number>(4);
 
     public simulateContactsKey = 'simulateContacts';
-    public simulateContacts$ = new BehaviorSubject<boolean>(null);
+    public simulateContacts$ = new BehaviorSubject<boolean>(false);
+
+    public hasConfirmedDisclaimerKey = 'hasConfirmedDisclaimer';
+    public hasConfirmedDisclaimer$ = new BehaviorSubject<boolean>(false);
+
+    public showNodeDebugInfoKey = 'showNodeDebugInfo';
+    public showNodeDebugInfo$ = new BehaviorSubject<boolean>(false);
 
     constructor(private storage: Storage) {}
 
@@ -49,6 +55,16 @@ export class FlagService {
         this.storage.get(this.simulateContactsKey).then(value => {
             if (value !== null) {
                 this.simulateContacts$.next(value);
+            }
+        });
+        this.storage.get(this.hasConfirmedDisclaimerKey).then(value => {
+            if (value !== null) {
+                this.hasConfirmedDisclaimer$.next(value);
+            }
+        });
+        this.storage.get(this.showNodeDebugInfoKey).then(value => {
+            if (value !== null) {
+                this.showNodeDebugInfo$.next(value);
             }
         });
     }

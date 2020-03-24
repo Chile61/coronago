@@ -6,4 +6,5 @@ export class ContactScore {
     isTinySlot = false;
     score: number;
     rssi: number;
+    userId = '';
 }

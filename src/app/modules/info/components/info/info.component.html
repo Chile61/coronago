@@ -5,16 +5,9 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ui-disclaimer></ui-disclaimer>
-
-    <br>
-    <br>
 
     <div>Icons erstellt von <a href="https://www.flaticon.com/de/autoren/freepik" title="Freepik">Freepik</a> from <a
         href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></div>
-
-    <br>
-    <br>
 
     <h1>Debugging</h1>
 
@@ -50,6 +43,21 @@
                 <p>Off: Detect devices via Bluetooth</p>
             </ion-label>
             <ion-toggle [ngModel]="simulateContacts" (ngModelChange)="setSimulateContacts($event)"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Show node debug info
+                <p>RSSI, UID</p>
+            </ion-label>
+            <ion-toggle [ngModel]="showNodeDebugInfo" (ngModelChange)="setShowNodeDebugInfo($event)"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                Confirmed disclaimer
+            </ion-label>
+            <ion-toggle [ngModel]="hasConfirmedDisclaimer" (ngModelChange)="setConfirmedDisclaimer($event)"></ion-toggle>
         </ion-item>
     </ion-list>
 

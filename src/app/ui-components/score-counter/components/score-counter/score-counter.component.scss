@@ -34,4 +34,24 @@
         font-weight: bold;
         color: var(--score-hint-text);
     }
+
+    .debug-info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 12px;
+
+        .rssi {
+            color: blue;
+            background: rgba(255, 255, 255, 0.6);
+            border: 8px;
+        }
+
+        .user-id {
+            color: #6b6b6b;
+            background: rgba(255, 255, 255, 0.6);
+        }
+    }
 }
