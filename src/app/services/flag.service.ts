@@ -15,6 +15,9 @@ export class FlagService {
     public simulateContactsKey = 'simulateContacts';
     public simulateContacts$ = new BehaviorSubject<boolean>(null);
 
+    public hasConfirmedDisclaimerKey = 'hasConfirmedDisclaimer';
+    public hasConfirmedDisclaimer$ = new BehaviorSubject<boolean>(null);
+
     constructor(private storage: Storage) {}
 
     /**
@@ -49,6 +52,11 @@ export class FlagService {
         this.storage.get(this.simulateContactsKey).then(value => {
             if (value !== null) {
                 this.simulateContacts$.next(value);
+            }
+        });
+        this.storage.get(this.hasConfirmedDisclaimerKey).then(value => {
+            if (value !== null) {
+                this.hasConfirmedDisclaimer$.next(value);
             }
         });
     }
