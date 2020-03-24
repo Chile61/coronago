@@ -19,8 +19,8 @@ export class ReportingService {
      */
     public reportMeeting(localUserId: string, detectedUserId: string, rssi: number, location: ContactLocation): Observable<ReportResponse> {
         const queryParams = [
-            'source=' + localUserId,
-            'target=' + detectedUserId,
+            'me=' + localUserId,
+            'other=' + detectedUserId,
             'timestamp=' + Date.now(),
             'rssi=' + rssi,
             'lng=' + location.lng,
