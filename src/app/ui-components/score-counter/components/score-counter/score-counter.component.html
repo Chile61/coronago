@@ -14,4 +14,13 @@
     <div class="group-icon" *ngIf="iconPosition === 'below'">
         <fa-icon [icon]="icon ? icon : icons.user"></fa-icon>
     </div>
+
+    <div class="debug-info" *ngIf="showNodeDebugInfo">
+        <span class="rssi">
+            {{ contactScore.rssi }}
+        </span><br>
+        <span class="user-id">
+            {{ contactScore.userId.substr(0, 10) }}
+        </span>
+    </div>
 </div>

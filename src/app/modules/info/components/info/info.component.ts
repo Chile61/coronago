@@ -16,6 +16,7 @@ export class InfoComponent implements OnInit, OnDestroy {
     public maxRenderDevices: number;
     public simulateContacts: boolean;
     public hasConfirmedDisclaimer: boolean;
+    public showNodeDebugInfo: boolean;
 
     constructor(public userService: UserService, private flagService: FlagService) {}
 
@@ -66,5 +67,12 @@ export class InfoComponent implements OnInit, OnDestroy {
      */
     public setConfirmedDisclaimer(value: boolean): void {
         this.flagService.updateValue(this.flagService.hasConfirmedDisclaimerKey, value);
+    }
+
+    /**
+     * Set new value for show node debug info
+     */
+    public setShowNodeDebugInfo(value: boolean): void {
+        this.flagService.updateValue(this.flagService.showNodeDebugInfoKey, value);
     }
 }

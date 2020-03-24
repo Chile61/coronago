@@ -20,6 +20,18 @@ export class HelperService {
     }
 
     /**
+     * Generate random hex string
+     */
+    public static getRandomHexString(length: number): string {
+        const hex = '0123456789ABCDEF';
+        let output = '';
+        for (let i = 0; i < length; ++i) {
+            output += hex.charAt(Math.floor(Math.random() * hex.length));
+        }
+        return output;
+    }
+
+    /**
      * Generate random id string
      */
     public static getRandomNumber(length: number): number {

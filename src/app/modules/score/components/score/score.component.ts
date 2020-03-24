@@ -165,6 +165,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
             let contactScore = new ContactScore();
             contactScore.score = HelperService.randomIntFromInterval(4, 2000);
             contactScore.rssi = HelperService.randomIntFromInterval(-20, -90);
+            contactScore.userId = HelperService.getRandomHexString(9);
             nearbyScores.push(contactScore);
         }
 

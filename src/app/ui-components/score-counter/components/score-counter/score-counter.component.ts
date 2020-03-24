@@ -1,16 +1,22 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { APP_ICONS } from '../../../icons/icons';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
+import { Subscription } from 'rxjs';
+import { ObservableService } from '../../../../services/observable.service';
+import { FlagService } from '../../../../services/flag.service';
 
 @Component({
     selector: 'ui-score-counter',
     templateUrl: './score-counter.component.html',
     styleUrls: ['./score-counter.component.scss']
 })
-export class ScoreCounterComponent implements OnInit {
+export class ScoreCounterComponent implements OnInit, OnDestroy {
     private log = new LogManager('ScoreCounterComponent');
+    private subscriptions: Subscription[] = [];
+    public icons = APP_ICONS;
+
     @Input() contactScore: ContactScore;
     @Input() textBorderOffsetPx: number;
     @Input() icon: IconDefinition;
@@ -20,14 +26,24 @@ export class ScoreCounterComponent implements OnInit {
     @ViewChild('container', { static: true }) scoreContainerElement: ElementRef;
     @ViewChild('scoreText', { static: true }) scoreTextElement: ElementRef;
 
-    public icons = APP_ICONS;
+    public showNodeDebugInfo: boolean;
 
-    constructor() {}
+    constructor(private flagService: FlagService) {}
 
     ngOnInit(): void {
         requestAnimationFrame(() => {
             this.adjustCounterSize();
         });
+
+        this.subscriptions.push(
+            this.flagService.showNodeDebugInfo$.subscribe(value => {
+                this.showNodeDebugInfo = value;
+            })
+        );
+    }
+
+    ngOnDestroy(): void {
+        ObservableService.unsubscribeFromAll(this.subscriptions);
     }
 
     /**
