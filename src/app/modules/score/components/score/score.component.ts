@@ -26,6 +26,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     private simulateContactsFlag: boolean;
     private maxRenderDevicesFlag: number;
     private showAllAreaDevicesFlag: boolean;
+    private userId: string;
 
     public nearbyScores: ContactScore[] = [];
     public contactScore: ContactScore = new ContactScore();
@@ -49,8 +50,9 @@ export class ScoreComponent implements OnInit, OnDestroy {
                 this.showAllAreaDevicesFlag = value;
                 this.onConfigUpdated();
             }),
-            this.userService.localUserIdLoaded$.subscribe(() => {
-                this.loadLocalUserScore();
+            this.flagService.localUserId$.subscribe((userId) => {
+                this.userId = userId;
+                this.getLocalUserScore();
             })
         );
     }
@@ -73,11 +75,11 @@ export class ScoreComponent implements OnInit, OnDestroy {
     /**
      * Get local user score from server
      */
-    private loadLocalUserScore() {
+    private getLocalUserScore(): void {
         this.contactScore = new ContactScore();
         this.contactScore.score = 0;
 
-        this.userService.getUserScore(this.userService.localUserId).subscribe(score => {
+        this.userService.getUserScore(this.userId).subscribe(score => {
             if (score) {
                 this.contactScore.score = score.networkSize;
             }

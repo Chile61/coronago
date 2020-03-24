@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
+import { UserService } from './api-services/user.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FlagService {
     public showAllAreaDevicesKey = 'showAllAreaDevices';
@@ -16,12 +17,18 @@ export class FlagService {
     public simulateContacts$ = new BehaviorSubject<boolean>(false);
 
     public hasConfirmedDisclaimerKey = 'hasConfirmedDisclaimer';
-    public hasConfirmedDisclaimer$ = new BehaviorSubject<boolean>(false);
+    public hasConfirmedDisclaimer$ = new ReplaySubject<boolean>(1);
 
     public showNodeDebugInfoKey = 'showNodeDebugInfo';
     public showNodeDebugInfo$ = new BehaviorSubject<boolean>(false);
 
-    constructor(private storage: Storage) {}
+    public localUserIdKey = 'localUserId';
+    public localUserId$ = new ReplaySubject<string>(1);
+
+    public loginTokenKey = 'loginToken';
+    public loginToken$ = new ReplaySubject<string>(1);
+
+    constructor(private storage: Storage, private userService: UserService) {}
 
     /**
      * Public service init
@@ -42,29 +49,52 @@ export class FlagService {
      * Load config flags
      */
     private loadConfigFlags(): void {
-        this.storage.get(this.showAllAreaDevicesKey).then(value => {
+        // Whether to show all devices in area or just 4
+        this.storage.get(this.showAllAreaDevicesKey).then((value) => {
             if (value !== null) {
                 this.showAllAreaDevices$.next(value);
             }
         });
-        this.storage.get(this.maxRenderDevicesKey).then(value => {
+
+        // Max render devices
+        this.storage.get(this.maxRenderDevicesKey).then((value) => {
             if (value !== null) {
                 this.maxRenderDevices$.next(value);
             }
         });
-        this.storage.get(this.simulateContactsKey).then(value => {
+
+        // Simulate area contacts
+        this.storage.get(this.simulateContactsKey).then((value) => {
             if (value !== null) {
                 this.simulateContacts$.next(value);
             }
         });
-        this.storage.get(this.hasConfirmedDisclaimerKey).then(value => {
-            if (value !== null) {
-                this.hasConfirmedDisclaimer$.next(value);
-            }
+
+        // Has confirmed disclaimer
+        this.storage.get(this.hasConfirmedDisclaimerKey).then((value) => {
+            this.hasConfirmedDisclaimer$.next(!!value);
         });
-        this.storage.get(this.showNodeDebugInfoKey).then(value => {
+
+        // Show node debug info
+        this.storage.get(this.showNodeDebugInfoKey).then((value) => {
             if (value !== null) {
                 this.showNodeDebugInfo$.next(value);
+            }
+        });
+
+        // UserId, LoginToken
+        Promise.all([this.storage.get(this.localUserIdKey), this.storage.get(this.loginTokenKey)]).then((result) => {
+            const userId = result[0];
+            const loginToken = result[1];
+
+            if (!userId || !loginToken) {
+                this.userService.createUser().subscribe((user) => {
+                    this.updateValue(this.localUserIdKey, user.userId);
+                    this.updateValue(this.loginTokenKey, user.token);
+                });
+            } else {
+                this.localUserId$.next(userId);
+                this.loginToken$.next(loginToken);
             }
         });
     }

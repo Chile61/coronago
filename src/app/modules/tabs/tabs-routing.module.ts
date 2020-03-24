@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { ConfirmDisclaimerGuard } from '../../guards/confirm-disclaimer.guard';
 
 const routes: Routes = [
     {
         path: 'tabs',
         component: TabsPage,
-        canActivateChild: [ConfirmDisclaimerGuard],
         children: [
             {
                 path: 'score',
@@ -60,10 +58,6 @@ const routes: Routes = [
                 pathMatch: 'full',
             },
         ],
-    },
-    {
-        path: 'disclaimer',
-        loadChildren: () => import('../../modules/confirm-disclaimer/confirm-disclaimer.module').then((m) => m.ConfirmDisclaimerModule),
     },
     {
         path: '',

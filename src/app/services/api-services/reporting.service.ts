@@ -21,7 +21,7 @@ export class ReportingService {
         const queryParams = [
             'me=' + localUserId,
             'other=' + detectedUserId,
-            'timestamp=' + Date.now(),
+            'me_time=' + Date.now(),
             'rssi=' + rssi,
             'lng=' + location.lng,
             'lat=' + location.lat

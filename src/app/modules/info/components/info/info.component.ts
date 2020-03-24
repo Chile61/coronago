@@ -17,8 +17,10 @@ export class InfoComponent implements OnInit, OnDestroy {
     public simulateContacts: boolean;
     public hasConfirmedDisclaimer: boolean;
     public showNodeDebugInfo: boolean;
+    public userId: string;
+    public loginToken: string;
 
-    constructor(public userService: UserService, private flagService: FlagService) {}
+    constructor(private flagService: FlagService) {}
 
     ngOnInit(): void {
         this.subscriptions.push(
@@ -36,6 +38,12 @@ export class InfoComponent implements OnInit, OnDestroy {
             }),
             this.flagService.showNodeDebugInfo$.subscribe(value => {
                 this.showNodeDebugInfo = value;
+            }),
+            this.flagService.localUserId$.subscribe(value => {
+                this.userId = value;
+            }),
+            this.flagService.loginToken$.subscribe(value => {
+                this.loginToken = value;
             })
         );
     }
