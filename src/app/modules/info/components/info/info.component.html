@@ -33,7 +33,7 @@
         <ion-item>
             <ion-range min="0" max="50" step="1" class="range-padding"
                        [ngModel]="maxRenderDevices" (ngModelChange)="setMaxRenderDevices($event)">
-                <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
+                <fa-icon slot="start" [icon]="icons.mobile"></fa-icon>
                 <h4 slot="end">{{ maxRenderDevices }}</h4>
             </ion-range>
         </ion-item>

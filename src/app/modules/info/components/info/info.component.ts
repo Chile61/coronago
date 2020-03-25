@@ -3,6 +3,7 @@ import { UserService } from '../../../../services/api-services/user.service';
 import { FlagService } from '../../../../services/flag.service';
 import { Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
+import { APP_ICONS } from '../../../../ui-components/icons/icons';
 
 @Component({
     selector: 'app-info',
@@ -11,6 +12,7 @@ import { ObservableService } from '../../../../services/observable.service';
 })
 export class InfoComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription[] = [];
+    public icons = APP_ICONS;
 
     public showAllAreaDevices: boolean;
     public maxRenderDevices: number;
