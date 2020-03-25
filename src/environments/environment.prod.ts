@@ -2,8 +2,7 @@ import { environmentBase } from './environment-base';
 
 const environmentProduction = {
     production: true,
-    baseUrl: '',
-    apiBaseUrl: 'https://sinux.de'
+    apiBaseUrl: 'https://api.corona-go.de'
 };
 
 export const environment = Object.assign({}, environmentBase, environmentProduction);
