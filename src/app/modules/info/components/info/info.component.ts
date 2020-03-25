@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserService } from '../../../../services/api-services/user.service';
 import { FlagService } from '../../../../services/flag.service';
 import { Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { APP_ICONS } from '../../../../ui-components/icons/icons';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-info',
@@ -12,6 +12,7 @@ import { APP_ICONS } from '../../../../ui-components/icons/icons';
 })
 export class InfoComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription[] = [];
+    public environment = environment;
     public icons = APP_ICONS;
 
     public showAllAreaDevices: boolean;
