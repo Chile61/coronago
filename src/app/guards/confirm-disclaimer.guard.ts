@@ -16,7 +16,7 @@ export class ConfirmDisclaimerGuard implements CanActivate, CanActivateChild {
                 if (!!value) {
                     return true;
                 }
-                this.router.navigate(['disclaimer']);
+                this.router.navigate(['disclaimer'], { replaceUrl: true });
                 return false;
             })
         );
