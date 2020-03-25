@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BackendService } from '../backend.service';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Storage } from '@ionic/storage';
 import { LogManager } from '../log.service';
 
 interface GetUserScoreResponse {
     networkSize: number;
-    // userId: number;
-    // timestamp: Date;
 }
 
 interface CreateUserResponse {
