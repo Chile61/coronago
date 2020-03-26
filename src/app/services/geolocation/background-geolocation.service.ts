@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { ReplaySubject } from 'rxjs';
-import BackgroundGeolocation from 'cordova-background-geolocation-lt';
+import BackgroundGeolocation, {
+    HeartbeatEvent,
+    HttpEvent,
+    Location,
+    MotionActivityEvent,
+    MotionChangeEvent,
+    ProviderChangeEvent,
+} from 'cordova-background-geolocation-lt';
 
-interface BgLocation {}
-
-interface BgMotion {}
-
-interface BgHttp {}
-
-interface BgProviderChange {}
+export type BgLocation = Location;
+export type BgMotion = MotionChangeEvent;
+export type BgHttp = HttpEvent;
+export type BgProviderChange = ProviderChangeEvent;
+export type BgHeartbeat = HeartbeatEvent;
+export type BgActivity = MotionActivityEvent;
+export type BgPowerSave = boolean;
 
 @Injectable({
     providedIn: 'root',
 })
 export class BackgroundGeolocationService {
+    public backgroundGeolocationInitialized$ = new ReplaySubject<boolean>(1);
+
     public location$ = new ReplaySubject<BgLocation>(1);
     public motion$ = new ReplaySubject<BgMotion>(1);
     public http$ = new ReplaySubject<BgHttp>(1);
     public providerChange$ = new ReplaySubject<BgProviderChange>(1);
-    public backgroundGeolocationInitialized$ = new ReplaySubject<boolean>(1);
+    public heartbeat$ = new ReplaySubject<BgHeartbeat>(1);
+    public activity$ = new ReplaySubject<BgActivity>(1);
+    public powerSave$ = new ReplaySubject<BgPowerSave>(1);
 
     constructor(private platform: Platform) {}
 
@@ -31,20 +42,29 @@ export class BackgroundGeolocationService {
             this.startServices();
         });
 
+        // DEBUG - can be removed
         this.location$.subscribe((value) => {
-            console.error('[hi i am here]: location', JSON.stringify(value));
+            console.error('[hi i am here]: location', value, JSON.stringify(value));
         });
 
         this.motion$.subscribe((value) => {
-            console.error('[hi i am here]: motion', JSON.stringify(value));
+            console.error('[hi i am here]: motion', value, JSON.stringify(value));
         });
 
         this.http$.subscribe((value) => {
-            console.error('[hi i am here]: http', JSON.stringify(value));
+            console.error('[hi i am here]: http', value, JSON.stringify(value));
         });
 
         this.providerChange$.subscribe((value) => {
-            console.error('[hi i am here]: providerChange', JSON.stringify(value));
+            console.error('[hi i am here]: providerChange', value, JSON.stringify(value));
+        });
+
+        this.heartbeat$.subscribe((value) => {
+            console.error('[hi i am here]: heartbeat', value, JSON.stringify(value));
+        });
+
+        this.activity$.subscribe((value) => {
+            console.error('[hi i am here]: activity', value, JSON.stringify(value));
         });
     }
 
@@ -66,6 +86,18 @@ export class BackgroundGeolocationService {
 
         BackgroundGeolocation.onProviderChange((event) => {
             this.providerChange$.next(event);
+        });
+
+        BackgroundGeolocation.onHeartbeat((event) => {
+            this.heartbeat$.next(event);
+        });
+
+        BackgroundGeolocation.onActivityChange((event) => {
+            this.activity$.next(event);
+        });
+
+        BackgroundGeolocation.onPowerSaveChange((event) => {
+            this.powerSave$.next(event);
         });
 
         BackgroundGeolocation.ready(
