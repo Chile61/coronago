@@ -21,22 +21,15 @@ export class CgAdvertisementScannerService {
 
     constructor() {
 
-        // setTimeout( () => {
-        //     this.cgAdvertisementReceivedSubject$.next('TESTTEST');
-        // }, 4000);
-
-
         this.startScanningForCgAdvertisement();
 
     }
-
 
     async delayAsync(delayMs: number): Promise<any> {
         return new Promise( (resolve, reject) => {
             setTimeout(resolve, delayMs);
         });
     }
-
 
     private async startScanningForCgAdvertisement(): Promise<any> {
 
@@ -49,29 +42,28 @@ export class CgAdvertisementScannerService {
 
                 try{
 
-                    // console.error('raw-adv', rawAdvResp);
+                    console.error('ffr', 'raw-adv', rssi, rawAdvResp );
 
-                    const serviceUuidByteArray = CdvBluetoothLeHelperService.extractServiceUuidByteArrayFromAdvResp(rawAdvResp);
-
-                    if (serviceUuidByteArray) {
+                    // const serviceUuidByteArray = CdvBluetoothLeHelperService.extractServiceUuidByteArrayFromAdvResp(rawAdvResp);
+                    //
+                    // if (serviceUuidByteArray) {
 
                         // console.error('raw-adv-service-id-extracted', serviceUuidByteArray);
 
-                        const uuidByteArray = CgServiceMatcherService.matchServiceUuidReturnUser(serviceUuidByteArray);
+                        // const uuidByteArray = CgServiceMatcherService.matchServiceUuidReturnUser(serviceUuidByteArray);
 
-                        const cgAdv = new CGAdvertisement(uuidByteArray, rssi, rawAdvResp);
+                        // const cgAdv = new CGAdvertisement(uuidByteArray, rssi, rawAdvResp);
 
-                        this.cgAdvertisementReceivedSubject$.next(cgAdv);
+                        // this.cgAdvertisementReceivedSubject$.next(cgAdv);
 
-                    }
+                    // }
 
+                // this.cgAdvertisementReceivedSubject$.next(cgAdv);
 
-                } catch (e) {
+            } catch (e) {
 
                     console.error('error', e);
                 }
-
-
 
             });
 
@@ -82,12 +74,12 @@ export class CgAdvertisementScannerService {
         while (true) {
 
             msg = await CdvBluetoothLeService.startScan();
-            console.error('startScan msg', msg);
+            console.error('ffr', 'startScan msg', JSON.stringify(msg));
 
             await this.delayAsync(scanTimeMs);
 
             msg = await CdvBluetoothLeService.stopScan();
-            console.error('stopScan msg', msg);
+            console.error('ffr', 'stopScan msg', JSON.stringify(msg));
 
             await this.delayAsync(pauseTimeMs);
 

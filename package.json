@@ -35,7 +35,11 @@
         "@ionic/storage": "^2.2.0",
         "await-to-js": "^2.1.1",
         "cordova-android": "^8.1.0",
+        "cordova-background-geolocation-lt": "^3.4.2",
         "cordova-ios": "^5.1.1",
+        "cordova-plugin-background-fetch": "^5.6.1",
+        "cordova-plugin-background-mode-bluetooth-central": "^1.0.0",
+        "cordova-plugin-background-mode-bluetooth-peripheral": "^1.0.0",
         "cordova-plugin-bluetoothle": "^4.5.9",
         "cordova-sqlite-storage": "^5.0.0",
         "core-js": "^2.5.4",
@@ -94,7 +98,16 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-bluetoothle": {},
-            "cordova-sqlite-storage": {}
+            "cordova-sqlite-storage": {},
+            "cordova-background-geolocation-lt": {
+                "GOOGLE_API_VERSION": "16.+",
+                "APPCOMPAT_VERSION": "28.+",
+                "OKHTTP_VERSION": "3.12.+",
+                "EVENTBUS_VERSION": "3.0.0",
+                "BACKGROUND_MODE_LOCATION": "<string>location</string>"
+            },
+            "cordova-plugin-background-mode-bluetooth-central": {},
+            "cordova-plugin-background-mode-bluetooth-peripheral": {}
         },
         "platforms": [
             "android",
