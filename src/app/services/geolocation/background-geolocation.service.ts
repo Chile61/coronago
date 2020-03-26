@@ -107,7 +107,7 @@ export class BackgroundGeolocationService {
         BackgroundGeolocation.ready(
             {
                 reset: true,
-                debug: true,
+                debug: false,
                 logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
                 desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
                 distanceFilter: 10,
@@ -119,11 +119,14 @@ export class BackgroundGeolocationService {
                 // iOS
                 preventSuspend: true,
                 // Android
+                enableHeadless: true,
                 foregroundService: true,
                 notification: {
                     title: 'Corona GO',
                     text: 'Deine Personen-Kontakte werden gezählt :)',
-                    priority: BackgroundGeolocation.NOTIFICATION_PRIORITY_MIN
+                    priority: BackgroundGeolocation.NOTIFICATION_PRIORITY_MIN,
+                    color: '#d81b60',
+                    channelName: 'Kontakt-Personen Zähler'
                 }
             },
             (state) => {
