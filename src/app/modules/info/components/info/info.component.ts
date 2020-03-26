@@ -89,4 +89,11 @@ export class InfoComponent implements OnInit, OnDestroy {
     public setShowNodeDebugInfo(value: boolean): void {
         this.flagService.updateValue(this.flagService.showNodeDebugInfoKey, value);
     }
+
+    /**
+     * On delete user id
+     */
+    public onDeleteUid(): void {
+        this.flagService.updateValue(this.flagService.localUserIdKey, null);
+    }
 }

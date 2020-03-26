@@ -22,8 +22,6 @@ export class UserService {
 
     constructor(private backendService: BackendService, private storage: Storage) {}
 
-    public init(): void {}
-
     /**
      * Get user score
      */
