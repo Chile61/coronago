@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import BackgroundGeolocation from 'cordova-background-geolocation-lt';
 
 interface BgLocation {}
@@ -30,6 +30,22 @@ export class BackgroundGeolocationService {
         this.platform.ready().then(() => {
             this.startServices();
         });
+
+        this.location$.subscribe((value) => {
+            console.error('[hi i am here]: location', JSON.stringify(value));
+        });
+
+        this.motion$.subscribe((value) => {
+            console.error('[hi i am here]: motion', JSON.stringify(value));
+        });
+
+        this.http$.subscribe((value) => {
+            console.error('[hi i am here]: http', JSON.stringify(value));
+        });
+
+        this.providerChange$.subscribe((value) => {
+            console.error('[hi i am here]: providerChange', JSON.stringify(value));
+        });
     }
 
     /**
@@ -37,22 +53,18 @@ export class BackgroundGeolocationService {
      */
     private startServices(): void {
         BackgroundGeolocation.onLocation((location) => {
-            console.log('[location] - ', location);
             this.location$.next(location);
         });
 
         BackgroundGeolocation.onMotionChange((event) => {
-            console.log('[motionchange] - ', event.isMoving, event.location);
             this.motion$.next(event);
         });
 
         BackgroundGeolocation.onHttp((response) => {
-            console.log('[http] - ', response.success, response.status, response.responseText);
             this.http$.next(response);
         });
 
         BackgroundGeolocation.onProviderChange((event) => {
-            console.log('[providerchange] - ', event.enabled, event.status, event.gps);
             this.providerChange$.next(event);
         });
 
@@ -63,8 +75,9 @@ export class BackgroundGeolocationService {
                 logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
                 desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
                 distanceFilter: 10,
-                url: 'http://my.server.com/locations',
-                autoSync: true,
+                heartbeatInterval: 10,
+                // url: 'http://my.server.com/locations',
+                // autoSync: true,
                 stopOnTerminate: false,
                 startOnBoot: true,
             },
