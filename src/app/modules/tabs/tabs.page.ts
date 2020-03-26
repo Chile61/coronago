@@ -19,7 +19,7 @@ export class TabsPage implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscriptions.push(
             this.platform.backButton.subscribe(() => {
-                navigator['app'].exitApp();
+                // navigator['app'].exitApp();
             })
         );
     }
