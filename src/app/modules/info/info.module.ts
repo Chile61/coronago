@@ -6,6 +6,7 @@ import { InfoComponent } from './components/info/info.component';
 import { DisclaimerModule } from '../../ui-components/disclaimer/disclaimer.module';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
         InfoRoutingModule,
         DisclaimerModule,
         IonicModule,
-        FormsModule
+        FormsModule,
+        FontAwesomeModule
     ]
 })
 export class InfoModule { }

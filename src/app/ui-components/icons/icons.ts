@@ -1,10 +1,10 @@
 import {
     faCheckCircle,
-    faEnvelope, faExclamationTriangle, faHandPaper,
+    faEnvelope, faExclamationTriangle, faExternalLinkAlt, faHandPaper,
     faHistory,
     faInfo,
     faInfoCircle,
-    faLongArrowAltRight,
+    faLongArrowAltRight, faMobileAlt,
     faNewspaper,
     faUser,
     faUsers
@@ -21,5 +21,7 @@ export const APP_ICONS = {
     users: faUsers,
     ok: faCheckCircle,
     warn: faExclamationTriangle,
-    danger: faHandPaper
+    danger: faHandPaper,
+    mobile: faMobileAlt,
+    externalLink: faExternalLinkAlt
 };

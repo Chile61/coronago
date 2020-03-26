@@ -17,7 +17,7 @@ export class ConfirmDisclaimerComponent implements OnInit {
      */
     public confirm(): void {
         this.flagService.updateValue(this.flagService.hasConfirmedDisclaimerKey, true);
-        this.router.navigate(['']);
+        this.router.navigate([''], { replaceUrl: true });
     }
 
     /**

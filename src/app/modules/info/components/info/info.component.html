@@ -1,74 +1,105 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title class="ion-padding-start" i18n>Disclaimer</ion-title>
+        <ion-title class="ion-padding-start" i18n>Info</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-    <div>Icons erstellt von <a href="https://www.flaticon.com/de/autoren/freepik" title="Freepik">Freepik</a> from <a
-        href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></div>
 
-    <h1>Debugging</h1>
+    <div class="ion-padding-vertical">
+        <b>WICHTIG: Diese App ersetzt keinen Arzt und kann keine Infektionswahrscheinlichkeiten ermitteln. Sie dient
+            lediglich dazu, um sich selbst einen Überblick über die Größe des eigenen Kontakt-Netzwerks zu
+            verschaffen</b><br>
+        <br>
+        Damit die App auch im Hingergrund (d. h. während die App geschlossen ist) die Kontakte über Bluetooth zählen
+        kann, brauchen wir die Berechtigungen für Standort und Bluetooth. Solltest du diese Berechtigungen nicht erteilt
+        haben, kannst du diese in deinen Einstellungen im Nachhinein freigeben. Schließe und öffne die App bitte in
+        diesem Fall erneut<br>
+        <br>
+        <a href="https://coronago369135004.wordpress.com/datenschutz/" target="_blank"><b>Sobald die Pandemie vorüber
+            ist, werden wir den Datenbestand löschen, siehe dazu auch unsere Datenschutzerklärung</b></a><br>
+        <br>
+    </div>
 
     <ion-list>
         <ion-item>
             <ion-label>
-                <h2>User Id</h2>
+                <h2>
+                    <a href="https://coronago369135004.wordpress.com/datenschutz/"
+                       style="text-decoration: none; padding: 16px 0;"
+                       target="_blank">Datenschutzerklärung <fa-icon [icon]="icons.externalLink"></fa-icon></a>
+                </h2>
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <h2>UID</h2>
                 <p>
                     {{ userId }}
                 </p>
             </ion-label>
         </ion-item>
-
-        <ion-item>
-            <ion-label>
-                <h2>Login Token</h2>
-                <p>
-                    {{ loginToken }}
-                </p>
-            </ion-label>
-        </ion-item>
-
-        <ion-item>
-            <ion-range min="0" max="50" step="1" class="range-padding"
-                       [ngModel]="maxRenderDevices" (ngModelChange)="setMaxRenderDevices($event)">
-                <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
-                <h4 slot="end">{{ maxRenderDevices }}</h4>
-            </ion-range>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>
-                Show all area devices
-                <p>Off: Only 4 large slots will be shown</p>
-            </ion-label>
-            <ion-toggle [ngModel]="showAllAreaDevices" (ngModelChange)="setShowAllAreaDevices($event)"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>
-                Simulate contacts
-                <p>Off: Detect devices via Bluetooth</p>
-            </ion-label>
-            <ion-toggle [ngModel]="simulateContacts" (ngModelChange)="setSimulateContacts($event)"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>
-                Show node debug info
-                <p>RSSI, UID</p>
-            </ion-label>
-            <ion-toggle [ngModel]="showNodeDebugInfo" (ngModelChange)="setShowNodeDebugInfo($event)"></ion-toggle>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>
-                Confirmed disclaimer
-            </ion-label>
-            <ion-toggle [ngModel]="hasConfirmedDisclaimer" (ngModelChange)="setConfirmedDisclaimer($event)"></ion-toggle>
-        </ion-item>
     </ion-list>
 
+    <div class="ion-padding-vertical">Icons erstellt von <a href="https://www.flaticon.com/de/autoren/freepik"
+                                                            title="Freepik">Freepik</a> from <a
+        href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a></div>
 
+    <ng-container *ngIf="!environment.production">
+        <h1>Debugging</h1>
+
+        <ion-list>
+
+            <ion-item>
+                <ion-label>
+                    <h2>Login Token</h2>
+                    <p>
+                        {{ loginToken }}
+                    </p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-range min="0" max="50" step="1" class="range-padding"
+                           [ngModel]="maxRenderDevices" (ngModelChange)="setMaxRenderDevices($event)">
+                    <fa-icon slot="start" [icon]="icons.mobile"></fa-icon>
+                    <h4 slot="end">{{ maxRenderDevices }}</h4>
+                </ion-range>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    Show all area devices
+                    <p>Off: Only 4 large slots will be shown</p>
+                </ion-label>
+                <ion-toggle [ngModel]="showAllAreaDevices" (ngModelChange)="setShowAllAreaDevices($event)"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    Simulate contacts
+                    <p>Off: Detect devices via Bluetooth</p>
+                </ion-label>
+                <ion-toggle [ngModel]="simulateContacts" (ngModelChange)="setSimulateContacts($event)"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    Show node debug info
+                    <p>RSSI, UID</p>
+                </ion-label>
+                <ion-toggle [ngModel]="showNodeDebugInfo" (ngModelChange)="setShowNodeDebugInfo($event)"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    Confirmed disclaimer
+                </ion-label>
+                <ion-toggle [ngModel]="hasConfirmedDisclaimer"
+                            (ngModelChange)="setConfirmedDisclaimer($event)"></ion-toggle>
+            </ion-item>
+        </ion-list>
+    </ng-container>
 </ion-content>
