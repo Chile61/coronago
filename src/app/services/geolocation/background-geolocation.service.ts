@@ -111,11 +111,20 @@ export class BackgroundGeolocationService {
                 logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
                 desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
                 distanceFilter: 10,
-                heartbeatInterval: 10,
+                heartbeatInterval: 60,
                 // url: 'http://my.server.com/locations',
                 // autoSync: true,
                 stopOnTerminate: false,
                 startOnBoot: true,
+                // iOS
+                preventSuspend: true,
+                // Android
+                foregroundService: true,
+                notification: {
+                    title: 'Corona GO',
+                    text: 'Deine Personen-Kontakte werden gezählt :)',
+                    priority: BackgroundGeolocation.NOTIFICATION_PRIORITY_MIN
+                }
             },
             (state) => {
                 console.log('[ready] BackgroundGeolocation is ready to use');
