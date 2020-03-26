@@ -9,16 +9,30 @@
 
     <div class="ion-padding-vertical">
         <b>WICHTIG: Diese App ersetzt keinen Arzt und kann keine Infektionswahrscheinlichkeiten ermitteln. Sie dient
-            lediglich dazu, um sich selbst einen Überblick über die Größe des eigenen Kontakt-Netzwerks zu
-            verschaffen</b><br>
+            lediglich dazu, um sich selbst einen Überblick über die Größe der eigenen direkten und indirekten
+            Personen-Kontakte zu verschaffen.</b><br>
+
         <br>
-        Damit die App auch im Hingergrund (d. h. während die App geschlossen ist) die Kontakte über Bluetooth zählen
-        kann, brauchen wir die Berechtigungen für Standort und Bluetooth. Solltest du diese Berechtigungen nicht erteilt
-        haben, kannst du diese in deinen Einstellungen im Nachhinein freigeben. Schließe und öffne die App bitte in
-        diesem Fall erneut<br>
+
+        Damit die App auch im Hintergrund zählen kann, brauchen wir die Berechtigungen für Standort und Bluetooth.
+        Solltest du diese Berechtigungen beim ersten Starten nicht erteilt haben, kannst du diese in deinen
+        Einstellungen im Nachhinein freigeben. Schließe und öffne die App bitte in diesem Fall erneut.<br>
+
         <br>
-        <a href="https://coronago369135004.wordpress.com/datenschutz/" target="_blank"><b>Sobald die Pandemie vorüber
-            ist, werden wir den Datenbestand löschen, siehe dazu auch unsere Datenschutzerklärung</b></a><br>
+
+        Die App benutzt Bluetooth Technologie für die Zählungen. Die GPS Berechtigung ist zwar für die Zählung nicht
+        wesentlich, wird aber benötigt, damit die App auch im Hintergrund weiter zählen kann.
+
+        <br>
+
+        Die App zählt nur die Personen-Kontakte derjenigen, die die App "Corona GO" installiert haben und unserer <a
+        href="https://coronago369135004.wordpress.com/datenschutz/" target="_blank">Datenschutzerklärung</a> zugestimmt
+        haben.<br><br>
+
+        <b>Sobald die Pandemie vorüber ist, werden wir den Datenbestand löschen, siehe dazu auch unsere <a
+            href="https://coronago369135004.wordpress.com/datenschutz/"
+            target="_blank">Datenschutzerklärung.</a></b><br>
+
         <br>
     </div>
 
@@ -28,7 +42,9 @@
                 <h2>
                     <a href="https://coronago369135004.wordpress.com/datenschutz/"
                        style="text-decoration: none; padding: 16px 0;"
-                       target="_blank">Datenschutzerklärung <fa-icon [icon]="icons.externalLink"></fa-icon></a>
+                       target="_blank">Datenschutzerklärung
+                        <fa-icon [icon]="icons.externalLink"></fa-icon>
+                    </a>
                 </h2>
             </ion-label>
         </ion-item>
@@ -99,6 +115,13 @@
                 </ion-label>
                 <ion-toggle [ngModel]="hasConfirmedDisclaimer"
                             (ngModelChange)="setConfirmedDisclaimer($event)"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>
+                    Delete UID
+                </ion-label>
+                <ion-button fill="clear" (click)="onDeleteUid()">Delete</ion-button>
             </ion-item>
         </ion-list>
     </ng-container>
