@@ -66,6 +66,10 @@ export class BackgroundGeolocationService {
         this.activity$.subscribe((value) => {
             console.error('[hi i am here]: activity', value, JSON.stringify(value));
         });
+
+        this.powerSave$.subscribe((value) => {
+            console.error('[hi i am here]: powerSave', value, JSON.stringify(value));
+        });
     }
 
     /**
