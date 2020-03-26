@@ -1,9 +1,6 @@
 import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {
-    CDV_BLE_RESTORE_KEY,
-    CORONA_GO_BLE_SERVICE_UUID
-} from './cdv-bluetooth-le-config';
+import {CDV_BLE_RESTORE_KEY} from './cdv-bluetooth-le-config';
 import {take} from 'rxjs/operators';
 import _ from 'lodash';
 
@@ -16,7 +13,7 @@ import _ from 'lodash';
 const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 // const SERVICE_TEST_UUID = '01000001-0101-0101-FFFF-000000000001';
-// const SERVICE_TEST_UUID = '11A33463-26ff-0101-FFFF-000000000' + _.random(10, 99) + (isIos ? '1' : '0');
+   const SERVICE_TEST_UUID = '11A33463-26ff-0101-FFFF-000000000' + _.random(10, 99) + (isIos ? '1' : '0');
 
 
 /**
@@ -43,8 +40,7 @@ export class CdvBluetoothLeService {
 
         const initParams = {
             request: true,
-            // restoreKey: 'coronago'
-            restoreKey: CDV_BLE_RESTORE_KEY
+            restoreKey: 'coronago'
         };
 
         window.bluetoothle.initialize(
@@ -90,11 +86,11 @@ export class CdvBluetoothLeService {
 
         window.bluetoothle.initializePeripheral(
             (obj) => {
-                console.error('ffr', 'initializePeripheral success', obj);
+                console.error('initializePeripheral success', obj);
                 peripheralEventReceivedSubject$.next(obj);
             },
             (errObj) => {
-                console.error('ffr', 'initializePeripheral error', errObj);
+                console.error('initializePeripheral error', errObj);
                 peripheralEventReceivedSubject$.error(errObj);
             },
             initPeriParams
@@ -121,7 +117,7 @@ export class CdvBluetoothLeService {
     static async addService(): Promise<any> {
 
         const serviceParams = {
-            service: CORONA_GO_BLE_SERVICE_UUID,
+            service: SERVICE_TEST_UUID,
             characteristics: [
                 {
                     uuid: 'ABCD',
@@ -163,34 +159,34 @@ export class CdvBluetoothLeService {
         if (isIos) {
 
             const msgGe = await CdvBluetoothLeService.removeAllService();
-            console.error('ffr', 'remove service', JSON.stringify(msgGe));
+            console.error('remove service', msgGe);
 
             const msg = await CdvBluetoothLeService.addService();
-            console.error('ffr', 'add service', JSON.stringify(msg));
+            console.error('add service', msg);
         }
 
-        // const hasLocation = await CdvBluetoothLeService.hasLocationPermission();
-        // if (!hasLocation){
-        //     const locPerm = await CdvBluetoothLeService.requestLocationPermission();
-        //     console.error('ffr', 'requestLocation', locPerm);
-        // }
+        const hasLocation = await CdvBluetoothLeService.hasLocationPermission();
+        if (!hasLocation){
+            const locPerm = await CdvBluetoothLeService.requestLocationPermission();
+            console.error('requestLocation', locPerm);
+        }
 
-        console.error('ffr', 'Attempting Start Advertising...');
+        console.error('Start Advertising...');
 
         const advParams = {
             // services: ["1234"],
             // service: "12341234-1234-1234-1234-1234aaaabbbb",
             // service: "123412341234123412341234aaaabbbb",
             // service: "01010101",
-            services: [CORONA_GO_BLE_SERVICE_UUID], // ios
-            service: CORONA_GO_BLE_SERVICE_UUID,    // android
+            services: [SERVICE_TEST_UUID], // ios
+            service: SERVICE_TEST_UUID,    // android
 
             name: '',
 
             mode: 'lowLatency',
             powerLevel: 'high',
             connectable: true,
-            timeout: 10000, // disable timeout
+            timeout: 0, // disable timeout
             includeDeviceName: false,
             includeTxPowerLevel: false
 
@@ -212,7 +208,7 @@ export class CdvBluetoothLeService {
         // necessary
         if (!isIos) {
             const reqPermResponse = await CdvBluetoothLeService.requestBlePermission();
-            console.error('ffr', 'REQ_PERMI_RESP', reqPermResponse);
+            console.error('REQ_PERMI_RESP', reqPermResponse);
         }
 
     }
@@ -262,8 +258,7 @@ export class CdvBluetoothLeService {
         await CdvBluetoothLeService.assertPreConditions();
 
         const scanParams = {
-            allowDuplicates: true, // iOS, no effect in background
-            services: [CORONA_GO_BLE_SERVICE_UUID]
+            allowDuplicates: true // iOS
         };
 
         return new Promise((resolve, reject) => {
@@ -271,7 +266,7 @@ export class CdvBluetoothLeService {
             window.bluetoothle.startScan(
                 (obj) => {
 
-                    console.error('ffr', 'raw-scan-obj', JSON.stringify(obj) )
+                    // console.error('raw-scan-obj', obj)
 
                     if (obj.status === 'scanStarted') {
                         console.error(obj);
@@ -284,7 +279,7 @@ export class CdvBluetoothLeService {
 
                 },
                 (obj) => {
-                    console.error('ffr', 'startScan error', obj);
+                    console.error('startScan error', obj);
                     CdvBluetoothLeService.advReceivedSubject$.error(obj);
                 },
                 scanParams);
@@ -292,60 +287,5 @@ export class CdvBluetoothLeService {
         });
 
     }
-
-    static async isAdvertising(): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            window.bluetoothle.isAdvertising(resolve, reject);
-
-        });
-
-    }
-
-    static async connect(params): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            window.bluetoothle.connect(resolve, reject, params);
-
-        });
-
-    }
-
-    static async disconnect(params): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            // bluetoothle.disconnect(disconnectSuccess, disconnectError, params);
-            window.bluetoothle.disconnect(resolve, reject, params);
-
-        });
-
-    }
-
-
-    static async close(params): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            // bluetoothle.close(closeSuccess, closeError, params);
-            window.bluetoothle.close(resolve, reject, params);
-
-        });
-
-    }
-
-    static async discover(params): Promise<any> {
-
-        return new Promise((resolve, reject) => {
-
-            // bluetoothle.close(closeSuccess, closeError, params);
-            window.bluetoothle.discover(resolve, reject, params);
-
-        });
-
-    }
-
 
 }

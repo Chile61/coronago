@@ -11,21 +11,21 @@ export class CgAdvertisementFactoryService {
         // this.startAdvertising();
     }
 
-    public static async startAdvertising(): Promise<any> {
+    public async startAdvertising(): Promise<any> {
 
-        console.error('ffr', 'factory', 'starting advertisement');
+        console.error('factory', 'starting advertisement');
+
         const msg$ = await CdvBluetoothLeService.initializePeripheral();
         msg$.subscribe( periEvent => {
-            console.error('ffr', 'start advertising', periEvent);
+            console.error('start advertising', periEvent);
         });
 
+
         const dd = await CdvBluetoothLeService.stopAdvertising();
-        console.error('ffr', 'stop advertising', dd);
+        console.error('stop advertising', dd);
 
         const advMsg = await CdvBluetoothLeService.startAdvertising();
-        console.error('ffr', 'start advertising', advMsg);
+        console.error('start advertising', advMsg);
 
-        return 'done';
     }
-
 }

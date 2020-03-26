@@ -10,16 +10,6 @@ interface ReportResponse {
     success: boolean;
 }
 
-class MeetingReport {
-    me: string;
-    other: string;
-    me_time: Date;
-    rssi: number;
-    lng: number;
-    lat: number;
-    token: string;
-}
-
 @Injectable({
     providedIn: 'root',
 })
@@ -28,8 +18,6 @@ export class ReportingService implements OnDestroy {
 
     private localUserId: string;
     private loginToken: string;
-
-    private reportingQueue: MeetingReport[] = [];
 
     constructor(private backendService: BackendService, private flagService: FlagService) {
         this.subscriptions.push(
