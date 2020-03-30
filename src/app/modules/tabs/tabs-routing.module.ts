@@ -55,6 +55,15 @@ const routes: Routes = [
                 ],
             },
             {
+                path: 'debug',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('../debug/debug.module').then((m) => m.DebugModule),
+                    },
+                ],
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/score',
                 pathMatch: 'full',

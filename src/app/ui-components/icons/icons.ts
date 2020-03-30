@@ -1,4 +1,5 @@
 import {
+    faBug,
     faCheckCircle,
     faEnvelope, faExclamationTriangle, faExternalLinkAlt, faHandPaper,
     faHistory,
@@ -23,5 +24,6 @@ export const APP_ICONS = {
     warn: faExclamationTriangle,
     danger: faHandPaper,
     mobile: faMobileAlt,
-    externalLink: faExternalLinkAlt
+    externalLink: faExternalLinkAlt,
+    bug: faBug
 };
