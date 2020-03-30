@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Storage } from '@ionic/storage';
 import { LogManager } from '../log.service';
+import { GeolocationService } from '../geolocation/geolocation.service';
+import { switchMap } from 'rxjs/operators';
 
 interface GetUserScoreResponse {
     networkSize: number;
@@ -20,14 +22,22 @@ interface CreateUserResponse {
 export class UserService {
     private log = new LogManager('UserService');
 
-    constructor(private backendService: BackendService, private storage: Storage) {}
+    constructor(private backendService: BackendService, private storage: Storage, private geolocationService: GeolocationService) {}
 
     /**
      * Get user score
      */
     public createUser(): Observable<CreateUserResponse> {
-        const route = environment.apiEndpoints.createUser;
-        return this.backendService.GET(route);
+        return this.geolocationService.getGeoLocation().pipe(
+            switchMap((location) => {
+                const queryArgs = [];
+                queryArgs.push('lng=' + location.coords.longitude);
+                queryArgs.push('lat=' + location.coords.latitude);
+                const route = `${environment.apiEndpoints.createUser}?${queryArgs.join('&')}`;
+
+                return this.backendService.GET(route);
+            })
+        );
     }
 
     /**

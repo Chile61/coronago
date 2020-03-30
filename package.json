@@ -41,6 +41,7 @@
         "cordova-plugin-bluetoothle": "^4.5.9",
         "cordova-plugin-browsertab": "^0.2.0",
         "cordova-plugin-compat": "^1.2.0",
+        "cordova-plugin-geolocation": "^4.0.2",
         "cordova-sqlite-storage": "^5.0.0",
         "core-js": "^2.5.4",
         "lodash": "^4.17.15",
@@ -99,7 +100,8 @@
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-bluetoothle": {},
             "cordova-sqlite-storage": {},
-            "cordova-plugin-browsertab": {}
+            "cordova-plugin-browsertab": {},
+            "cordova-plugin-geolocation": {}
         },
         "platforms": [
             "android",
