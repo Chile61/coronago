@@ -36,7 +36,6 @@
         "@ionic/storage": "^2.2.0",
         "await-to-js": "^2.1.1",
         "cordova-android": "^8.1.0",
-        "cordova-background-geolocation-lt": "^3.4.2",
         "cordova-ios": "^5.1.1",
         "cordova-plugin-bluetoothle": "^4.5.9",
         "cordova-plugin-browsertab": "^0.2.0",
