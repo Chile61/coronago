@@ -1,6 +1,6 @@
 {
   "APP_DEVELOPMENT": "App-Entwicklung",
-  "APP_DISCLAIMER": "<p>     Ich bin damit einverstanden, dass meine Bluetooth-Signale (eindeutige Nutzer ID; Signalstärke zur     Abschätzung der Distanz) sowie meine Standortdaten (Hintergrund-GPS) zum Zwecke der eigenen Risikoeischätzung und     zur Bekämpfung und Eindämmung der Corona Pandemie verwendet werden um: </p>  <ol class=\"ion-padding-start\">     <li>mir als Nutzer anhand einer Kontakt-Kennzahl eine eigene Risikoeinschätzung der jeweiligen Umgebung zu         ermöglichen und;     </li>     <li>dem Land Saarland zu ermöglichen etwaige Infektionswege und Cluster nachzuverfolgen und anonymisiert per         GPS/Karte zu visualisieren, um den Behörden zu helfen, die Ausbreitungsgeschwindigkeit der Pandemie zu         verlangsamen.     </li> </ol>  <p>     Sie können diese Einwilligung jederzeit mit Wirkung für die Zukunft in     <u>Einstellungen &rarr; Rechtliches</u> widerrufen. </p>  <p>     Weitere Informationen finden Sie in unserer Datenschutzerklärung </p>",
+  "APP_DISCLAIMER": "<p>     Ich bin damit einverstanden, dass meine Bluetooth-Signale (eindeutige Nutzer-ID; Signalstärke zur     Abschätzung der Distanz) sowie meine Standortdaten (Hintergrund-GPS) zum Zwecke der eigenen Risikoeinschätzung und     zur Bekämpfung und Eindämmung der Corona-Pandemie verwendet werden um: </p>  <ol class=\"ion-padding-start\">     <li>mir als Nutzer anhand einer Kontakt-Kennzahl eine eigene Risikoeinschätzung der jeweiligen Umgebung zu         ermöglichen und;     </li>     <li>dem Land Saarland zu ermöglichen etwaige Infektionswege und Cluster nachzuverfolgen und anonymisiert per         GPS/Karte zu visualisieren, um den Behörden zu helfen, die Ausbreitungsgeschwindigkeit der Pandemie zu         verlangsamen.     </li> </ol>  <p>     Sie können diese Einwilligung jederzeit mit Wirkung für die Zukunft in     <u>Einstellungen &rarr; Rechtliches</u> widerrufen. </p>  <p>     Weitere Informationen finden Sie in unserer Datenschutzerklärung </p>",
   "APP_NAME": "Corona GO",
   "BUTTON_ACCEPT": "Akzeptieren",
   "BUTTON_DECLINE": "Ablehnen",
@@ -19,7 +19,7 @@
   "TAB_NEWS": "News",
   "TAB_PEOPLE_CONTACTS": "Personen-Kontakte",
   "TITLE_DEBUG": "Debugging",
-  "TITLE_DISCLAIMER": "Haftungsausschluss",
+  "TITLE_DISCLAIMER": "Einwilligung",
   "TITLE_HISTORY": "Verlauf",
   "TITLE_INFO": "Info",
   "TITLE_NEWS": "News",
