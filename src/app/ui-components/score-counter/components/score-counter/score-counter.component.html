@@ -4,7 +4,7 @@
     </div>
 
     <div class="score" #scoreText>
-        <ng-container *ngIf="contactScore.score; else contactScoreAsync">
+        <ng-container *ngIf="!contactScore.scoreAsync; else contactScoreAsync">
             {{ contactScore.score | number: '' : 'de-DE' }}<br>
         </ng-container>
         <ng-template #contactScoreAsync>

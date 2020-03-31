@@ -10,9 +10,10 @@ import { interval, Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { FlagService } from '../../../../services/flag.service';
 import { BleScanCycleManagerService } from '../../../../services/ble/ble-scan-cycle-manager.service';
-import {CgUser} from '../../../../services/ble/cg-user.class';
-import {NearbyScoreCounterComponent} from '../../../../ui-components/score-counter/components/nearby-score-counter/nearby-score-counter.component';
+import { CgUser } from '../../../../services/ble/cg-user.class';
 import _ from 'lodash';
+import { ReportingService } from '../../../../services/api-services/reporting.service';
+import { GeolocationService } from '../../../../services/geolocation/geolocation.service';
 
 @Component({
     selector: 'app-score',
@@ -41,7 +42,9 @@ export class ScoreComponent implements OnInit, OnDestroy {
     constructor(
         private userService: UserService,
         private flagService: FlagService,
-        private bleScanCycleManagerService: BleScanCycleManagerService
+        private bleScanCycleManagerService: BleScanCycleManagerService,
+        private reportingService: ReportingService,
+        private geolocationService: GeolocationService
     ) {}
 
     ngOnInit(): void {
@@ -208,12 +211,25 @@ export class ScoreComponent implements OnInit, OnDestroy {
     private switchToNearbyContacts(cgUsers: CgUser[]): void {
         this.resetAvailableSlots();
 
-        let nearbyScores = _.map(cgUsers, ( cgu: CgUser ) => {
+        let nearbyScores = _.map(cgUsers, (cgu: CgUser) => {
             const cs = new ContactScore();
             cs.rssi = cgu.lastSeenRssi;
             cs.lastSeenTimestamp = cgu.lastSeenTimestamp;
             cs.userId = cgu.userUuId;
             cs.scoreAsync = this.userService.getUserScore(cs.userId);
+
+            // Report meetin
+            this.geolocationService.getGeoLocation().subscribe((location) => {
+                this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
+                    () => {
+                        this.log.log(this.reportingService.reportMeeting.name, 'Meeting reported', cs.userId);
+                    },
+                    (error) => {
+                        this.log.error(this.reportingService.reportMeeting.name, 'Failed to report meeting', error, location, cs);
+                    }
+                );
+            });
+
             return cs;
         });
 
@@ -225,5 +241,4 @@ export class ScoreComponent implements OnInit, OnDestroy {
         this.nearbyScores = nearbyScores;
         this.updateDangerLevel();
     }
-
 }

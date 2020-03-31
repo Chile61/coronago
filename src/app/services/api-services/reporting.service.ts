@@ -37,14 +37,14 @@ export class ReportingService implements OnDestroy {
     /**
      * Report user clash
      */
-    public reportMeeting(detectedUserId: string, rssi: number, location: ContactLocation): Observable<ReportResponse> {
+    public reportMeeting(detectedUserId: string, rssi: number, location: Position): Observable<ReportResponse> {
         const queryParams = [
             'me=' + this.localUserId,
             'other=' + detectedUserId,
             'me_time=' + Date.now(),
             'rssi=' + rssi,
-            'lng=' + location.lng,
-            'lat=' + location.lat,
+            'lng=' + location.coords.longitude,
+            'lat=' + location.coords.latitude,
             'token=' + this.loginToken,
         ];
         const query = '?' + queryParams.join('&');
