@@ -6,14 +6,16 @@ import { LogManager } from '../../../../services/log.service';
 import { Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { FlagService } from '../../../../services/flag.service';
+import { I18nService } from '../../../../services/i18n.service';
 
 @Component({
     selector: 'ui-score-counter',
     templateUrl: './score-counter.component.html',
-    styleUrls: ['./score-counter.component.scss']
+    styleUrls: ['./score-counter.component.scss'],
 })
 export class ScoreCounterComponent implements OnInit, OnDestroy {
     private log = new LogManager('ScoreCounterComponent');
+    public i18n = I18nService;
     private subscriptions: Subscription[] = [];
     public icons = APP_ICONS;
 
@@ -32,11 +34,13 @@ export class ScoreCounterComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         requestAnimationFrame(() => {
-            this.adjustCounterSize();
+            setTimeout(() => {
+                this.adjustCounterSize();
+            }, 200);
         });
 
         this.subscriptions.push(
-            this.flagService.showNodeDebugInfo$.subscribe(value => {
+            this.flagService.showNodeDebugInfo$.subscribe((value) => {
                 this.showNodeDebugInfo = value;
             })
         );
