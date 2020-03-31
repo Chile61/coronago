@@ -3,6 +3,8 @@ import {CdvBluetoothLeService} from './cdv-bluetooth-le.service';
 import to from 'await-to-js';
 import {Subject} from 'rxjs';
 import _ from 'lodash';
+import {FlagService} from '../flag.service';
+import {filter, take} from 'rxjs/operators';
 
 
 const isIosPlatform = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -18,7 +20,7 @@ export class CgAdvertisementFactoryService {
     public peripheralScanCycleFinished$ = this.peripheralScanCycleFinishedSubject$.asObservable();
 
 
-    constructor() {
+    constructor(private flagService: FlagService) {
 
         // Restart the advertisement after a ble-central disconnected
         if (isAndroid) {
@@ -47,7 +49,7 @@ export class CgAdvertisementFactoryService {
 
         }
 
-        this.addService();
+        this.startAdvertising();
 
     }
 
@@ -56,10 +58,20 @@ export class CgAdvertisementFactoryService {
      */
     public async startAdvertising(): Promise<any> {
 
-        await this.addService();
+
+        console.error('ffr', 'userid', 'Waiting for user-id');
+        const cgUserId = await this.retrieveUserId();
+
+        console.error('ffr', 'userid', 'Received user id', cgUserId);
+
+        await this.addService(cgUserId);
 
         console.error('ffr', 'factory', 'starting advertisement');
         await CdvBluetoothLeService.initializePeripheral();
+
+
+
+
 
         let [ err, dd ] = await to(CdvBluetoothLeService.stopAdvertising());
         console.error('ffr', 'stop advertising', JSON.stringify(err), JSON.stringify(dd));
@@ -70,10 +82,18 @@ export class CgAdvertisementFactoryService {
         return 'started advertising';
     }
 
+    private async retrieveUserId(): Promise<string> {
+        return this.flagService.localUserId$
+            .pipe(
+                filter(k => !!k),
+                take(1)
+            )
+            .toPromise();
+    }
 
     private restartAdvertisingDebounced = _.debounce( () => {
         this.restartAdvertising();
-    }, 5000);
+    }, 7000);
 
 
     /**
@@ -87,12 +107,12 @@ export class CgAdvertisementFactoryService {
         console.error('ffr', 'restart advertising', msg);
     }
 
-    private async addService(): Promise<any> {
+    private async addService(cgUserId: string): Promise<any> {
 
         let [err, msgGe] = await to(CdvBluetoothLeService.removeAllService());
         console.error('ffr', 'remove service', JSON.stringify(err), JSON.stringify(msgGe));
 
-        [err, msgGe] = await to(CdvBluetoothLeService.addService());
+        [err, msgGe] = await to(CdvBluetoothLeService.addService(cgUserId));
         console.error('ffr', 'add service', JSON.stringify(err), JSON.stringify(msgGe));
 
     }
