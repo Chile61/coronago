@@ -70,12 +70,6 @@ export class BleScanCycleManagerService {
                   for (let i = 0, ii = peris.length; i < ii; i += 1) {
                       const peri = peris[i];
 
-
-                      // if (this.cgUserId) {
-                      //     console.error('ffr', 'peri', this.address, 'retrieve user-id, already has a user-id');
-                      //     return;
-                      // }
-
                       await peri.retrieveUserId();
 
                       if (peri.didExtractUserId()) {
@@ -83,6 +77,16 @@ export class BleScanCycleManagerService {
                       }
 
                   }
+
+
+                  console.error('ffr', '--------------------------------------------------');
+                  console.error('ffr', 'Drop DEAD USERS');
+                  console.error('ffr', '--------------------------------------------------');
+
+                  const maxAgeSec = 3 * 60;
+                  this.cgUserManagerService.dropUsersOlderThanSec(maxAgeSec);
+
+
 
                   console.error('ffr', '--------------------------------------------------');
                   console.error('ffr', 'USER STATUS CURRENT');
