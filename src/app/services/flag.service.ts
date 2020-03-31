@@ -38,13 +38,15 @@ export class FlagService {
         this.subscriptions.push(
             this.localUserId$.subscribe((userId) => {
                 this.log.error('constructor', 'userId$', userId);
-                if (!!userId) {
+                if (!userId || !userId.length) {
+                    this.log.error('constructor', 'Creating new userId');
                     this.createNewUserId();
                 }
             }),
             this.loginToken$.subscribe((token) => {
                 this.log.error('constructor', 'token$', token);
-                if (!!token) {
+                if (!token || !token.length) {
+                    this.log.error('constructor', 'Creating new userId');
                     this.createNewUserId();
                 }
             })
