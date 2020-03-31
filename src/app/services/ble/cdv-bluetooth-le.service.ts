@@ -144,13 +144,6 @@ export class CdvBluetoothLeService {
 
 
 
-        // return new Promise(( resolve, reject ) => {
-        //     CdvBluetoothLeService.peripheralEventReceived$
-        //         .pipe(take(1))
-        //         .subscribe(obj => {
-        //             resolve(CdvBluetoothLeService.peripheralEventReceived$);
-        //         });
-        // });
 
     }
 
@@ -160,13 +153,16 @@ export class CdvBluetoothLeService {
         });
     }
 
-    static async addService(): Promise<any> {
+    static async addService(charUuid: string): Promise<any> {
+
+        charUuid = this.reformatToAdhereToUuid(charUuid);
 
         const serviceParams = {
             service: CORONA_GO_BLE_SERVICE_UUID,
             characteristics: [
                 {
-                    uuid: TEST_USER_ID,
+                    uuid: charUuid,
+                    // uuid: TEST_USER_ID,
                     permissions: {
                         read: true,
                         // write: true,
@@ -435,5 +431,29 @@ export class CdvBluetoothLeService {
 
     }
 
+
+    /**
+     *
+     * aa aa aa aa aa
+     *
+     *  '11A33463-26ff-0101-FFFF-000000000001';
+     *
+     * @param charUuid
+     */
+    private static reformatToAdhereToUuid(charUuid: string): string {
+
+        charUuid = charUuid.replace(/[\s\-]/gi, '');
+        charUuid = charUuid.toUpperCase();
+
+        _.each([8, 13, 18, 23], (insertAtIdx) => {
+            charUuid = CdvBluetoothLeService.insertStr(charUuid, insertAtIdx, '-');
+        });
+
+        return charUuid;
+    }
+
+    private static insertStr(str, index, value): string {
+        return str.substr(0, index) + value + str.substr(index);
+    }
 
 }
