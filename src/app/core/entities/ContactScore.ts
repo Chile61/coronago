@@ -7,4 +7,5 @@ export class ContactScore {
     score: number;
     rssi: number;
     userId = '';
+    lastSeenTimestamp: number = null;
 }

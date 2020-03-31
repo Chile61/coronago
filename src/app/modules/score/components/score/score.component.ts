@@ -9,11 +9,15 @@ import { UserService } from '../../../../services/api-services/user.service';
 import { interval, Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { FlagService } from '../../../../services/flag.service';
+import { BleScanCycleManagerService } from '../../../../services/ble/ble-scan-cycle-manager.service';
+import {CgUser} from '../../../../services/ble/cg-user.class';
+import {NearbyScoreCounterComponent} from '../../../../ui-components/score-counter/components/nearby-score-counter/nearby-score-counter.component';
+import _ from 'lodash';
 
 @Component({
     selector: 'app-score',
     templateUrl: './score.component.html',
-    styleUrls: ['./score.component.scss']
+    styleUrls: ['./score.component.scss'],
 })
 export class ScoreComponent implements OnInit, OnDestroy {
     private log = new LogManager('ScoreComponent');
@@ -34,19 +38,30 @@ export class ScoreComponent implements OnInit, OnDestroy {
     public countOfDangerContacts = 0;
     public countOfWarningContacts = 0;
 
-    constructor(private userService: UserService, private flagService: FlagService) {}
+    constructor(
+        private userService: UserService,
+        private flagService: FlagService,
+        private bleScanCycleManagerService: BleScanCycleManagerService
+    ) {}
 
     ngOnInit(): void {
         this.subscriptions.push(
-            this.flagService.simulateContacts$.subscribe(value => {
+            this.bleScanCycleManagerService.nearbyUserListUpdated$.subscribe((cgUsers: CgUser[]) => {
+                try {
+                    this.onConfigUpdated(cgUsers);
+                } catch(e) {
+                    console.error('error while view update', e);
+                }
+            }),
+            this.flagService.simulateContacts$.subscribe((value) => {
                 this.simulateContactsFlag = value;
                 this.onConfigUpdated();
             }),
-            this.flagService.maxRenderDevices$.subscribe(value => {
+            this.flagService.maxRenderDevices$.subscribe((value) => {
                 this.maxRenderDevicesFlag = value;
                 this.onConfigUpdated();
             }),
-            this.flagService.showAllAreaDevices$.subscribe(value => {
+            this.flagService.showAllAreaDevices$.subscribe((value) => {
                 this.showAllAreaDevicesFlag = value;
                 this.onConfigUpdated();
             }),
@@ -71,11 +86,11 @@ export class ScoreComponent implements OnInit, OnDestroy {
     /**
      * On config updated
      */
-    public onConfigUpdated(): void {
+    public onConfigUpdated(cgUsers?): void {
         if (this.simulateContactsFlag === true) {
             this.simulateContacts();
         } else {
-            this.detectNearbyContacts();
+            this.switchToNearbyContacts(cgUsers);
         }
     }
 
@@ -86,7 +101,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
         this.contactScore = new ContactScore();
         this.contactScore.score = 0;
 
-        this.userService.getUserScore(this.userId).subscribe(score => {
+        this.userService.getUserScore(this.userId).subscribe((score) => {
             if (score) {
                 this.contactScore.score = score.networkSize;
             }
@@ -158,8 +173,8 @@ export class ScoreComponent implements OnInit, OnDestroy {
             this.dangerLevel = 0;
         }
 
-        this.countOfDangerContacts = this.nearbyScores.filter(score => score.slotType === 'inner').length;
-        this.countOfWarningContacts = this.nearbyScores.filter(score => score.slotType === 'outer').length;
+        this.countOfDangerContacts = this.nearbyScores.filter((score) => score.slotType === 'inner').length;
+        this.countOfWarningContacts = this.nearbyScores.filter((score) => score.slotType === 'outer').length;
     }
 
     /**
@@ -179,7 +194,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
         }
 
         nearbyScores = _orderBy(nearbyScores, ['rssi', 'score'], ['desc', 'desc']); // sort by signal, score
-        nearbyScores = nearbyScores.map(contactScore => {
+        nearbyScores = nearbyScores.map((contactScore) => {
             return this.addAvailableSlot(contactScore);
         });
 
@@ -190,8 +205,24 @@ export class ScoreComponent implements OnInit, OnDestroy {
     /**
      * Detect nearby via bluetooth
      */
-    private detectNearbyContacts(): void {
+    private switchToNearbyContacts(cgUsers: CgUser[]): void {
         this.resetAvailableSlots();
-        this.nearbyScores = [];
+
+        let nearbyScores = _.map(cgUsers, ( cgu: CgUser ) => {
+            const cs = new ContactScore();
+            cs.rssi = cgu.lastSeenRssi;
+            cs.lastSeenTimestamp = cgu.lastSeenTimestamp;
+            cs.userId = cgu.userUuId;
+            return cs;
+        });
+
+        nearbyScores = _orderBy(nearbyScores, ['rssi', 'score'], ['desc', 'desc']); // sort by signal, score
+        nearbyScores = nearbyScores.map((contactScore) => {
+            return this.addAvailableSlot(contactScore);
+        });
+
+        this.nearbyScores = nearbyScores;
+        this.updateDangerLevel();
     }
+
 }
