@@ -4,9 +4,12 @@
     </div>
 
     <div class="score" #scoreText>
+        <!-- main center score / local user score -->
         <ng-container *ngIf="!contactScore.scoreAsync">
             {{ (contactScore.score | number: '' : i18n.activeLocaleKey) || '…' }}<br>
         </ng-container>
+
+        <!-- satellite scores -->
         <ng-container *ngIf="contactScore.scoreAsync">
             {{ ((contactScore.scoreAsync | async)?.networkSize | number: '' : i18n.activeLocaleKey) || '…' }}<br>
         </ng-container>
