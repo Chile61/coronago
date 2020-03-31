@@ -100,10 +100,10 @@
         <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
         <config-file parent="NSBluetoothAlwaysUsageDescription" target="*-Info.plist">
             <key>NSBluetoothAlwaysUsageDescription</key>
-            <string>BLE Permission</string>
+            <string>Bitte gewähren Sie Zugriff auf Bluetooth um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
-        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>need location access to find things nearby</string>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
+            <string>Bitte gewähren Zugriff auf Ihren Standort.</string>
         </edit-config>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />

@@ -61,6 +61,16 @@ export class AppComponent {
         document.addEventListener('deviceready', () => {
             // cordova.plugins.backgroundMode is now available
 
+            // window.cordova.plugins.backgroundMode.setDefaults({
+            //     title: String,
+            //     text: String,
+            //     icon: 'icon' // this will look for icon.png in platforms/android/res/drawable|mipmap
+            //     color: String // hex format like 'F14F4D'
+            //     resume: Boolean,
+            //     hidden: Boolean,
+            //     bigText: Boolean
+            // });
+
             window.cordova.plugins.backgroundMode.enable();
             console.error('ffr', 'background mode requested!!');
 
