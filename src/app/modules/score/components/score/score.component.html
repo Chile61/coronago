@@ -40,17 +40,17 @@
         <!--    </div>-->
 
         <div class="danger-level-hint">
-            <div class="level-0" *ngIf="dangerLevel === 0" i18n>
+            <div class="level-0" *ngIf="dangerLevel === 0">
                 <fa-icon [icon]="icons.ok"></fa-icon>
                 Keine Personen-Kontakte in deiner Umgebung<br><br>
             </div>
-            <div class="level-1" *ngIf="dangerLevel === 1" i18n>
+            <div class="level-1" *ngIf="dangerLevel === 1">
                 <fa-icon [icon]="icons.warn"></fa-icon>
                 <b class="keyword">Vorsicht! </b><b>{{ countOfWarningContacts }} {{ countOfWarningContacts >= 2 ? 'Personen' : 'Person' }}
                 in der Umgebung.</b> Deine Personen-Kontakte könnten sich
                 vergrößern.
             </div>
-            <div class="level-2" *ngIf="dangerLevel === 2" i18n>
+            <div class="level-2" *ngIf="dangerLevel === 2">
                 <fa-icon [icon]="icons.danger"></fa-icon>
                 <b class="keyword">Vorsicht! </b><b>{{ countOfDangerContacts }} {{ countOfDangerContacts >= 2 ? 'Personen' : 'Person' }}
                 im unmittelbaren Umfeld. </b> Situation genau einschätzen und ggf. meiden.
