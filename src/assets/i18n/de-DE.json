@@ -10,6 +10,7 @@
   "DANGER_LEVEL_MIDDLE": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Personen in deiner Umgebung.</b> Deine Personen-Kontakte könnten sich vergrößern.",
   "DANGER_LEVEL_MIDDLE_SINGLE": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Person in deiner Umgebung.</b> Deine Personen-Kontakte könnten sich vergrößern.",
   "HISTORY_SOON_HINT": "Hier kannst du in Kürze den Verlauf deiner Personen-Kontakte einsehen.",
+  "LANGUAGE": "Spache",
   "PEOPLE_CONTACTS": "Personen-Kontakte",
   "PRIVACY_POLICY": "Datenschutzerklärung",
   "TAB_DEBUG": "",

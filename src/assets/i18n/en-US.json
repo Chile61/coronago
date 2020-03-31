@@ -10,6 +10,7 @@
   "DANGER_LEVEL_MIDDLE": "<b class=\"keyword\">Careful!</b><b> {{ value }} people in your surroundings.</b> Your total contacts might increase.",
   "DANGER_LEVEL_MIDDLE_SINGLE": "<b class=\"keyword\">Careful!</b><b> {{ value }} person in your surroundings.</b> Your total contacts might increase.",
   "HISTORY_SOON_HINT": "Here you can see the history of your personal contacts shortly.",
+  "LANGUAGE": "Language",
   "PEOPLE_CONTACTS": "Total contacts",
   "PRIVACY_POLICY": "Privacy Policy",
   "TAB_DEBUG": "DEBUG",
