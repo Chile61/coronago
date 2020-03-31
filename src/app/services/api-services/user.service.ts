@@ -7,11 +7,11 @@ import { LogManager } from '../log.service';
 import { GeolocationService } from '../geolocation/geolocation.service';
 import { switchMap } from 'rxjs/operators';
 
-interface GetUserScoreResponse {
+export interface GetUserScoreResponse {
     networkSize: number;
 }
 
-interface CreateUserResponse {
+export interface CreateUserResponse {
     userId: string;
     token: string;
 }

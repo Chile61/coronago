@@ -4,7 +4,12 @@
     </div>
 
     <div class="score" #scoreText>
-        {{ contactScore.score | number: '' : 'de-DE' }}<br>
+        <ng-container *ngIf="contactScore.score; else contactScoreAsync">
+            {{ contactScore.score | number: '' : 'de-DE' }}<br>
+        </ng-container>
+        <ng-template #contactScoreAsync>
+            {{ contactScore.scoreAsync | async | number: '' : 'de-DE' }}<br>
+        </ng-template>
     </div>
 
     <div i18n *ngIf="showHintText" class="person-contacts-hint">
