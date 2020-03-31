@@ -134,8 +134,8 @@ export class CgAdvertisementScannerService {
 
                 // The pause inbetween scans needs to be random, in order to equal
                 // the chances that a device is to connect to another device
-                // randPauseTimeMs = _.random(40000, 80000); // avg 60sec
-                randPauseTimeMs = _.random(10000, 16000); // avg 60sec
+                randPauseTimeMs = _.random(40000, 80000); // avg 60sec
+                // randPauseTimeMs = _.random(10000, 16000); // avg 60sec
                 console.error('ffr', 'stopScan pause time/sec',
                     `<${( randPauseTimeMs / 1000 ).toFixed(0)}>`);
 
