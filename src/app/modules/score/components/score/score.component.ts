@@ -213,6 +213,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
             cs.rssi = cgu.lastSeenRssi;
             cs.lastSeenTimestamp = cgu.lastSeenTimestamp;
             cs.userId = cgu.userUuId;
+            cs.scoreAsync = this.userService.getUserScore(cs.userId);
             return cs;
         });
 
