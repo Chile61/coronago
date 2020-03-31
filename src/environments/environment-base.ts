@@ -12,7 +12,8 @@ export const environmentBase = {
        createUser: '/createUser',
        userScore: '/getNetworkSize',
        ping: '/api/ping'
-   }
+   },
+   pauseBetweenScanCyclesSec: 6
 };
 
 /*

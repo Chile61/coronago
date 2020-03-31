@@ -7,6 +7,7 @@ import {CGAdvertisement} from './cg-advertisement.class';
 import to from 'await-to-js';
 import {take} from 'rxjs/operators';
 import _ from 'lodash';
+import {environment} from '../../../environments/environment';
 
 const isIosPlatform = /iPad|iPhone|iPod/.test(navigator.userAgent);
 const isAndroid = !isIosPlatform;
@@ -134,8 +135,12 @@ export class CgAdvertisementScannerService {
 
                 // The pause inbetween scans needs to be random, in order to equal
                 // the chances that a device is to connect to another device
-                randPauseTimeMs = _.random(40000, 80000); // avg 60sec
-                // randPauseTimeMs = _.random(10000, 16000); // avg 60sec
+
+                const scanCyclePauseAvgSec = environment.pauseBetweenScanCyclesSec;
+                randPauseTimeMs = _.random(
+                    Math.floor(scanCyclePauseAvgSec * 0.8),
+                    Math.floor(scanCyclePauseAvgSec * 1.2)) * 1000;
+
                 console.error('ffr', 'stopScan pause time/sec',
                     `<${( randPauseTimeMs / 1000 ).toFixed(0)}>`);
 
