@@ -49,7 +49,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
             this.bleScanCycleManagerService.nearbyUserListUpdated$.subscribe((cgUsers: CgUser[]) => {
                 try {
                     this.onConfigUpdated(cgUsers);
-                } catch(e) {
+                } catch (e) {
                     console.error('error while view update', e);
                 }
             }),
