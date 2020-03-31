@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="wegzwei.coronago" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="wegzwei.coronago" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Corona GO</name>
     <description>Your Corona Virus contact tracker.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -21,9 +21,6 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="Orientation" value="portrait" />
     <platform name="android">
-        <config-file parent="/manifest/application" target="app/src/main/AndroidManifest.xml">
-            <meta-data android:name="com.transistorsoft.locationmanager.license_key" android:value="YOUR_LICENSE_KEY_HERE" />
-        </config-file>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
@@ -104,18 +101,6 @@
         <config-file parent="NSBluetoothAlwaysUsageDescription" target="*-Info.plist">
             <key>NSBluetoothAlwaysUsageDescription</key>
             <string>BLE Permission</string>
-        </config-file>
-        <config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" target="*-Info.plist">
-            <string>Background location tracking is required for our app so the app can detect when to users are nähern sich.</string>
-        </config-file>
-        <config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
-            <string>Background location tracking is required for our app so the app can detect when to users are nähern sich.</string>
-        </config-file>
-        <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
-            <string>Background location tracking is required for our app so the app can detect when to users are nähern sich.</string>
-        </config-file>
-        <config-file parent="NSMotionUsageDescription" target="*-Info.plist">
-            <string>Device motion updates help determine when the device is stationary so the app can save power by turning off location-updates.</string>
         </config-file>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />

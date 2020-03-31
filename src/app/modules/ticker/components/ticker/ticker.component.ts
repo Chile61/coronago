@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ticker',
-  templateUrl: './ticker.component.html',
-  styleUrls: ['./ticker.component.scss'],
+    selector: 'app-ticker',
+    templateUrl: './ticker.component.html',
+    styleUrls: ['./ticker.component.scss'],
 })
-export class TickerComponent implements OnInit {
+export class TickerComponent implements OnInit, OnDestroy {
+    constructor() {}
 
-  constructor() { }
+    ngOnInit(): void {}
 
-  ngOnInit() {}
-
+    ngOnDestroy(): void {}
 }

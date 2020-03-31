@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 import {CdvBluetoothLeService} from './cdv-bluetooth-le.service';
 import {CdvBluetoothLeHelperService} from './cdv-bluetooth-le-helper.service';
 import {CGAdvertisement} from './cg-advertisement.class';
-import {CgServiceMatcherService} from './cg-service-matcher.service';
+// import {CgServiceMatcherService} from './cg-service-matcher.service';
 import to from 'await-to-js';
 import {take} from 'rxjs/operators';
 import _ from 'lodash';

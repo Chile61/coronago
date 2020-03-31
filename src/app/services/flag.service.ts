@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { UserService } from './api-services/user.service';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class FlagService {
+    private subscriptions: Subscription[] = [];
+    private inProgressUserRequest = false;
+
     public showAllAreaDevicesKey = 'showAllAreaDevices';
     public showAllAreaDevices$ = new BehaviorSubject<boolean>(false);
 
@@ -28,7 +32,20 @@ export class FlagService {
     public loginTokenKey = 'loginToken';
     public loginToken$ = new ReplaySubject<string>(1);
 
-    constructor(private storage: Storage, private userService: UserService) {}
+    constructor(private storage: Storage, private userService: UserService) {
+        this.subscriptions.push(
+            this.localUserId$.subscribe((userId) => {
+                if (userId === null) {
+                    this.createNewUserId();
+                }
+            }),
+            this.loginToken$.subscribe((token) => {
+                if (token === null) {
+                    this.createNewUserId();
+                }
+            })
+        );
+    }
 
     /**
      * Public service init
@@ -82,20 +99,28 @@ export class FlagService {
             }
         });
 
-        // UserId, LoginToken
-        Promise.all([this.storage.get(this.localUserIdKey), this.storage.get(this.loginTokenKey)]).then((result) => {
-            const userId = result[0];
-            const loginToken = result[1];
-
-            if (!userId || !loginToken) {
-                this.userService.createUser().subscribe((user) => {
-                    this.updateValue(this.localUserIdKey, user.userId);
-                    this.updateValue(this.loginTokenKey, user.token);
-                });
-            } else {
-                this.localUserId$.next(userId);
-                this.loginToken$.next(loginToken);
-            }
+        // UserId
+        this.storage.get(this.localUserIdKey).then((value) => {
+            this.localUserId$.next(value);
         });
+
+        // LoginToken
+        this.storage.get(this.loginTokenKey).then((value) => {
+            this.loginToken$.next(value);
+        });
+    }
+
+    /**
+     * Create new userId and save
+     */
+    private createNewUserId() {
+        if (!this.inProgressUserRequest) {
+            this.inProgressUserRequest = true;
+            this.userService.createUser().subscribe((user) => {
+                this.updateValue(this.localUserIdKey, user.userId);
+                this.updateValue(this.loginTokenKey, user.token);
+                this.inProgressUserRequest = false;
+            });
+        }
     }
 }
