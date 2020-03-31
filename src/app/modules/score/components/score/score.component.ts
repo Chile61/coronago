@@ -6,7 +6,7 @@ import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
 import _orderBy from 'lodash.orderby';
 import { UserService } from '../../../../services/api-services/user.service';
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { FlagService } from '../../../../services/flag.service';
 
@@ -53,6 +53,13 @@ export class ScoreComponent implements OnInit, OnDestroy {
             this.flagService.localUserId$.subscribe((userId) => {
                 this.userId = userId;
                 this.getLocalUserScore();
+            }),
+            interval(60000).subscribe(() => {
+                if (this.userId) {
+                    this.getLocalUserScore();
+                } else {
+                    this.log.error(this.ngOnInit.name, 'Invalid user id', this.userId);
+                }
             })
         );
     }
