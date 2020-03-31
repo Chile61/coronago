@@ -49,6 +49,10 @@ export class CgPeripheral {
             return;
         }
 
+        if (this.cgUserId) {
+            console.error('ffr', 'peri', this.address, 'retrieve user-id, already has a user-id');
+            return;
+        }
 
         if (this.isConnectionAttemptInProgress) {
             console.error('ffr', 'peri', this.address, 'Canceling connection-attempt. Already trying');
