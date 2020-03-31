@@ -135,16 +135,10 @@ export class CdvBluetoothLeService {
 
     static async initializePeripheral(): Promise<any> {
 
-        await CdvBluetoothLeService.isBlePeripheralInitialized;
+        return await CdvBluetoothLeService.isBlePeripheralInitialized;
 
-        return Promise.resolve(CdvBluetoothLeService.peripheralEventReceived$);
+        // return Promise.resolve(CdvBluetoothLeService.peripheralEventReceived$);
         // await CdvBluetoothLeService.initialize();
-
-
-
-
-
-
     }
 
     static async removeAllService(): Promise<any> {

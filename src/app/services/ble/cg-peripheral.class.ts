@@ -136,25 +136,19 @@ export class CgPeripheral {
       }
      * @param dscvResp
      */
+
     private extractUserIdFromDiscoverResp(dscvResp: DiscoverResp): string {
 
+        const fallBackUuid = null;
+
         if (!dscvResp.services || dscvResp.services.length === 0) {
-            return 'n/a';
+            return null;
         }
 
-        // return JSON.stringify(
-        //     _.map(dscvResp.services, ( {uuid: serviceUuid, characteristics } ) => {
-        //         const characteristicUuid = _.map(characteristics, 'uuid');
-        //
-        //
-        //         return serviceUuid + ': ' + _.join(characteristicUuid);
-        //     })
-        // );
-
-        const fallBackUuid = JSON.stringify(_.map(dscvResp.services, ( {uuid: serviceUuid, characteristics } ) => {
-            const characteristicUuid = _.map(characteristics, 'uuid');
-            return serviceUuid + ': ' + _.join(characteristicUuid);
-        }));
+        // const fallBackUuid = JSON.stringify(_.map(dscvResp.services, ( {uuid: serviceUuid, characteristics } ) => {
+        //     const characteristicUuid = _.map(characteristics, 'uuid');
+        //     return serviceUuid + ': ' + _.join(characteristicUuid);
+        // }));
 
         const cgGattServiceData = _.find(dscvResp.services, s => {
             return s.uuid.toUpperCase() === CORONA_GO_BLE_SERVICE_UUID.toUpperCase();
@@ -177,9 +171,6 @@ export class CgPeripheral {
         } else {
             return fallBackUuid;
         }
-
-
-
 
     }
 

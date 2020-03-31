@@ -115,12 +115,14 @@ export class ScoreComponent implements OnInit, OnDestroy {
      * Get available circle slot
      */
     public addAvailableSlot(contactScore: ContactScore): ContactScore {
+        const innerOuterThreshRssi = -67;
+
         if (this.availableSlots.length) {
             // Assign next slot
             const slot = Object.assign({}, this.availableSlots[0]);
             this.availableSlots = this.availableSlots.slice(1);
 
-            if (contactScore.rssi <= -50) {
+            if (contactScore.rssi <= innerOuterThreshRssi) {
                 contactScore.slot = slot.outer;
                 contactScore.slotType = 'outer';
             } else {
@@ -130,7 +132,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
         } else {
             if (this.showAllAreaDevicesFlag) {
                 // Assign random tiny-slot
-                const direction = contactScore.rssi <= -50 ? 'outer' : 'inner';
+                const direction = contactScore.rssi <= innerOuterThreshRssi ? 'outer' : 'inner';
                 const randomSlot = new CircleScoreSlotPosition();
                 randomSlot.setRandomPosition(direction);
                 contactScore.slot = randomSlot;

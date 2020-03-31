@@ -59,17 +59,17 @@ export class CgAdvertisementFactoryService {
     public async startAdvertising(): Promise<any> {
 
 
-        console.error('ffr', 'userid', 'Waiting for user-id');
-        const cgUserId = await this.retrieveUserId();
-
-        console.error('ffr', 'userid', 'Received user id', cgUserId);
-
-        await this.addService(cgUserId);
-
         console.error('ffr', 'factory', 'starting advertisement');
         await CdvBluetoothLeService.initializePeripheral();
 
+        console.error('ffr', 'userid', 'Waiting for user-id');
+        const cgUserId = await this.retrieveUserId();
 
+
+        console.error('ffr', 'userid', 'Received user id', cgUserId);
+
+
+        await this.addService(cgUserId);
 
 
 
