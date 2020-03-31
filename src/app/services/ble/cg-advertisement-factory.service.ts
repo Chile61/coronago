@@ -4,7 +4,7 @@ import to from 'await-to-js';
 import {Subject} from 'rxjs';
 import _ from 'lodash';
 import {FlagService} from '../flag.service';
-import {take} from 'rxjs/operators';
+import {filter, take} from 'rxjs/operators';
 
 
 const isIosPlatform = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -82,10 +82,10 @@ export class CgAdvertisementFactoryService {
         return 'started advertising';
     }
 
-
     private async retrieveUserId(): Promise<string> {
         return this.flagService.localUserId$
             .pipe(
+                filter(k => !!k),
                 take(1)
             )
             .toPromise();

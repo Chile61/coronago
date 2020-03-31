@@ -29,6 +29,9 @@ export class UserService {
      */
     public createUser(): Observable<CreateUserResponse> {
         return this.geolocationService.getGeoLocation().pipe(
+
+            // window.cordova.getGeo
+
             switchMap((location) => {
                 const queryArgs = [];
                 queryArgs.push('lng=' + location.coords.longitude);
@@ -37,6 +40,7 @@ export class UserService {
 
                 return this.backendService.GET(route);
             })
+
         );
     }
 
