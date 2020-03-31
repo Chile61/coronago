@@ -4,6 +4,7 @@ import { APP_ICONS } from '../../../../ui-components/icons/icons';
 import { FlagService } from '../../../../services/flag.service';
 import { ObservableService } from '../../../../services/observable.service';
 import { environment } from '../../../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-debug',
@@ -23,7 +24,7 @@ export class DebugComponent implements OnInit, OnDestroy {
     public userId: string;
     public loginToken: string;
 
-    constructor(private flagService: FlagService, private cdRef: ChangeDetectorRef) {}
+    constructor(private flagService: FlagService, private cdRef: ChangeDetectorRef, private router: Router) {}
 
     ngOnInit(): void {
         this.subscriptions.push(
@@ -97,5 +98,13 @@ export class DebugComponent implements OnInit, OnDestroy {
      */
     public onDeleteUid(): void {
         this.flagService.updateValue(this.flagService.localUserIdKey, null);
+    }
+
+    /**
+     * Temporary enable prod mode
+     */
+    public enableProductionMode() {
+        environment.production = true;
+        this.router.navigate(['']);
     }
 }
