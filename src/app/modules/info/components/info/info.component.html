@@ -43,8 +43,8 @@
         <ion-item>
             <ion-label>
                 <h2>
-                    <a (click)="openPrivacyPage()"
-                       style="text-decoration: none; padding: 16px 0;">Datenschutzerklärung
+                    <a (click)="openPrivacyPage()">
+                        {{ 'PRIVACY_POLICY' | translate}}
                         <fa-icon [icon]="icons.externalLink"></fa-icon>
                     </a>
                 </h2>
@@ -54,7 +54,7 @@
         <ion-item>
             <ion-label>
                 <p>
-                    App-Entwicklung: WEGZWEI GmbH
+                    {{ 'APP_DEVELOPMENT' | translate }}: WEGZWEI GmbH
                 </p>
             </ion-label>
         </ion-item>

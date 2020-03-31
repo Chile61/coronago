@@ -5,6 +5,7 @@ import { ScoreLogRoutingModule } from './score-log-routing.module';
 import { ScoreLogComponent } from './components/score-log/score-log.component';
 import { IonicModule } from '@ionic/angular';
 import { ScoreLogEntryModule } from '../../ui-components/score-log-entry/score-log-entry.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ScoreLogEntryModule } from '../../ui-components/score-log-entry/score-l
         CommonModule,
         ScoreLogRoutingModule,
         IonicModule,
-        ScoreLogEntryModule
+        ScoreLogEntryModule,
+        TranslateModule
     ]
 })
 export class ScoreLogModule { }

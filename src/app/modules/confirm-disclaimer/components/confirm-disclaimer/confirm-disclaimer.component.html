@@ -1,6 +1,8 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title class="ion-padding-start">Haftungsausschluss</ion-title>
+        <ion-title class="ion-padding-start">
+            {{ 'TITLE_DISCLAIMER' | translate }}
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -10,7 +12,11 @@
 
 <ion-footer>
     <ion-toolbar class="ion-padding-start ion-padding-end">
-        <ion-button slot="start" color="medium" fill="clear" (click)="deny()">Ablehnen</ion-button>
-        <ion-button slot="end" color="success" (click)="confirm()">Akzeptieren</ion-button>
+        <ion-button slot="start" color="medium" fill="clear" (click)="deny()">
+            {{ 'BUTTON_DECLINE' | translate }}
+        </ion-button>
+        <ion-button slot="end" color="success" (click)="confirm()">
+            {{ 'BUTTON_ACCEPT' | translate }}
+        </ion-button>
     </ion-toolbar>
 </ion-footer>

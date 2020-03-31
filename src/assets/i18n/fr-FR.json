@@ -1,6 +1,8 @@
 {
   "APP_DEVELOPMENT": "",
   "APP_DISCLAIMER": "",
+  "BUTTON_ACCEPT": "",
+  "BUTTON_DECLINE": "",
   "DANGER_LEVEL_HIGH": "",
   "DANGER_LEVEL_LOW": "",
   "DANGER_LEVEL_MIDDLE": "",
@@ -11,5 +13,6 @@
   "TAB_HISTORY": "",
   "TAB_INFO": "",
   "TAB_NEWS": "",
-  "TAB_PEOPLE_CONTACTS": ""
+  "TAB_PEOPLE_CONTACTS": "",
+  "TITLE_DISCLAIMER": ""
 }
