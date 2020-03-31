@@ -1,23 +1,11 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title class="ion-padding-horizontal">Corona GO</ion-title>
+        <ion-title class="ion-padding-horizontal">{{ 'TITLE_PEOPLE_CONTACTS' | translate }}</ion-title>
     </ion-toolbar>
-    <!--    <div class="header">-->
-    <!--        <div class="image-container">-->
-    <!--            <img src="assets/icon/icon.png" alt="">-->
-    <!--        </div>-->
-    <!--        <div class="title-container">-->
-    <!--            Corona Go-->
-    <!--        </div>-->
-    <!--    </div>-->
 </ion-header>
 
 
 <ion-content [fullscreen]="true" force-overscroll="false">
-
-    <!--    <div class="virus-background">-->
-    <!--        <img src="assets/icon/virus.svg">-->
-    <!--    </div>-->
 
     <div class="flex-center-container">
         <div class="score-area">
@@ -35,27 +23,30 @@
                               textBorderOffsetPx="200"></ui-score-counter>
         </div>
 
-        <!--    <div style="text-align: center; padding: 50px 20px;">-->
-        <!--        <fa-icon [icon]="icons.infoCircle"></fa-icon> Was bedeutet das?-->
-        <!--    </div>-->
-
         <div class="danger-level-hint">
             <div class="level-0" *ngIf="dangerLevel === 0">
                 <fa-icon [icon]="icons.ok"></fa-icon>
-                Keine Personen-Kontakte in deiner Umgebung<br><br>
+                {{ 'DANGER_LEVEL_LOW' | translate }}<br><br>
             </div>
             <div class="level-1" *ngIf="dangerLevel === 1">
                 <fa-icon [icon]="icons.warn"></fa-icon>
-                <b class="keyword">Vorsicht! </b><b>{{ countOfWarningContacts }} {{ countOfWarningContacts >= 2 ? 'Personen' : 'Person' }}
-                in der Umgebung.</b> Deine Personen-Kontakte könnten sich
-                vergrößern.
+
+                <ng-container *ngIf="countOfWarningContacts < 2">
+                    <span [innerHTML]="'DANGER_LEVEL_MIDDLE_SINGLE' | translate: {value:countOfWarningContacts}"></span>
+                </ng-container>
+                <ng-container *ngIf="countOfWarningContacts >= 2">
+                    <span [innerHTML]="'DANGER_LEVEL_MIDDLE' | translate: {value:countOfWarningContacts}"></span>
+                </ng-container>
             </div>
             <div class="level-2" *ngIf="dangerLevel === 2">
                 <fa-icon [icon]="icons.danger"></fa-icon>
-                <b class="keyword">Vorsicht! </b><b>{{ countOfDangerContacts }} {{ countOfDangerContacts >= 2 ? 'Personen' : 'Person' }}
-                im unmittelbaren Umfeld. </b> Situation genau einschätzen und ggf. meiden.
-                <br>
-                <br>
+
+                <ng-container *ngIf="countOfDangerContacts < 2">
+                    <span [innerHTML]="'DANGER_LEVEL_HIGH_SINGLE' | translate: {value:countOfDangerContacts}"></span>
+                </ng-container>
+                <ng-container *ngIf="countOfDangerContacts >= 2">
+                    <span [innerHTML]="'DANGER_LEVEL_HIGH' | translate: {value:countOfDangerContacts}"></span>
+                </ng-container>
             </div>
         </div>
     </div>

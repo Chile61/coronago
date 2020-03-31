@@ -1,0 +1,23 @@
+{
+  "APP_DEVELOPMENT": "App-Entwicklung",
+  "APP_DISCLAIMER": "<p>     Ich bin damit einverstanden, dass meine Bluetooth-Signale (eindeutige Nutzer ID; Signalstärke zur     Abschätzung der Distanz) sowie meine Standortdaten (Hintergrund-GPS) zum Zwecke der eigenen Risikoeischätzung und     zur Bekämpfung und Eindämmung der Corona Pandemie verwendet werden um: </p>  <ol class=\"ion-padding-start\">     <li>mir als Nutzer anhand einer Kontakt-Kennzahl eine eigene Risikoeinschätzung der jeweiligen Umgebung zu         ermöglichen und;     </li>     <li>dem Land Saarland zu ermöglichen etwaige Infektionswege und Cluster nachzuverfolgen und anonymisiert per         GPS/Karte zu visualisieren, um den Behörden zu helfen, die Ausbreitungsgeschwindigkeit der Pandemie zu         verlangsamen.     </li> </ol>  <p>     Sie können diese Einwilligung jederzeit mit Wirkung für die Zukunft in     <u>Einstellungen &rarr; Rechtliches</u> widerrufen. </p>  <p>     Weitere Informationen finden Sie in unserer Datenschutzerklärung </p>",
+  "APP_NAME": "Corona GO",
+  "DANGER_LEVEL_HIGH": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Personen in unmittelbarem Umfeld.</b> Situation genau einschätzen und ggf. meiden.",
+  "DANGER_LEVEL_HIGH_SINGLE": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Person in unmittelbarem Umfeld.</b> Situation genau einschätzen und ggf. meiden.",
+  "DANGER_LEVEL_LOW": "Keine Personen-Kontakte in deiner Umgebung",
+  "DANGER_LEVEL_MIDDLE": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Personen in deiner Umgebung.</b> Deine Personen-Kontakte könnten sich vergrößern.",
+  "DANGER_LEVEL_MIDDLE_SINGLE": "<b class=\"keyword\">Vorsicht!</b><b> {{ value }} Person in deiner Umgebung.</b> Deine Personen-Kontakte könnten sich vergrößern.",
+  "HISTORY_SOON_HINT": "Hier kannst du in Kürze den Verlauf deiner Personen-Kontakte einsehen.",
+  "PEOPLE_CONTACTS": "Personen-Kontakte",
+  "PRIVACY_POLICY": "Datenschutzerklärung",
+  "TAB_DEBUG": "",
+  "TAB_HISTORY": "Verlauf",
+  "TAB_INFO": "Info",
+  "TAB_NEWS": "News",
+  "TAB_PEOPLE_CONTACTS": "Personen-Kontakte",
+  "TITLE_DEBUG": "Debugging",
+  "TITLE_HISTORY": "Verlauf",
+  "TITLE_INFO": "Info",
+  "TITLE_NEWS": "News",
+  "TITLE_PEOPLE_CONTACTS": "Corona GO"
+}

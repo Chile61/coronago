@@ -1,0 +1,23 @@
+{
+  "APP_DEVELOPMENT": "App-Development",
+  "APP_DISCLAIMER": "<p>     I agree to my Bluetooth signal (unique user ID, signal strength to estimate distance) and location data (background     GPS) being used for my own risk assessment and for fighting as well as containing the Corona pandemic to: </p>  <ol>     <li>         enable me to assess the risk of my surroundings using the total number of my direct and indirect contacts, and     </li>     <li>         enable the Bundesland Saarland to trace possible transmission routes and clusters, and to visualise this using         GPS / maps.     </li> </ol>  <p>     This will help authorities to slow the speed of the pandemic. You can revoke your agreement for future data     collection at any time in Settings > Legal. For more information please see our Privacy Policy. </p>",
+  "APP_NAME": "Corona GO",
+  "DANGER_LEVEL_HIGH": "<b class=\"keyword\">Careful!</b><b> {{ value }} people in your surroundings.</b> Assess situation, possibly avoid.",
+  "DANGER_LEVEL_HIGH_SINGLE": "<b class=\"keyword\">Careful!</b><b> {{ value }} person in your surroundings.</b> Assess situation, possibly avoid.",
+  "DANGER_LEVEL_LOW": "No contacts in your surroundings",
+  "DANGER_LEVEL_MIDDLE": "<b class=\"keyword\">Careful!</b><b> {{ value }} people in your surroundings.</b> Your total contacts might increase.",
+  "DANGER_LEVEL_MIDDLE_SINGLE": "<b class=\"keyword\">Careful!</b><b> {{ value }} person in your surroundings.</b> Your total contacts might increase.",
+  "HISTORY_SOON_HINT": "Here you can see the history of your personal contacts shortly.",
+  "PEOPLE_CONTACTS": "Total contacts",
+  "PRIVACY_POLICY": "Privacy Policy",
+  "TAB_DEBUG": "DEBUG",
+  "TAB_HISTORY": "History",
+  "TAB_INFO": "Info",
+  "TAB_NEWS": "News",
+  "TAB_PEOPLE_CONTACTS": "Total contacts",
+  "TITLE_DEBUG": "Debugging",
+  "TITLE_HISTORY": "History",
+  "TITLE_INFO": "Info",
+  "TITLE_NEWS": "News",
+  "TITLE_PEOPLE_CONTACTS": "Corona GO"
+}
