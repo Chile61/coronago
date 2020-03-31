@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { UserService } from './api-services/user.service';
 import { map, tap } from 'rxjs/operators';
 import { LogManager } from './log.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -72,37 +73,40 @@ export class FlagService {
      * Load config flags
      */
     private loadConfigFlags(): void {
-        // Whether to show all devices in area or just 4
-        this.storage.get(this.showAllAreaDevicesKey).then((value) => {
-            if (value !== null) {
-                this.showAllAreaDevices$.next(value);
-            }
-        });
+        // Load debug config only for development, else use defaults
+        if (!environment.production) {
+            // Whether to show all devices in area or just 4
+            this.storage.get(this.showAllAreaDevicesKey).then((value) => {
+                if (value !== null) {
+                    this.showAllAreaDevices$.next(value);
+                }
+            });
 
-        // Max render devices
-        this.storage.get(this.maxRenderDevicesKey).then((value) => {
-            if (value !== null) {
-                this.maxRenderDevices$.next(value);
-            }
-        });
+            // Max render devices
+            this.storage.get(this.maxRenderDevicesKey).then((value) => {
+                if (value !== null) {
+                    this.maxRenderDevices$.next(value);
+                }
+            });
 
-        // Simulate area contacts
-        this.storage.get(this.simulateContactsKey).then((value) => {
-            if (value !== null) {
-                this.simulateContacts$.next(value);
-            }
-        });
+            // Simulate area contacts
+            this.storage.get(this.simulateContactsKey).then((value) => {
+                if (value !== null) {
+                    this.simulateContacts$.next(value);
+                }
+            });
+
+            // Show node debug info
+            this.storage.get(this.showNodeDebugInfoKey).then((value) => {
+                if (value !== null) {
+                    this.showNodeDebugInfo$.next(value);
+                }
+            });
+        }
 
         // Has confirmed disclaimer
         this.storage.get(this.hasConfirmedDisclaimerKey).then((value) => {
             this.hasConfirmedDisclaimer$.next(!!value);
-        });
-
-        // Show node debug info
-        this.storage.get(this.showNodeDebugInfoKey).then((value) => {
-            if (value !== null) {
-                this.showNodeDebugInfo$.next(value);
-            }
         });
 
         // UserId
