@@ -25,13 +25,17 @@ export class CgUserManagerService {
 
     public createOrUpdateUser(cgPeripheral: CgPeripheral): void {
 
-        const cgUserId = cgPeripheral.getUserId();
+        const cgUserIdFromPeripheral = cgPeripheral.getUserId();
+        if (!cgUserIdFromPeripheral) {
+            console.error('ffr', 'Will not create a user from falsey: ', cgUserIdFromPeripheral);
+            return;
+        }
 
-        let cgUser: CgUser = this.cgUserByUserUuid[cgUserId];
+        let cgUser: CgUser = this.cgUserByUserUuid[cgUserIdFromPeripheral];
 
         if (!cgUser){
-            cgUser = new CgUser(cgUserId);
-            this.cgUserByUserUuid[cgUserId] = cgUser;
+            cgUser = new CgUser(cgUserIdFromPeripheral);
+            this.cgUserByUserUuid[cgUserIdFromPeripheral] = cgUser;
         }
 
         cgUser.setLastSeenTimestamp(cgPeripheral.lastSeenTimestamp);
