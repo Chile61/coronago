@@ -33,6 +33,8 @@
         "@ionic-native/status-bar": "^5.23.0",
         "@ionic/angular": "^5.0.5",
         "@ionic/storage": "^2.2.0",
+        "@ngx-translate/core": "^12.1.2",
+        "@ngx-translate/http-loader": "^4.0.0",
         "await-to-js": "^2.1.1",
         "cordova-android": "^8.1.0",
         "cordova-ios": "^5.1.1",

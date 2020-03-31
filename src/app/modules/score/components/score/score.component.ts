@@ -218,7 +218,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
             cs.userId = cgu.userUuId;
             cs.scoreAsync = this.userService.getUserScore(cs.userId);
 
-            // Report meetin
+            // Report meeting
             this.geolocationService.getGeoLocation().subscribe((location) => {
                 this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
                     () => {
