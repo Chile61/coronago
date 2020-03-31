@@ -17,8 +17,6 @@ export class CgUserManagerService {
     private cgUserByUserUuid = {};
 
     constructor() {
-
-
     }
 
     public getUsers(): CgUser[] {
@@ -36,7 +34,23 @@ export class CgUserManagerService {
             this.cgUserByUserUuid[cgUserId] = cgUser;
         }
 
+        cgUser.setLastSeenTimestamp(cgPeripheral.lastSeenTimestamp);
         cgUser.setRssi(cgPeripheral.getRssi());
+    }
+
+    public dropUsersOlderThanSec(maxAgeSec): void {
+
+        console.error('ffr', 'CHECK IF TO DROP USERS');
+
+        const cgUsersToDrop = _.filter(this.cgUserByUserUuid, (cgUser: CgUser) => {
+            return cgUser.isLastSeenOlderThanSec(maxAgeSec);
+        });
+
+        _.each(cgUsersToDrop, (cgUser: CgUser) => {
+            const userId = cgUser.userUuId;
+            console.error('ffr', 'DROPPING USER WITH userid', userId);
+            delete this.cgUserByUserUuid[cgUser.userUuId];
+        });
     }
 
 
