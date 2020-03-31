@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {CgPeripheral} from './cg-peripheral.class';
 import _ from 'lodash';
 import {CgUser} from './cg-user.class';
+import {BleScanCycleManagerService} from './ble-scan-cycle-manager.service';
 
 
 
@@ -12,9 +13,13 @@ import {CgUser} from './cg-user.class';
 })
 export class CgUserManagerService {
 
+
     private cgUserByUserUuid = {};
 
-    constructor() { }
+    constructor() {
+
+
+    }
 
     public getUsers(): CgUser[] {
         return _.values(this.cgUserByUserUuid);

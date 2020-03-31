@@ -183,6 +183,8 @@ export class CdvBluetoothLeService {
             ]
         };
 
+        console.error('ffr', 'Adding service', JSON.stringify(charUuid));
+
         return new Promise( (resolve, reject) => {
             window.bluetoothle.addService(resolve, reject, serviceParams);
         });
