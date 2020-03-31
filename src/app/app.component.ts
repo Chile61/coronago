@@ -9,23 +9,29 @@ import {CgAdvertisementFactoryService} from './services/ble/cg-advertisement-fac
 import {CGAdvertisement} from './services/ble/cg-advertisement.class';
 
 // You may import any optional interfaces
-import BackgroundGeolocation, {
-    State,
-    Config,
-    Location,
-    LocationError,
-    Geofence,
-    HttpEvent,
-    MotionActivityEvent,
-    ProviderChangeEvent,
-    MotionChangeEvent,
-    GeofenceEvent,
-    GeofencesChangeEvent,
-    HeartbeatEvent,
-    ConnectivityChangeEvent
-} from 'cordova-background-geolocation-lt';
+// import BackgroundGeolocation, {
+//     State,
+//     Config,
+//     Location,
+//     LocationError,
+//     Geofence,
+//     HttpEvent,
+//     MotionActivityEvent,
+//     ProviderChangeEvent,
+//     MotionChangeEvent,
+//     GeofenceEvent,
+//     GeofencesChangeEvent,
+//     HeartbeatEvent,
+//     ConnectivityChangeEvent
+// } from 'cordova-background-geolocation-lt';
+
 import {CdvBluetoothLeService} from './services/ble/cdv-bluetooth-le.service';
 import to from 'await-to-js';
+import {scan} from 'rxjs/operators';
+import _ from 'lodash';
+import {CgPeripheralManagerService} from './services/ble/cg-peripheral-manager.service';
+import {CgPeripheral} from './services/ble/cg-peripheral.class';
+import {CgUserManagerService} from './services/ble/cg-user-manager.service';
 
 
 @Component({
@@ -39,24 +45,128 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private bootService: BootService,
-        private cGAdvertisementScannerService: CgAdvertisementScannerService
-        // private cGAdvertisementFactoryService: CgAdvertisementFactoryService
+        private cGAdvertisementScannerService: CgAdvertisementScannerService,
+        private cGAdvertisementFactoryService: CgAdvertisementFactoryService,
+        private cgPeripheralManagerService: CgPeripheralManagerService,
+        private cgUserManagerService: CgUserManagerService,
     ) {
         this.bootService.initApp();
 
 
-        cGAdvertisementScannerService.cgAdvertisementReceived$
-            .subscribe( ( cgAdv: CGAdvertisement ) => {
-                console.error('ffr', 'KLABBET', cgAdv.uuid, cgAdv.rawAdvResp);
-            });
-
         setTimeout(async () => {
-            CgAdvertisementFactoryService.startAdvertising();
+            this.cGAdvertisementFactoryService.startAdvertising();
         }, 3000);
 
 
+        cgPeripheralManagerService.peripheralsUpdated$
+            .subscribe(async ( periByAddr ) => {
+                try {
 
-        setTimeout(this.configureBackgroundGeolocation,  5000);
+                    console.error('ffr', '--------------------------------------------------');
+                    console.error('ffr', 'PERIPHERALS');
+                    console.error('ffr', '--------------------------------------------------');
+                    _.each(periByAddr, (peri: CgPeripheral, addr) => {
+                        console.error(
+                            'ffr', 'peri#', addr,
+                            'seen', peri.getLastSeenReadableSec(), 'secs ago',
+                            JSON.stringify(peri), peri.getUserId());
+
+                    });
+
+
+
+                    console.error('ffr', '--------------------------------------------------');
+                    console.error('ffr', 'DROP OLD PERIPHERAL ENTRIES');
+                    console.error('ffr', '--------------------------------------------------');
+                    const peris: CgPeripheral[] = _.values(periByAddr);
+                    for (let i = 0, ii = peris.length; i < ii; i += 1) {
+                        const peri = peris[i];
+                        if (peri.isOlderThenMs(200 * 1000)) {
+                            console.error('ffr', 'Dropping peripheral ', peri.address);
+                            await cgPeripheralManagerService.dropPeripheralByAddress(peri.address);
+                        }
+                    }
+
+
+                    console.error('ffr', '--------------------------------------------------');
+                    console.error('ffr', 'RETRIEVING USER ID');
+                    console.error('ffr', '--------------------------------------------------');
+                    for (let i = 0, ii = peris.length; i < ii; i += 1) {
+                        const peri = peris[i];
+                        await peri.retrieveUserId();
+                    }
+
+                    console.error('ffr', '--------------------------------------------------');
+                    console.error('ffr', 'USER STATUS CURRENT');
+                    console.error('ffr', '--------------------------------------------------');
+
+
+                    console.error('ffr', cgUserManagerService.getUsers(), JSON.stringify( cgUserManagerService.getUsers() ) );
+
+
+
+                    // notifyPeripheralCycleDone
+
+                    // _.each(periByAddr, (peri: CgPeripheral, addr) => {
+                    //     if (!peri.didExtractUserId() ) {
+                    //         console.error('ffr', 'Retrieving user id for ', addr , '...');
+                    //         peri.retrieveUserId();
+                    //     }
+                    // });
+
+                    // notifyPeripherCycleDone
+
+                } catch (e) {
+                    console.error('ffr', 'error', JSON.stringify(e));
+                    console.error(e);
+                }
+            });
+
+
+        cGAdvertisementScannerService.startScanningForCgAdvertisement();
+
+
+        setInterval( async () => {
+            const [err, advResponse] = await to(CdvBluetoothLeService.isAdvertising());
+            console.error('frr', 'isAdvertising?', JSON.stringify(err), JSON.stringify(advResponse));
+        }, 5000);
+
+
+
+
+        cGAdvertisementScannerService.cgScanCycleWorthOfScanResps$
+            .subscribe( async (scanResponses: []) => {
+                console.error('ffr', 'scan responses coutn', scanResponses.length);
+
+                if (scanResponses && scanResponses.length) {
+
+                    let addrs = _.map(scanResponses, 'address');
+                    addrs = _.uniq(addrs);
+                    console.error('ffr', 'got scan responses', JSON.stringify(addrs));
+
+
+                    cgPeripheralManagerService.feedWithScanResponses(scanResponses);
+
+                }
+
+            });
+
+
+
+
+
+        // setTimeout(this.configureBackgroundGeolocation,  5000);
+
+
+        document.addEventListener('deviceready', () => {
+            // cordova.plugins.backgroundMode is now available
+
+            window.cordova.plugins.backgroundMode.enable();
+            console.error('ffr', 'background mode requested!!');
+
+        }, false);
+
+
 
 
         this.initializeApp();
@@ -66,73 +176,6 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleLightContent();
             this.splashScreen.hide();
-        });
-    }
-
-    // Like any Cordova plugin, you must wait for Platform.ready() before referencing the plugin.
-    configureBackgroundGeolocation(): void {
-
-        // 1.  Listen to events.
-        BackgroundGeolocation.onLocation(location => {
-            console.error('ffr', '[location] - ', location);
-        });
-
-        // 1.  Listen to events.
-        BackgroundGeolocation.onHeartbeat(async (heartbeat) => {
-            console.error('ffr', '[heartbeat] - ', heartbeat);
-
-            const [err, msg] = await to(CdvBluetoothLeService.isAdvertising());
-            // const msg = await CgAdvertisementFactoryService.isAdvertising();
-            console.error('ffr', 'heartbeat', JSON.stringify(msg), JSON.stringify(err));
-        });
-
-        BackgroundGeolocation.onMotionChange(event => {
-            console.error('ffr', '[motionchange] - ', event.isMoving, event.location);
-        });
-
-        BackgroundGeolocation.onHttp(response => {
-            console.error('ffr', '[http] - ', response.success, response.status, response.responseText);
-        });
-
-        BackgroundGeolocation.onProviderChange(event => {
-            console.error('ffr', '[providerchange] - ', event.enabled, event.status, event.gps);
-        });
-
-        // 2.  Configure the plugin with #ready
-        BackgroundGeolocation.ready({
-
-            // debugging
-            reset: true,
-            debug: true,
-            logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
-
-            locationAuthorizationRequest: 'Always',
-            desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
-            distanceFilter: 10,
-
-            // server config
-            // url: 'http://my.server.com/locations',
-            // autoSync: true,         // with server
-
-
-            stopOnTerminate: false, // continue tracking after user terminates app
-            startOnBoot: true,      // enable background-tracking after the device boots
-
-            preventSuspend: true,   // Prevent iOS from suspending your application
-                                    // in the background after location-services have been switched off
-            heartbeatInterval: 10   // seconds
-
-            // Android Switches
-            //foregroundService:	Boolean	Default: false. Set true to make the plugin mostly immune to OS termination due to memory pressure from other apps.
-            //enableHeadless:	Boolean	Default: false. Set to true to enable "Headless" mode when the user terminates the application. In this mode, you can respond to all the plugin's events in the native Android environment. For more information, see the wiki for Android Headless Mode
-
-
-        }, (state) => {
-            console.error('[ready] BackgroundGeolocation is ready to use');
-            if (!state.enabled) {
-                // 3.  Start tracking.
-                BackgroundGeolocation.start();
-            }
         });
     }
 
