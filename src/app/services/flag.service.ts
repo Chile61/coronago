@@ -3,11 +3,13 @@ import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { UserService } from './api-services/user.service';
 import { map, tap } from 'rxjs/operators';
+import { LogManager } from './log.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class FlagService {
+    private log = new LogManager('FlagService');
     private subscriptions: Subscription[] = [];
     private inProgressUserRequest = false;
 
@@ -35,12 +37,14 @@ export class FlagService {
     constructor(private storage: Storage, private userService: UserService) {
         this.subscriptions.push(
             this.localUserId$.subscribe((userId) => {
-                if (userId === null) {
+                this.log.error('constructor', 'userId$', userId);
+                if (!!userId) {
                     this.createNewUserId();
                 }
             }),
             this.loginToken$.subscribe((token) => {
-                if (token === null) {
+                this.log.error('constructor', 'token$', token);
+                if (!!token) {
                     this.createNewUserId();
                 }
             })
