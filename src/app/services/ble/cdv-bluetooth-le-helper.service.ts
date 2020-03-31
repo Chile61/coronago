@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {CORONA_GO_BLE_SERVICE_UUID} from "./cdv-bluetooth-le-config";
 
 const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -20,6 +21,8 @@ export class CdvBluetoothLeHelperService {
 
         return {resultHexList, resultIntList};
     }
+
+
 
     public static extractServiceUuidByteArrayFromAdvResp(resp): any{
 
@@ -49,9 +52,48 @@ export class CdvBluetoothLeHelperService {
 
     }
 
+    private static doesContainCoronaGoAdvUuidIosResp(resp): boolean {
+
+        if (resp.serviceUuids && resp.serviceUuids.length &&
+            resp.serviceUuids.includes(CORONA_GO_BLE_SERVICE_UUID))  {
+            return true;
+        }
+
+        // While in background, the service-uuid is placed in the overflow area
+        // on iOS
+        if (resp.overflowServiceUuids && resp.overflowServiceUuids.length &&
+            resp.serviceUuids.includes(CORONA_GO_BLE_SERVICE_UUID)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     *
+     */
+    public static doesContainCoronaGoAdv(rawAdvResp): any {
+
+        if (isIos) {
+
+            return CdvBluetoothLeHelperService.doesContainCoronaGoAdvUuidIosResp(rawAdvResp);
+
+        } else {
+            // android
+
+            const rawBase64Str = rawAdvResp;
+            const advIntArray = window.bluetoothle.encodedStringToBytes(rawBase64Str);
+            const serviceUuidByteArray = CdvBluetoothLeHelperService.extractServiceUuidOnAndroidAdv(advIntArray);
+            console.error('ffr', 'service-uuid-byte-array', JSON.stringify(serviceUuidByteArray));
+            const cgBleServiceUuidAsByteArray = this.parseHexStrToByteArray(CORONA_GO_BLE_SERVICE_UUID);
+
+            return _.isEqual(serviceUuidByteArray, cgBleServiceUuidAsByteArray);
+        }
+
+    }
+
     /**
      * Finds the first service-uuid in the advertisement packet and reverses it
-     * @param byteList
      */
     public static extractServiceUuidOnAndroidAdv(byteList: number[]): number[] {
 
