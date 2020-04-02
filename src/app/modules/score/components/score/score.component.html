@@ -8,6 +8,13 @@
 <ion-content [fullscreen]="true" force-overscroll="false">
 
     <div class="flex-center-container">
+
+        <div class="full-center ion-padding-vertical" style="margin-top: -40px; height: 50px;">
+            <div class="scanning-hint animated infinite flash slower" *ngIf="showScanningAreaHint">
+                {{ 'SCORE_SCANNING_AREA' | translate }}
+            </div>
+        </div>
+
         <div class="score-area">
             <ng-container *ngFor="let score of nearbyScores; let i=index">
                 <ui-nearby-score-counter
