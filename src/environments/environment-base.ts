@@ -18,6 +18,13 @@ export const environmentBase = {
 
     scanWindowWidthSec: 6,
 
+    scanCycleConfig: {
+
+        pauseAfterCycleForegroundSec: 10,
+
+        pauseAfterCycleBackgroundSec: 60,
+    },
+
 };
 
 /*

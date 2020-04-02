@@ -49,8 +49,8 @@ export class ReportingService implements OnDestroy {
             'lng=' + location.coords.longitude,
             'lat=' + location.coords.latitude,
             'token=' + this.loginToken,
-            // 'isBg=' + (isBg ? 1 : 0),
-            'isBg=' + 'null',
+            'isBg=' + (isBg ? 1 : 0),
+            // 'isBg=' + 'null',
         ];
         const query = '?' + queryParams.join('&');
 
@@ -59,7 +59,7 @@ export class ReportingService implements OnDestroy {
 
     private isAppInBackground(): boolean {
 
-        // return window.cordova.plugins.backgroundMode.isActive();
-        return true;
+        return window.cordova.plugins.backgroundMode.isActive();
+        // return true;
     }
 }

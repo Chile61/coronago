@@ -115,7 +115,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
      * Get available circle slot
      */
     public addAvailableSlot(contactScore: ContactScore): ContactScore {
-        const innerOuterThreshRssi = -73;
+        const innerOuterThreshRssi = -68;
 
         if (this.availableSlots.length) {
             // Assign next slot
