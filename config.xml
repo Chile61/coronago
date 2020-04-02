@@ -21,9 +21,6 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="Orientation" value="portrait" />
     <platform name="android">
-        <config-file parent="/manifest/application" target="app/src/main/AndroidManifest.xml">
-            <meta-data android:name="com.transistorsoft.locationmanager.license_key" android:value="YOUR_LICENSE_KEY_HERE" />
-        </config-file>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
@@ -106,16 +103,13 @@
             <string>Bitte gewähren Sie Zugriff auf Bluetooth um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" target="*-Info.plist">
-            <string>[CHANGEME] Background location tracking is required for our app so we can...</string>
+            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
-            <string>[CHANGEME pre-iOS11.  No longer used with iOS 12] Background location tracking is required for our app so we can...</string>
+            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
-            <string>[CHANGEME] Background location tracking is required for our app so we can...</string>
-        </config-file>
-        <config-file parent="NSMotionUsageDescription" target="*-Info.plist">
-            <string>[CHANGEME] Device motion updates help determine when the device is stationary so the app can save power by turning off location-updates</string>
+            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
