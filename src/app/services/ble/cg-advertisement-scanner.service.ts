@@ -138,7 +138,15 @@ export class CgAdvertisementScannerService {
                 // The pause inbetween scans needs to be random, in order to equal
                 // the chances that a device is to connect to another device
 
-                const scanCyclePauseAvgSec = environment.pauseBetweenScanCyclesSec;
+
+
+
+
+                // const scanCyclePauseAvgSec = environment.pauseBetweenScanCyclesSec;
+                const scanCyclePauseAvgSec = this.isAppInBackground()
+                    ? environment.scanCycleConfig.pauseAfterCycleBackgroundSec
+                    : environment.scanCycleConfig.pauseAfterCycleForegroundSec;
+
                 randPauseTimeMs = _.random(
                     Math.floor(scanCyclePauseAvgSec * 0.8),
                     Math.floor(scanCyclePauseAvgSec * 1.2)) * 1000;
@@ -196,6 +204,10 @@ export class CgAdvertisementScannerService {
     //
     //
     // }
+
+    private isAppInBackground(): boolean {
+        return window.cordova.plugins.backgroundMode.isActive();
+    }
 
 
     private async waitingForGattServiceRequestsDone(): Promise<any> {
