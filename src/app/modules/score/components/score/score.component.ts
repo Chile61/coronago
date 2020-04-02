@@ -38,7 +38,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     public dangerLevel: 0 | 1 | 2 = 0;
     public countOfDangerContacts = 0;
     public countOfWarningContacts = 0;
-    public showScanningAreaHint: boolean;
+    // public showScanningAreaHint: boolean;
 
     constructor(
         private userService: UserService,
@@ -265,12 +265,12 @@ export class ScoreComponent implements OnInit, OnDestroy {
             }, 900);
         }
 
-        if (!this.showScanningAreaHint) {
-            this.showScanningAreaHint = true;
-
-            setTimeout(() => {
-                this.showScanningAreaHint = false
-            }, 5000);
-        }
+        // if (!this.showScanningAreaHint) {
+        //     this.showScanningAreaHint = true;
+        //
+        //     setTimeout(() => {
+        //         this.showScanningAreaHint = false
+        //     }, 5000);
+        // }
     }
 }
