@@ -20,7 +20,8 @@ export class I18nService {
         this.registerLocales();
 
         // this language will be used as a fallback when a translation isn't found in the current language
-        this.translate.setDefaultLang('en-US');
+        // this.translate.setDefaultLang('en-US');
+        this.translate.setDefaultLang('de-DE');
 
         this.flagService.appLanguage$.subscribe((languageKey) => {
             I18nService.activeLocaleKey = languageKey;
@@ -35,6 +36,6 @@ export class I18nService {
      */
     private registerLocales(): void {
         registerLocaleData(localeGerman);
-        registerLocaleData(localeEnglish);
+        // registerLocaleData(localeEnglish);
     }
 }
