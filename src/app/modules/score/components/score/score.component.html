@@ -14,10 +14,13 @@
                     class="animated infinite pulse slow"
                     [nearbyContactScore]="score" [ngStyle]="score.slot"></ui-nearby-score-counter>
             </ng-container>
-            <ui-score-counter [contactScore]="contactScore"
+            <ui-score-counter [contactScore]="localContactScore"
                               [class.danger-level-ok]="dangerLevel === 0"
                               [class.danger-level-warn]="dangerLevel === 1"
                               [class.danger-level-danger]="dangerLevel === 2"
+                              (click)="onCounterClick()"
+                              class="animated fast"
+                              id="localScoreCounter"
                               showHintText="true"
                               textBorderOffsetPx="140"></ui-score-counter>
         </div>

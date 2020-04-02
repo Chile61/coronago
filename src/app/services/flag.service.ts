@@ -35,7 +35,7 @@ export class FlagService {
     public loginToken$ = new ReplaySubject<string>(1);
 
     public localUserLastScoreKey = 'localUserLastScore';
-    public localUserLastScore$ = new ReplaySubject<string>(1);
+    public localUserLastScore$ = new ReplaySubject<number>(1);
 
     public appLanguageKey = 'appLanguage';
     public appLanguage$ = new ReplaySubject<string>(1);
