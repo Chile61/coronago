@@ -38,6 +38,9 @@ export class ReportingService implements OnDestroy {
      * Report user clash
      */
     public reportMeeting(detectedUserId: string, rssi: number, location: Position): Observable<ReportResponse> {
+
+        const isBg = this.isAppInBackground();
+
         const queryParams = [
             'me=' + this.localUserId,
             'other=' + detectedUserId,
@@ -46,9 +49,17 @@ export class ReportingService implements OnDestroy {
             'lng=' + location.coords.longitude,
             'lat=' + location.coords.latitude,
             'token=' + this.loginToken,
+            // 'isBg=' + (isBg ? 1 : 0),
+            'isBg=' + 'null',
         ];
         const query = '?' + queryParams.join('&');
 
         return this.backendService.GET(environment.apiEndpoints.reportMeeting + query);
+    }
+
+    private isAppInBackground(): boolean {
+
+        // return window.cordova.plugins.backgroundMode.isActive();
+        return true;
     }
 }

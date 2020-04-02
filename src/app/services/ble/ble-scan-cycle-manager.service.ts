@@ -111,7 +111,7 @@ export class BleScanCycleManagerService {
 
       setInterval( async () => {
           const [err, advResponse] = await to(CdvBluetoothLeService.isAdvertising());
-          console.error('frr', 'isAdvertising?', JSON.stringify(err), JSON.stringify(advResponse));
+          console.error('ffr', 'isAdvertising?', JSON.stringify(err), JSON.stringify(advResponse));
       }, 5000);
 
 

@@ -221,16 +221,19 @@ export class ScoreComponent implements OnInit, OnDestroy {
             cs.scoreAsync = this.userService.getUserScore(cs.userId);
 
             // Report meetin
-            this.geolocationService.getGeoLocation().subscribe((location) => {
-                this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
-                    () => {
-                        this.log.log(this.reportingService.reportMeeting.name, 'Meeting reported', cs.userId);
-                    },
-                    (error) => {
-                        this.log.error(this.reportingService.reportMeeting.name, 'Failed to report meeting', error, location, cs);
-                    }
-                );
-            });
+            this.geolocationService.getGeoLocation()
+                .subscribe((location) => {
+
+                    this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
+                        () => {
+                            this.log.log(this.reportingService.reportMeeting.name, 'Meeting reported', cs.userId);
+                        },
+                        (error) => {
+                            this.log.error(this.reportingService.reportMeeting.name, 'Failed to report meeting', error, location, cs);
+                        }
+                    );
+
+                });
 
             return cs;
         });

@@ -126,7 +126,9 @@ export class CgAdvertisementScannerService {
                 msg = await CdvBluetoothLeService.startScan();
                 console.error('ffr', 'startScan msg', JSON.stringify(msg));
 
-                await this.delayAsync(scanTimeMs);
+                const scanWindowWidthSec = environment.scanWindowWidthSec;
+                const scanWindowWidthMsec = scanWindowWidthSec * 1000;
+                await this.delayAsync(scanWindowWidthMsec);
 
                 msg = await CdvBluetoothLeService.stopScan();
                 console.error('ffr', 'stopScan msg', JSON.stringify(msg));

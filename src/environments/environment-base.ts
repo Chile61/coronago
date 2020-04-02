@@ -4,16 +4,20 @@
 declare var require: any;
 
 export const environmentBase = {
-   production: false,
-   VERSION: require('../../package.json').version,
-   build: require('../../package.json').build,
-   apiEndpoints: {
-       reportMeeting: '/meet',
-       createUser: '/createUser',
-       userScore: '/getNetworkSize',
-       ping: '/api/ping'
-   },
-   pauseBetweenScanCyclesSec: 6
+    production: false,
+    VERSION: require('../../package.json').version,
+    build: require('../../package.json').build,
+    apiEndpoints: {
+        reportMeeting: '/meet',
+        createUser: '/createUser',
+        userScore: '/getNetworkSize',
+        ping: '/api/ping'
+    },
+
+    pauseBetweenScanCyclesSec: 10,
+
+    scanWindowWidthSec: 6,
+
 };
 
 /*
