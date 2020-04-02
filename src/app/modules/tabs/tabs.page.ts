@@ -11,7 +11,10 @@ import { environment } from '../../../environments/environment';
     styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage implements OnInit, OnDestroy {
-    public newsUrl = 'https://corona.saarland.de/DE/home/home_node.html';
+
+    // public newsUrl = 'https://corona.saarland.de/DE/home/home_node.html';
+    public newsUrl = 'https://www.bundesgesundheitsministerium.de/coronavirus.html';
+
     private subscriptions: Subscription[] = [];
     public environment = environment;
 
