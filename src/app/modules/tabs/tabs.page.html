@@ -3,17 +3,23 @@
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="score">
             <fa-icon [icon]="icons.user"></fa-icon>
-            <ion-label style="white-space: nowrap">Personen-Kontakte</ion-label>
+            <ion-label style="white-space: nowrap">
+                {{ 'TAB_PEOPLE_CONTACTS' | translate }}
+            </ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="score-log">
             <fa-icon [icon]="icons.history"></fa-icon>
-            <ion-label>Verlauf</ion-label>
+            <ion-label>
+                {{ 'TAB_HISTORY' | translate }}
+            </ion-label>
         </ion-tab-button>
 
         <ion-tab-button (click)="openNewsPage()">
             <fa-icon [icon]="icons.news"></fa-icon>
-            <ion-label>News</ion-label>
+            <ion-label>
+                {{ 'TAB_NEWS' | translate }}
+            </ion-label>
         </ion-tab-button>
 
 <!--        <ion-tab-button tab="message-box">-->
@@ -23,12 +29,16 @@
 
         <ion-tab-button tab="info">
             <fa-icon [icon]="icons.infoCircle"></fa-icon>
-            <ion-label>Info</ion-label>
+            <ion-label>
+                {{ 'TAB_INFO' | translate }}
+            </ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="debug" *ngIf="!environment.production">
             <fa-icon [icon]="icons.bug"></fa-icon>
-            <ion-label>Debug</ion-label>
+            <ion-label>
+                {{ 'TAB_DEBUG' | translate }}
+            </ion-label>
         </ion-tab-button>
     </ion-tab-bar>
 

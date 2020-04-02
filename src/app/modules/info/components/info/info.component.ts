@@ -18,6 +18,7 @@ export class InfoComponent implements OnInit, OnDestroy {
 
     public privacyPolicyUrl = 'https://coronago369135004.wordpress.com/datenschutz/';
     public userId: string;
+    public activeLanguage: string;
 
     constructor(private flagService: FlagService, private cdRef: ChangeDetectorRef, private platform: Platform) {}
 
@@ -26,6 +27,9 @@ export class InfoComponent implements OnInit, OnDestroy {
             this.flagService.localUserId$.subscribe((value) => {
                 this.userId = value;
                 this.cdRef.detectChanges();
+            }),
+            this.flagService.appLanguage$.subscribe((value) => {
+                this.activeLanguage = value;
             })
         );
     }
@@ -56,5 +60,12 @@ export class InfoComponent implements OnInit, OnDestroy {
                 window.open(this.privacyPolicyUrl, '_blank');
             }
         });
+    }
+
+    /**
+     * Set app language
+     */
+    public setLanguage(languageKey: string): void {
+        this.flagService.updateValue(this.flagService.appLanguageKey, languageKey);
     }
 }

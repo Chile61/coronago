@@ -6,6 +6,7 @@ import { ScoreComponent } from './components/score/score.component';
 import { IonicModule } from '@ionic/angular';
 import { ScoreCounterModule } from '../../ui-components/score-counter/score-counter.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         ScoreRoutingModule,
         IonicModule,
         ScoreCounterModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        TranslateModule
     ]
 })
 export class ScoreModule { }

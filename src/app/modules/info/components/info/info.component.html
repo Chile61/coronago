@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title class="ion-padding-start" i18n>Info</ion-title>
+        <ion-title class="ion-padding-start">Info</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -43,8 +43,8 @@
         <ion-item>
             <ion-label>
                 <h2>
-                    <a (click)="openPrivacyPage()"
-                       style="text-decoration: none; padding: 16px 0;">Datenschutzerklärung
+                    <a (click)="openPrivacyPage()">
+                        {{ 'PRIVACY_POLICY' | translate}}
                         <fa-icon [icon]="icons.externalLink"></fa-icon>
                     </a>
                 </h2>
@@ -53,8 +53,25 @@
 
         <ion-item>
             <ion-label>
-                <p i18n>
-                    App-Entwicklung: WEGZWEI GmbH
+                <p>
+                    {{ 'APP_DEVELOPMENT' | translate }}: WEGZWEI GmbH
+                </p>
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{ 'LANGUAGE' | translate }} (Language)</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="activeLanguage" (ngModelChange)="setLanguage($event)">
+                <ion-select-option value="de-DE">Deutsch</ion-select-option>
+                <ion-select-option value="en-US">English</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <h2>UID</h2>
+                <p>
+                    {{ userId }}
                 </p>
             </ion-label>
         </ion-item>
@@ -71,15 +88,6 @@
             </ion-label>
         </ion-item>
 
-
-        <ion-item>
-            <ion-label>
-                <h2>UID</h2>
-                <p>
-                    {{ userId }}
-                </p>
-            </ion-label>
-        </ion-item>
 
     </ion-list>
 </ion-content>

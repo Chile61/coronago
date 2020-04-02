@@ -7,9 +7,17 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-    imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule, FontAwesomeModule],
-    declarations: [TabsPage]
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        TabsPageRoutingModule,
+        FontAwesomeModule,
+        TranslateModule,
+    ],
+    declarations: [TabsPage],
 })
 export class TabsPageModule {}

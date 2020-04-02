@@ -61,27 +61,29 @@
     }
 
     .level-0 {
-        fa-icon, .keyword {
+        fa-icon,
+        ::ng-deep.keyword {
             color: var(--score-distance-ok);
         }
     }
     .level-1 {
-        fa-icon, .keyword {
+        fa-icon,
+        ::ng-deep .keyword {
             color: var(--score-distance-warn);
         }
     }
     .level-2 {
-        fa-icon, .keyword {
+        fa-icon,
+        ::ng-deep .keyword {
             color: var(--score-distance-danger);
         }
     }
 }
 
-
 .virus-background {
     position: fixed;
     top: 20%;
-    opacity: .07;
+    opacity: 0.07;
 }
 
 ion-header:after {

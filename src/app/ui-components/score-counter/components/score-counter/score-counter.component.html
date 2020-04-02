@@ -4,20 +4,19 @@
     </div>
 
     <div class="score" #scoreText>
-        <ng-container *ngIf="!contactScore.scoreAsync; else contactScoreAsync">
-
-            <!--            main center score/local user score-->
-            {{ (contactScore.score | number: '' : 'de-DE') || '…' }}<br>
+        <!-- main center score / local user score -->
+        <ng-container *ngIf="!contactScore.scoreAsync">
+            {{ (contactScore.score | number: '' : i18n.activeLocaleKey) || '…' }}<br>
         </ng-container>
 
-        <!--        satellite scores-->
-        <ng-template #contactScoreAsync>
-            {{ ((contactScore.scoreAsync | async)?.networkSize | number: '' : 'de-DE') || '…' }}<br>
-        </ng-template>
+        <!-- satellite scores -->
+        <ng-container *ngIf="contactScore.scoreAsync">
+            {{ ((contactScore.scoreAsync | async)?.networkSize | number: '' : i18n.activeLocaleKey) || '…' }}<br>
+        </ng-container>
     </div>
 
-    <div i18n *ngIf="showHintText" class="person-contacts-hint">
-        Personen-Kontakte
+    <div *ngIf="showHintText" class="person-contacts-hint">
+        {{ 'PEOPLE_CONTACTS' | translate }}
     </div>
 
     <div class="group-icon" *ngIf="iconPosition === 'below'">

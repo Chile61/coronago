@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { UserService } from './api-services/user.service';
-import { map, tap } from 'rxjs/operators';
 import { LogManager } from './log.service';
 import { environment } from '../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root',
 })
 export class FlagService {
     private log = new LogManager('FlagService');
-    private subscriptions: Subscription[] = [];
     private inProgressUserRequest = false;
 
     public showAllAreaDevicesKey = 'showAllAreaDevices';
@@ -35,23 +34,28 @@ export class FlagService {
     public loginTokenKey = 'loginToken';
     public loginToken$ = new ReplaySubject<string>(1);
 
-    constructor(private storage: Storage, private userService: UserService) {
-        this.subscriptions.push(
-            this.localUserId$.subscribe((userId) => {
-                this.log.error('constructor', 'userId$', userId);
-                if (!userId || !userId.length) {
-                    this.log.error('constructor', 'Creating new userId');
-                    this.createNewUserId();
-                }
-            }),
-            this.loginToken$.subscribe((token) => {
-                this.log.error('constructor', 'token$', token);
-                if (!token || !token.length) {
-                    this.log.error('constructor', 'Creating new userId');
-                    this.createNewUserId();
-                }
-            })
-        );
+    public localUserLastScoreKey = 'localUserLastScore';
+    public localUserLastScore$ = new ReplaySubject<string>(1);
+
+    public appLanguageKey = 'appLanguage';
+    public appLanguage$ = new ReplaySubject<string>(1);
+
+    constructor(private storage: Storage, private userService: UserService, private translate: TranslateService) {
+        this.localUserId$.subscribe((userId) => {
+            this.log.error('constructor', 'userId$', userId);
+            if (!userId || !userId.length) {
+                this.log.error('constructor', 'Creating new userId');
+                this.createNewUserId();
+            }
+        });
+
+        this.loginToken$.subscribe((token) => {
+            this.log.error('constructor', 'token$', token);
+            if (!token || !token.length) {
+                this.log.error('constructor', 'Creating new userId');
+                this.createNewUserId();
+            }
+        });
     }
 
     /**
@@ -118,12 +122,28 @@ export class FlagService {
         this.storage.get(this.loginTokenKey).then((value) => {
             this.loginToken$.next(value);
         });
+
+        // Last contact score
+        this.storage.get(this.localUserLastScoreKey).then((value) => {
+            if (value !== null) {
+                this.localUserLastScore$.next(value);
+            }
+        });
+
+        // Last contact score
+        this.storage.get(this.appLanguageKey).then((value) => {
+            if (value !== null) {
+                this.appLanguage$.next(value);
+            } else {
+                this.setLanguageKey();
+            }
+        });
     }
 
     /**
      * Create new userId and save
      */
-    private createNewUserId() {
+    private createNewUserId(): void {
         if (!this.inProgressUserRequest) {
             this.inProgressUserRequest = true;
             this.userService.createUser().subscribe((user) => {
@@ -132,5 +152,12 @@ export class FlagService {
                 this.inProgressUserRequest = false;
             });
         }
+    }
+
+    /**
+     * Set language key if not set
+     */
+    private setLanguageKey(): void {
+        this.updateValue(this.appLanguageKey, this.translate.getBrowserCultureLang());
     }
 }

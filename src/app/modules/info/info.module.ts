@@ -7,6 +7,7 @@ import { DisclaimerModule } from '../../ui-components/disclaimer/disclaimer.modu
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         DisclaimerModule,
         IonicModule,
         FormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        TranslateModule
     ]
 })
 export class InfoModule { }
