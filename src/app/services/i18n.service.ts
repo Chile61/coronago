@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeGerman from '@angular/common/locales/de';
 import localeEnglish from '@angular/common/locales/en';
+import localeArabic from '@angular/common/locales/ar';
 import { TranslateService } from '@ngx-translate/core';
 import { FlagService } from './flag.service';
 
@@ -27,6 +28,12 @@ export class I18nService {
 
             // the lang to use, if the lang isn't available, it will use the current loader to get them
             this.translate.use(I18nService.activeLocaleKey);
+
+            if (languageKey === 'ar-SA') {
+                document.querySelector('body').classList.add('rtl');
+            } else {
+                document.querySelector('body').classList.remove('rtl');
+            }
         });
     }
 
@@ -36,5 +43,6 @@ export class I18nService {
     private registerLocales(): void {
         registerLocaleData(localeGerman);
         registerLocaleData(localeEnglish);
+        registerLocaleData(localeArabic);
     }
 }
