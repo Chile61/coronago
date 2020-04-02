@@ -1,6 +1,7 @@
 :host {
     display: block;
     position: absolute;
+    z-index: 999;
 
     ::ng-deep ui-score-counter {
 

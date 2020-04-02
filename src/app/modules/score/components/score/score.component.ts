@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { APP_ICONS } from '../../../../ui-components/icons/icons';
 import { CircleScoreSlot, CircleScoreSlotPosition, circleScoreSlots, hiddenSlot } from './circle-score-slots';
 import { HelperService } from '../../../../services/helper.service';
@@ -34,7 +34,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     private userId: string;
 
     public nearbyScores: ContactScore[] = [];
-    public contactScore: ContactScore = new ContactScore();
+    public localContactScore: ContactScore = new ContactScore();
     public dangerLevel: 0 | 1 | 2 = 0;
     public countOfDangerContacts = 0;
     public countOfWarningContacts = 0;
@@ -72,6 +72,11 @@ export class ScoreComponent implements OnInit, OnDestroy {
                 this.userId = userId;
                 this.getLocalUserScore();
             }),
+            this.flagService.localUserLastScore$.subscribe((value) => {
+                if (!this.localContactScore.score && value && value > 0) {
+                    this.localContactScore.score = value;
+                }
+            }),
             interval(60000).subscribe(() => {
                 if (this.userId) {
                     this.getLocalUserScore();
@@ -101,12 +106,9 @@ export class ScoreComponent implements OnInit, OnDestroy {
      * Get local user score from server
      */
     private getLocalUserScore(): void {
-        this.contactScore = new ContactScore();
-        this.contactScore.score = 0;
-
         this.userService.getUserScore(this.userId).subscribe((score) => {
             if (score) {
-                this.contactScore.score = score.networkSize;
+                this.localContactScore.score = score.networkSize;
             }
         });
     }
@@ -242,5 +244,24 @@ export class ScoreComponent implements OnInit, OnDestroy {
 
         this.nearbyScores = nearbyScores;
         this.updateDangerLevel();
+    }
+
+    /**
+     * On counter click
+     */
+    public onCounterClick() {
+        if (this.simulateContactsFlag) {
+            this.onConfigUpdated();
+        }
+
+        // Apply pulse animation
+        const refElement = document.querySelector('#localScoreCounter');
+        if (!refElement.classList.contains('pulse')) {
+            document.querySelector('#localScoreCounter').classList.add('pulse');
+
+            setTimeout(() => {
+                document.querySelector('#localScoreCounter').classList.remove('pulse');
+            }, 800);
+        }
     }
 }
