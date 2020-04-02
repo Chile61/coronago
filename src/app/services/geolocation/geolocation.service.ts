@@ -22,8 +22,9 @@ export class GeolocationService {
                 (error) => {
                     this.log.error(this.getGeoLocation.name, 'Failed to get geo location');
                     // @ts-ignore
-                    subscriber.next(error);
-                    subscriber.complete();
+                    // subscriber.next(error);
+                    // subscriber.complete();
+                    subscriber.error(error);
                 },
                 { enableHighAccuracy: true }
             );

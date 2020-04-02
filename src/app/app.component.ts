@@ -24,6 +24,7 @@ import { BootService } from './services/boot.service';
 
 
 import {BleScanCycleManagerService} from './services/ble/ble-scan-cycle-manager.service';
+import {CgAdvertisementFactoryService} from './services/ble/cg-advertisement-factory.service';
 
 
 @Component({
@@ -37,13 +38,21 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private bootService: BootService,
-        private bleScanCycleManagerService: BleScanCycleManagerService
+        private bleScanCycleManagerService: BleScanCycleManagerService,
+        private cGAdvertisementFactoryService: CgAdvertisementFactoryService
     ) {
         this.bootService.initApp();
 
 
 
+        // this.cGAdvertisementFactoryService.startAdvertising();
+
+
+
         this.bleScanCycleManagerService.startScanCycle();
+
+
+
 
 
         // setTimeout(this.configureBackgroundGeolocation,  5000);

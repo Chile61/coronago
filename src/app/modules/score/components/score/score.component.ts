@@ -6,7 +6,7 @@ import { ContactScore } from '../../../../core/entities/ContactScore';
 import { LogManager } from '../../../../services/log.service';
 import _orderBy from 'lodash.orderby';
 import { UserService } from '../../../../services/api-services/user.service';
-import { interval, Subscription } from 'rxjs';
+import {interval, of, Subscription} from 'rxjs';
 import { ObservableService } from '../../../../services/observable.service';
 import { FlagService } from '../../../../services/flag.service';
 import { BleScanCycleManagerService } from '../../../../services/ble/ble-scan-cycle-manager.service';
@@ -14,6 +14,7 @@ import { CgUser } from '../../../../services/ble/cg-user.class';
 import _ from 'lodash';
 import { ReportingService } from '../../../../services/api-services/reporting.service';
 import { GeolocationService } from '../../../../services/geolocation/geolocation.service';
+import {catchError} from 'rxjs/operators';
 
 @Component({
     selector: 'app-score',
@@ -224,16 +225,29 @@ export class ScoreComponent implements OnInit, OnDestroy {
             cs.scoreAsync = this.userService.getUserScore(cs.userId);
 
             // Report meeting
-            this.geolocationService.getGeoLocation().subscribe((location) => {
-                this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
-                    () => {
-                        this.log.log(this.reportingService.reportMeeting.name, 'Meeting reported', cs.userId);
-                    },
-                    (error) => {
-                        this.log.error(this.reportingService.reportMeeting.name, 'Failed to report meeting', error, location, cs);
-                    }
-                );
-            });
+            this.geolocationService.getGeoLocation()
+
+                .pipe(
+                    catchError(err => {
+                        console.error('ffr', err);
+                        console.error('ffr', 'Could not retrieve geolocation', JSON.stringify(err));
+                        return of( {
+                            coords: {longitude: null, latitude: null},
+                            timestamp: Date.now()
+                        } as Position);
+                    }),
+                )
+
+                .subscribe((location) => {
+                    this.reportingService.reportMeeting(cs.userId, cs.rssi, location).subscribe(
+                        () => {
+                            this.log.log(this.reportingService.reportMeeting.name, 'Meeting reported', cs.userId);
+                        },
+                        (error) => {
+                            this.log.error(this.reportingService.reportMeeting.name, 'Failed to report meeting', error, location, cs);
+                        }
+                    );
+                });
 
             return cs;
         });

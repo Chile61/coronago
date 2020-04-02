@@ -29,9 +29,6 @@ export class BleScanCycleManagerService {
 
   public startScanCycle(): void {
 
-      setTimeout(async () => {
-          this.cGAdvertisementFactoryService.startAdvertising();
-      }, 3000);
 
 
       this.cgPeripheralManagerService.peripheralsUpdated$
@@ -57,7 +54,8 @@ export class BleScanCycleManagerService {
                   const peris: CgPeripheral[] = _.values(periByAddr);
                   for (let i = 0, ii = peris.length; i < ii; i += 1) {
                       const peri = peris[i];
-                      if (peri.isOlderThenMs(200 * 1000)) {
+                      const maxPeripheralAgeMs = 200 * 1000;
+                      if (peri.isOlderThenMs(maxPeripheralAgeMs)) {
                           console.error('ffr', 'Dropping peripheral ', peri.address);
                           await this.cgPeripheralManagerService.dropPeripheralByAddress(peri.address);
                       }

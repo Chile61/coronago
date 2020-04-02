@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BackendService } from '../backend.service';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Storage } from '@ionic/storage';
 import { LogManager } from '../log.service';
 import { GeolocationService } from '../geolocation/geolocation.service';
-import { switchMap } from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 
 export interface GetUserScoreResponse {
     networkSize: number;
@@ -30,7 +30,14 @@ export class UserService {
     public createUser(): Observable<CreateUserResponse> {
         return this.geolocationService.getGeoLocation().pipe(
 
-            // window.cordova.getGeo
+            catchError(err => {
+                console.error('ffr', err);
+                console.error('ffr', 'Could not retrieve geolocation');
+                return of({
+                    coords: {longitude: null, latitude: null},
+                    timestamp: Date.now()
+                } as Position);
+            }),
 
             switchMap((location) => {
                 const queryArgs = [];
