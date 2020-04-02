@@ -37,9 +37,7 @@
         "@ngx-translate/http-loader": "^4.0.0",
         "await-to-js": "^2.1.1",
         "cordova-android": "^8.1.0",
-        "cordova-background-geolocation-lt": "^3.4.2",
         "cordova-ios": "^5.1.1",
-        "cordova-plugin-background-fetch": "^5.6.1",
         "cordova-plugin-background-mode": "^0.7.3",
         "cordova-plugin-background-mode-bluetooth-central": "^1.0.0",
         "cordova-plugin-background-mode-bluetooth-peripheral": "^1.0.0",
@@ -110,13 +108,6 @@
             "cordova-plugin-background-mode-bluetooth-peripheral": {},
             "cordova-plugin-browsertab": {},
             "cordova-plugin-geolocation": {},
-            "cordova-background-geolocation-lt": {
-                "GOOGLE_API_VERSION": "16.+",
-                "APPCOMPAT_VERSION": "28.+",
-                "OKHTTP_VERSION": "3.12.+",
-                "EVENTBUS_VERSION": "3.0.0",
-                "BACKGROUND_MODE_LOCATION": "<string>location</string>"
-            },
             "cordova-plugin-background-mode": {}
         },
         "platforms": [
