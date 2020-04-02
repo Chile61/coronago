@@ -270,7 +270,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
 
             setTimeout(() => {
                 this.showScanningAreaHint = false
-            }, 4000);
+            }, 5000);
         }
     }
 }
