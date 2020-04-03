@@ -33,7 +33,7 @@ export class LogManager {
     public log(functionName: string, ...args: any[]): void {
         if (this.isLoggingEnabled) {
             const color = 'blue';
-            console.log(...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
+            console.log('[CORONA]', ...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
         }
     }
 
@@ -43,7 +43,7 @@ export class LogManager {
     public warn(functionName: string, ...args: any[]): void {
         if (this.isLoggingEnabled) {
             const color = 'corn';
-            console.warn(...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
+            console.warn('[CORONA]', ...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
         }
     }
 
@@ -53,7 +53,7 @@ export class LogManager {
     public error(functionName: string, ...args: any[]): void {
         if (this.isLoggingEnabled) {
             const color = 'firebrick';
-            console.error(...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
+            console.error('[CORONA]', ...this.wrapInColor(color, this.logDomain), this.prepFnName(functionName), ...args);
         }
     }
 
