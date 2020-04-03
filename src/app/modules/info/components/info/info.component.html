@@ -58,16 +58,13 @@
             </ion-label>
         </ion-item>
 
-
-<!--        temporarily disable language selection-->
-
-<!--        <ion-item>-->
-<!--            <ion-label>{{ 'LANGUAGE' | translate }} (Language)</ion-label>-->
-<!--            <ion-select placeholder="Select One" [(ngModel)]="activeLanguage" (ngModelChange)="setLanguage($event)">-->
-<!--                <ion-select-option value="de-DE">Deutsch</ion-select-option>-->
-<!--                <ion-select-option value="en-US">English</ion-select-option>-->
-<!--            </ion-select>-->
-<!--        </ion-item>-->
+        <ion-item>
+            <ion-label>{{ 'LANGUAGE' | translate }} (Language)</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="activeLanguage" (ngModelChange)="setLanguage($event)">
+                <ion-select-option value="de-DE">Deutsch</ion-select-option>
+                <ion-select-option value="en-US">English</ion-select-option>
+            </ion-select>
+        </ion-item>
 
         <ion-item>
             <ion-label>
