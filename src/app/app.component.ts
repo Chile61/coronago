@@ -45,7 +45,7 @@ export class AppComponent {
 
 
 
-        // this.cGAdvertisementFactoryService.startAdvertising();
+        this.cGAdvertisementFactoryService.startAdvertising();
 
 
 
