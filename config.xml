@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
+
 <widget android-packageName="wegzwei.coronago" id="coronago" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Corona GO</name>
     <description>Your Corona Virus contact tracker.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -103,16 +104,16 @@
             <string>Bitte gewähren Sie Zugriff auf Bluetooth um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" target="*-Info.plist">
-            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
+            <string>Bitte gewähren Sie Zugriff auf Ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
-            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
+            <string>Bitte gewähren Sie Zugriff auf Ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
-            <string>Bitte gewähren Sie Zugriff auf ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
+            <string>Bitte gewähren Sie Zugriff auf Ihre Position um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <config-file parent="NSMotionUsageDescription" target="*-Info.plist">
-            <string>Bitte gewähren Sie Zugriff auf ihre Bewegungsprofil um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
+            <string>Bitte gewähren Sie Zugriff auf Ihr Bewegungsprofil um andere Geräte in Ihrer Umgebung zu ermitteln.</string>
         </config-file>
         <preference name="WKWebViewOnly" value="true" />
     </platform>
