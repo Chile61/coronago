@@ -22,35 +22,44 @@ export class CgAdvertisementFactoryService {
 
     constructor(private flagService: FlagService) {
 
-        // Restart the advertisement after a ble-central disconnected
+    }
+
+    public async initPeripheralAdvertising(): Promise<any> {
+
+        await this.initService();
+
+
         if (isAndroid) {
-
-            CdvBluetoothLeService.peripheralEventReceived$
-                .subscribe( ({status: peripheralEvent}) => {
-
-                    console.error('ffr', 'peri - event:', peripheralEvent);
-
-
-                    if (peripheralEvent === 'connected') {
-
-                        // this.restartAdvertisingDebounced();
-
-                    }
-
-                    if (peripheralEvent === 'disconnected') {
-
-                        console.error('ffr', 'PERIEVENT disconnect detected');
-
-                        this.restartAdvertisingDebounced();
-
-                    }
-
-                });
-
+            this.restartAdvertisementOnDisconects();
         }
 
-        this.startAdvertising();
 
+        this.startAdvertising();
+    }
+
+
+    private restartAdvertisementOnDisconects(): void {
+
+        console.error('ffr', 'ANDROID, register: restart advertisements on disconnect');
+
+        CdvBluetoothLeService.peripheralEventReceived$
+            .subscribe(({status: peripheralEvent}) => {
+
+                console.error('ffr', 'peri - event:', peripheralEvent);
+
+                if (peripheralEvent === 'connected') {
+                    // this.restartAdvertisingDebounced();
+                }
+
+                if (peripheralEvent === 'disconnected') {
+
+                    console.error('ffr', 'PERIEVENT disconnect detected, Restart advertising debounced ...');
+
+                    this.restartAdvertisingDebounced();
+
+                }
+
+            });
     }
 
     /**
@@ -62,14 +71,8 @@ export class CgAdvertisementFactoryService {
         console.error('ffr', 'factory', 'starting advertisement');
         await CdvBluetoothLeService.initializePeripheral();
 
-        console.error('ffr', 'userid', 'Waiting for user-id');
-        const cgUserId = await this.retrieveUserId();
 
 
-        console.error('ffr', 'userid', 'Received user id', cgUserId);
-
-
-        await this.addService(cgUserId);
 
 
 
@@ -82,7 +85,7 @@ export class CgAdvertisementFactoryService {
         return 'started advertising';
     }
 
-    private async retrieveUserId(): Promise<string> {
+    public async retrieveUserId(): Promise<any> {
         return this.flagService.localUserId$
             .pipe(
                 filter(k => !!k),
@@ -115,5 +118,18 @@ export class CgAdvertisementFactoryService {
         [err, msgGe] = await to(CdvBluetoothLeService.addService(cgUserId));
         console.error('ffr', 'add service', JSON.stringify(err), JSON.stringify(msgGe));
 
+    }
+
+    private async initService(): Promise<any> {
+
+        console.error('ffr', 'factory', 'starting advertisement');
+        await CdvBluetoothLeService.initializePeripheral();
+
+        console.error('ffr', 'userid', 'Waiting for user-id');
+        const cgUserId = await this.retrieveUserId();
+
+        console.error('ffr', 'userid', 'Received user id', cgUserId);
+
+        return await this.addService(cgUserId);
     }
 }

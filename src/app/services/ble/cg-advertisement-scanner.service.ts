@@ -106,8 +106,8 @@ export class CgAdvertisementScannerService {
         let msg: any;
         let randPauseTimeMs;
         let scanLoopIdx = 1;
-        const reInitAdapterOnEveryNthCycle = 5;
-        const scanTimeMs = 2000;
+        const reInitAdapterOnEveryNthCycle = 10;
+        // const scanTimeMs = 2000;
 
         while (true) {
 
@@ -116,10 +116,11 @@ export class CgAdvertisementScannerService {
             try {
 
                 // Fix for older android devices who seem to stop scanning
-                // after certain
-                if (isAndroid && (scanLoopIdx % reInitAdapterOnEveryNthCycle === 0)) {
-                    // msg = await this.reInitBleAndroid(msg);
-                }
+                // after certain period of time
+                // if (isAndroid && (scanLoopIdx % reInitAdapterOnEveryNthCycle === 0)) {
+                //     msg = await this.reInitBleAndroid(msg);
+                //     console.error(msg);
+                // }
 
 
                 this.clearScanBuffer();
@@ -170,22 +171,22 @@ export class CgAdvertisementScannerService {
         }
     }
 
-    private async reInitBleAndroid(msg: any) {
+    private async reInitBleAndroid(msg: any): Promise<string> {
         console.error('ffr', 'REINIT ble adapter');
 
         msg = await CdvBluetoothLeService.disableBleAdapter();
-        console.error('ffr', 'startScan msg', 'disable-adapter', JSON.stringify(msg));
+        console.error('ffr', 'REINIT startScan msg', 'disable-adapter', JSON.stringify(msg));
 
 
         msg = await CdvBluetoothLeService.enableBleAdapter();
-        console.error('ffr', 'startScan msg', 'enable-adapter', JSON.stringify(msg));
+        console.error('ffr', 'REINIT startScan msg', 'enable-adapter', JSON.stringify(msg));
 
         // Sicherheitsabstand between enable und scan, system seems to be
         // for android devices
         await this.delayAsync(5000);
 
         msg = await CdvBluetoothLeService.hardInitialize();
-        console.error('ffr', 'startScan msg', 'enable-adapter', JSON.stringify(msg));
+        console.error('ffr', 'REINIT startScan msg', 'enable-adapter', JSON.stringify(msg));
         return msg;
     }
 

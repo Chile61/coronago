@@ -71,13 +71,13 @@ export class CgPeripheral {
 
 
         const startTimeMs = Date.now();
-        const connectionTimeoutMs = 5000;
+        const connectionAttempTimeoutMs = 7000;
         console.error('ffr', connFlowId, blePartnerId, 'connect attempt... ');
         let [err, msg] = await to( CdvBluetoothLeService.connectWithTimeout({
             address,
             autoConnect: false // android: Automatically connect as soon as the
                                // remote device becomes available
-        }, connectionTimeoutMs));
+        }, connectionAttempTimeoutMs));
         console.error('ffr', connFlowId, blePartnerId, 'connect response', JSON.stringify(err), JSON.stringify(msg));
         console.error('ffr', connFlowId, blePartnerId, `connect response time ${( (Date.now() - startTimeMs) / 1000 ).toFixed(0)}`, );
 
@@ -121,7 +121,6 @@ export class CgPeripheral {
     private setLastSeenTimestampToNow(): void {
 
         this.lastSeenTimestamp = Date.now();
-
     }
 
     /**

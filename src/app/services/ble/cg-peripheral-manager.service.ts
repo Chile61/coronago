@@ -36,13 +36,13 @@ export class CgPeripheralManagerService {
 
 
 
-        const scanRespByAddr: {} = _.groupBy(scanResps, 'address');
+        const scanRespsByAddr: {} = _.groupBy(scanResps, 'address');
 
-        _.each(scanRespByAddr, (sr, addr) => {
+        _.each(scanRespsByAddr, (srs, addr) => {
 
             const cgPeri = this.retrieveOrCreatePeripheralByAddr(addr);
 
-            cgPeri.updateViaScanResp(sr);
+            cgPeri.updateViaScanResp(srs);
 
         });
 

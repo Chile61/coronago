@@ -59,8 +59,8 @@ export class CdvBluetoothLeService {
 
         window.bluetoothle.initialize(
             (resp) => {
-                console.error('ffr', 'BLE initialize');
-                resolve();
+                console.error('ffr', 'BLE initialize', resp);
+                resolve(resp);
             }
             , initParams
         );
@@ -78,7 +78,7 @@ export class CdvBluetoothLeService {
 
         window.bluetoothle.initializePeripheral(
             (obj) => {
-                console.error('ffr', 'initializePeripheral event cordova callback', obj);
+                console.error('ffr', 'initializePeripheral-event cordova callback', obj);
                 CdvBluetoothLeService.peripheralEventReceivedSubject$.next(obj);
             },
             (errObj) => {

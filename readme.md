@@ -14,3 +14,13 @@ assets: [
     "output": "./svg"
 }
 ```
+
+
+# development build 
+ionic cordova prepare [android/ios]
+
+ionic cordova prepare [android/ios] --prod
+
+
+# rebuild resources/splash, icons
+

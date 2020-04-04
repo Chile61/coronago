@@ -44,18 +44,22 @@ export class AppComponent {
         this.bootService.initApp();
 
 
+        /**
+         * Advertising
+         */
+        this.cGAdvertisementFactoryService.initPeripheralAdvertising();
 
-        this.cGAdvertisementFactoryService.startAdvertising();
 
 
-
+        /**
+         * Scanning
+         */
         this.bleScanCycleManagerService.startScanCycle();
 
 
 
 
 
-        // setTimeout(this.configureBackgroundGeolocation,  5000);
 
 
 

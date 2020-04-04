@@ -115,7 +115,7 @@ export class BleScanCycleManagerService {
 
       this.cGAdvertisementScannerService.cgScanCycleWorthOfScanResps$
           .subscribe( async (scanResponses: []) => {
-              console.error('ffr', 'scan responses coutn', scanResponses.length);
+              console.error('ffr', 'scan response count: ', scanResponses.length);
 
               if (scanResponses && scanResponses.length) {
 
