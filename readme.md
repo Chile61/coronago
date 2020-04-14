@@ -1,6 +1,6 @@
 # Corona GO App (BETA)
 
-![Screenshot](https://coronago369135004.files.wordpress.com/2020/04/screenshot-2020-04-10-at-16.04.29-1024x660-1.png)
+![Screenshot](https://coronago369135004.files.wordpress.com/2020/04/screenshot-2020-04-14-at-21.05.02.png)
 
 Corona GO Pandemie-Stopper-App: Der Umgang mit sozialen Kontakten und die Fehleinschätzung des Risikos der exponentiellen Verbreitung der Infektionen machen die Darstellung der Personen-Kontakte für jeden Einzelnen notwendig. Zählen und addieren der Personen-Kontakte über Bluetooth – ganz automatisch “in der Hosentasche“.  
 
