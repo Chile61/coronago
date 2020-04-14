@@ -1,0 +1,118 @@
+.flex-center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 0vh;
+}
+
+.score-area {
+    position: relative;
+
+    ::ng-deep ui-score-counter .score {
+        font-size: 5em;
+    }
+}
+
+.danger-level-ok {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-ok);
+
+        fa-icon {
+            color: var(--score-distance-ok);
+        }
+    }
+}
+
+.danger-level-warn {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-warn);
+
+        fa-icon {
+            color: var(--score-distance-warn);
+        }
+    }
+}
+
+.danger-level-danger {
+    ::ng-deep .score-container {
+        border-color: var(--score-distance-danger);
+
+        fa-icon {
+            color: var(--score-distance-danger);
+        }
+    }
+}
+
+.danger-level-hint {
+    padding: 8px;
+    margin: 30px 10px -24px;
+    font-size: large;
+    border-radius: 8px;
+    color: var(--score-hint-text);
+    text-align: center;
+
+    fa-icon {
+        margin-right: 8px;
+        font-size: larger;
+        vertical-align: -2px;
+    }
+
+    .level-0 {
+        fa-icon,
+        ::ng-deep.keyword {
+            color: var(--score-distance-ok);
+        }
+    }
+    .level-1 {
+        fa-icon,
+        ::ng-deep .keyword {
+            color: var(--score-distance-warn);
+        }
+    }
+    .level-2 {
+        fa-icon,
+        ::ng-deep .keyword {
+            color: var(--score-distance-danger);
+        }
+    }
+}
+
+.virus-background {
+    position: fixed;
+    top: 20%;
+    opacity: 0.07;
+}
+
+ion-header:after {
+    background-image: none;
+}
+
+.header {
+    padding: 2vh 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image-container {
+        img {
+            max-height: 12vh;
+        }
+        margin-right: 10px;
+    }
+
+    .title-container {
+        color: var(--app-primary);
+        font-weight: bold;
+        font-size: 12vw;
+    }
+}
+
+.scanning-hint {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    height: 50px;
+    font-size: large;
+}

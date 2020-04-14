@@ -1,0 +1,14 @@
+fa-icon {
+    font-size: 22px;
+}
+
+.virus-icon {
+    filter: saturate(0%) contrast(0) brightness(1.2);
+    width: 24px;
+}
+
+.tab-selected {
+    .virus-icon {
+        filter: hue-rotate(-90deg) brightness(0.5) contrast(0.9);
+    }
+}

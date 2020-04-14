@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title class="ion-padding-horizontal">Infektion</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <div class="content-box" *ngIf="!toggleDemoText" (click)="onDemoTextToggle()">
+        <h1>Aktuelle Meldungen</h1>
+
+        <fa-icon [icon]="icons.ok" style="color: var(--score-distance-ok);"></fa-icon>&nbsp;
+        <b>Derzeit gibt es für Sie keine aktuellen Meldungen.</b><br><br>
+        Sie können sich unter Einhaltung der allgemeinen Hygiene- und
+        Abstandsregeln
+        frei bewegen.
+    </div>
+
+    <div class="content-box" *ngIf="toggleDemoText" (click)="onDemoTextToggle()">
+        <h1>Aktuelle Meldungen</h1>
+
+        <fa-icon [icon]="icons.danger" style="color: var(--score-distance-danger);"></fa-icon>&nbsp;
+        <b>Achtung!</b><br><br>
+        Sie hatten am 2.4.2020 um 13:58 Uhr <u>Kontakt mit einer infizierten Person</u>.
+        Bitte begeben Sie sich bis einschließlich dem 16.04.2020 in häusliche Quarantäne!
+    </div>
+
+
+    <div class="content-box">
+        <h1>Infektion melden</h1>
+        Bitte den Überprüfungscode eingeben:
+
+        <div class="infection-input-box">
+            <div class="input-container">
+                <ion-input placeholder="z.B. 12345-67890-12345" spellcheck="false" type="text"></ion-input>
+            </div>
+            <ion-button slot="end">Melden</ion-button>
+        </div>
+    </div>
+
+</ion-content>

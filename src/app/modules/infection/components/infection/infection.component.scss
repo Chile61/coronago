@@ -1,0 +1,20 @@
+.infection-input-box {
+    display: flex;
+    align-items: center;
+
+    .input-container {
+        flex-grow: 1;
+        border: 2px solid var(--app-primary);
+        border-radius: 4px;
+        padding: 0 12px !important;
+        margin-right: 6px;
+    }
+}
+
+.content-box {
+    min-height: 40%;
+
+    &:not(:first-child) {
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+}

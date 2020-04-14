@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title class="ion-padding-horizontal">Info</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <!--    <div>-->
+    <!--        <img src="/assets/img/saarland_logo.png">-->
+    <!--    </div>-->
+
+    <div class="ion-padding-vertical">
+
+        Corona GO Pandemie-Stopper-App: Der Umgang mit sozialen Kontakten und die Fehleinschätzung des Risikos der
+        exponentiellen Verbreitung der Infektionen machen die Darstellung der Personen-Kontakte für jeden Einzelnen
+        notwendig. Zählen und addieren der Personen-Kontakte über Bluetooth – ganz automatisch “in der Hosentasche“.<br><br>
+
+
+        <b>Die Kernfunktionalität der App</b>
+        <ol>
+            <li>Darstellung einer Kontakt-Kennzahl auf dem Smartphone (unsichtbares Netzwerk der Kontakte meiner
+                Kontakte und wiederum deren Kontakte u.s.w.) - alle Personen, mit denen ich direkt oder indirekt Kontakt
+                hatte, die mich möglicherweise infiziert haben könnten.
+            </li>
+            <li>
+                Zähl-Regeln: Zeit, Distanz, Abkühlung: Man muss eine bestimmte Zeit mit einer Person zusammen sein,
+                damit die beiden Personen-Kontakte zusammengezählt werden. Wenn man diese Person einen längeren Zeitraum
+                anschließend nicht mehr trifft, geht der Zählstand wieder um den gleichen Wert herunter.
+            </li>
+        </ol>
+
+        <b>WICHTIG: Diese App ersetzt keinen Arzt und kann keine Infektionswahrscheinlichkeiten ermitteln. Sie dient
+            lediglich dazu, um sich selbst einen Überblick über die Größe der eigenen direkten und indirekten
+            Personen-Kontakte zu verschaffen.</b><br>
+
+        <br>
+
+        Damit die App auch im Hintergrund zählen kann, brauchen wir die Berechtigungen für Standort und Bluetooth.
+        Solltest du diese Berechtigungen beim ersten Starten nicht erteilt haben, kannst du diese in deinen
+        Einstellungen im Nachhinein freigeben. Schließe und öffne die App bitte in diesem Fall erneut.<br>
+
+        <br>
+
+        Die App benutzt Bluetooth Technologie für die Zählungen. Die GPS Berechtigung ist zwar für die Zählung nicht
+        wesentlich, wird aber benötigt, damit die App auch im Hintergrund weiter zählen kann.
+
+        <br>
+
+        Die App zählt nur die Personen-Kontakte derjenigen, die die App "Corona GO" installiert haben und unserer <a
+        (click)="openPrivacyPage()">Datenschutzerklärung</a> zugestimmt
+        haben.<br><br>
+
+        <b>Sobald die Pandemie vorüber ist, werden wir den Datenbestand löschen, siehe dazu auch unsere <a
+            (click)="openPrivacyPage()">Datenschutzerklärung.</a></b><br>
+
+        <br>
+    </div>
+
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                <h2>
+                    <a (click)="openPrivacyPage()">
+                        {{ 'PRIVACY_POLICY' | translate}}
+                        <fa-icon [icon]="icons.externalLink"></fa-icon>
+                    </a>
+                </h2>
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <p>
+                    {{ 'APP_DEVELOPMENT' | translate }}: WEGZWEI GmbH
+                </p>
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{ 'LANGUAGE' | translate }} (Language)</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="activeLanguage" (ngModelChange)="setLanguage($event)">
+                <ion-select-option value="de-DE">Deutsch</ion-select-option>
+                <ion-select-option value="en-US">English</ion-select-option>
+                <ion-select-option value="es-ES">Español</ion-select-option>
+                <ion-select-option value="ar-SA">عربى</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <h2>UID</h2>
+                <p>
+                    {{ userId }}
+                </p>
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <p style="white-space: normal">
+                    Icons erstellt von <a href="https://www.flaticon.com/de/autoren/freepik"
+                                          style="text-decoration: none;" target="_blank"
+                                          title="Freepik">Freepik</a> from <a
+                    href="https://www.flaticon.com/de/" title="Flaticon" target="_blank"
+                    style="text-decoration: none;">www.flaticon.com</a>
+                </p>
+            </ion-label>
+        </ion-item>
+
+
+    </ion-list>
+</ion-content>

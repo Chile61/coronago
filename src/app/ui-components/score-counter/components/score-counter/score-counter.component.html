@@ -1,0 +1,35 @@
+<div class="score-container" #container>
+    <div class="group-icon" *ngIf="iconPosition === 'above'">
+        <fa-icon [icon]="icon ? icon : icons.user"></fa-icon>
+    </div>
+
+    <div class="score" #scoreText>
+        <!-- main center score / local user score -->
+        <ng-container *ngIf="!isSatel && !contactScore.scoreAsync">
+            {{ (contactScore.score | number: '' : i18n.activeLocaleKey) || '…' }}<br>
+        </ng-container>
+
+<!--        &lt;!&ndash; satellite scores &ndash;&gt;-->
+<!--        <ng-container *ngIf="contactScore.scoreAsync" >-->
+<!--            {{ ((contactScore.scoreAsync | async)?.networkSize | number: '' : i18n.activeLocaleKey) || '…' }}<br>-->
+<!--        </ng-container>-->
+
+    </div>
+
+    <div *ngIf="showHintText" class="person-contacts-hint">
+        {{ 'PEOPLE_CONTACTS' | translate }}
+    </div>
+
+    <div class="group-icon" *ngIf="iconPosition === 'below'">
+        <fa-icon [icon]="icon ? icon : icons.user"></fa-icon>
+    </div>
+
+    <div class="debug-info" *ngIf="showNodeDebugInfo">
+        <span class="rssi">
+            {{ contactScore.rssi }}
+        </span><br>
+        <span class="user-id">
+            {{ contactScore.userId.substr(0, 10) }}
+        </span>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="score">
+            <fa-icon [icon]="icons.user"></fa-icon>
+            <ion-label style="white-space: nowrap">
+                {{ 'TAB_PEOPLE_CONTACTS' | translate }}
+            </ion-label>
+        </ion-tab-button>
+
+
+        <ion-tab-button tab="infection">
+            <div class="virus-icon">
+                <img src="/assets/icon/virus.svg">
+            </div>
+            <ion-label>
+                <!--                {{ 'TAB_INFECTION' | translate }}-->
+                Infektion
+            </ion-label>
+        </ion-tab-button>
+
+
+        <ion-tab-button tab="score-log">
+            <fa-icon [icon]="icons.history"></fa-icon>
+            <ion-label>
+                {{ 'TAB_HISTORY' | translate }}
+            </ion-label>
+        </ion-tab-button>
+
+<!--        <ion-tab-button (click)="openNewsPage()">-->
+<!--            <fa-icon [icon]="icons.news"></fa-icon>-->
+<!--            <ion-label>-->
+<!--                {{ 'TAB_NEWS' | translate }}-->
+<!--            </ion-label>-->
+<!--        </ion-tab-button>-->
+
+<!--        <ion-tab-button tab="message-box">-->
+<!--            <fa-icon [icon]="icons.messages"></fa-icon>-->
+<!--            <ion-label>Messages</ion-label>-->
+<!--        </ion-tab-button>-->
+
+        <ion-tab-button tab="info">
+            <fa-icon [icon]="icons.infoCircle"></fa-icon>
+            <ion-label>
+                {{ 'TAB_INFO' | translate }}
+            </ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="debug" *ngIf="!environment.production">
+            <fa-icon [icon]="icons.bug"></fa-icon>
+            <ion-label>
+                {{ 'TAB_DEBUG' | translate }}
+            </ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+
+</ion-tabs>
+
